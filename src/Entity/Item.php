@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ItemRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,18 @@ class Item
 
     #[ORM\Column]
     private ?bool $visible = null;
+
+    #[ORM\ManyToMany(targetEntity: Menu::class, inversedBy: 'items')]
+    private Collection $menu_has_item;
+
+    #[ORM\ManyToOne(inversedBy: 'items')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Restaurant $restaurant = null;
+
+    public function __construct()
+    {
+        $this->menu_has_item = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +104,42 @@ class Item
     public function setVisible(bool $visible): self
     {
         $this->visible = $visible;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Menu>
+     */
+    public function getMenuHasItem(): Collection
+    {
+        return $this->menu_has_item;
+    }
+
+    public function addMenuHasItem(Menu $menuHasItem): self
+    {
+        if (!$this->menu_has_item->contains($menuHasItem)) {
+            $this->menu_has_item->add($menuHasItem);
+        }
+
+        return $this;
+    }
+
+    public function removeMenuHasItem(Menu $menuHasItem): self
+    {
+        $this->menu_has_item->removeElement($menuHasItem);
+
+        return $this;
+    }
+
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant(?Restaurant $restaurant): self
+    {
+        $this->restaurant = $restaurant;
 
         return $this;
     }
