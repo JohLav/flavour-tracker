@@ -44,7 +44,7 @@ class Restaurant
     private Collection $images;
 
     #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Menu::class)]
-    private Collection $menu;
+    private Collection $menus;
 
     #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: TimeSlot::class, orphanRemoval: true)]
     private Collection $timeSlots;
@@ -56,7 +56,7 @@ class Restaurant
     {
         $this->users = new ArrayCollection();
         $this->images = new ArrayCollection();
-        $this->menu = new ArrayCollection();
+        $this->menus = new ArrayCollection();
         $this->timeSlots = new ArrayCollection();
         $this->items = new ArrayCollection();
     }
@@ -210,27 +210,27 @@ class Restaurant
     /**
      * @return Collection<int, Menu>
      */
-    public function getMenu(): Collection
+    public function getMenus(): Collection
     {
-        return $this->menu;
+        return $this->menus;
     }
 
-    public function addMenu(Menu $menu): self
+    public function addMenus(Menu $menus): self
     {
-        if (!$this->menu->contains($menu)) {
-            $this->menu->add($menu);
-            $menu->setRestaurant($this);
+        if (!$this->menus->contains($menus)) {
+            $this->menus->add($menus);
+            $menus->setRestaurant($this);
         }
 
         return $this;
     }
 
-    public function removeMenu(Menu $menu): self
+    public function removeMenus(Menu $menus): self
     {
-        if ($this->menu->removeElement($menu)) {
+        if ($this->menus->removeElement($menus)) {
             // set the owning side to null (unless already changed)
-            if ($menu->getRestaurant() === $this) {
-                $menu->setRestaurant(null);
+            if ($menus->getRestaurant() === $this) {
+                $menus->setRestaurant(null);
             }
         }
 

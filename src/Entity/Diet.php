@@ -19,11 +19,11 @@ class Diet
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Menu::class, inversedBy: 'diets')]
-    private Collection $diet_has_menu;
+    private Collection $menus;
 
     public function __construct()
     {
-        $this->diet_has_menu = new ArrayCollection();
+        $this->menus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -46,23 +46,23 @@ class Diet
     /**
      * @return Collection<int, Menu>
      */
-    public function getDietHasMenu(): Collection
+    public function getMenus(): Collection
     {
-        return $this->diet_has_menu;
+        return $this->menus;
     }
 
-    public function addDietHasMenu(Menu $dietHasMenu): self
+    public function addMenus(Menu $menus): self
     {
-        if (!$this->diet_has_menu->contains($dietHasMenu)) {
-            $this->diet_has_menu->add($dietHasMenu);
+        if (!$this->menus->contains($menus)) {
+            $this->menus->add($menus);
         }
 
         return $this;
     }
 
-    public function removeDietHasMenu(Menu $dietHasMenu): self
+    public function removeMenus(Menu $menus): self
     {
-        $this->diet_has_menu->removeElement($dietHasMenu);
+        $this->menus->removeElement($menus);
 
         return $this;
     }

@@ -32,7 +32,7 @@ class Item
     private ?bool $visible = null;
 
     #[ORM\ManyToMany(targetEntity: Menu::class, inversedBy: 'items')]
-    private Collection $menu_has_item;
+    private Collection $menus;
 
     #[ORM\ManyToOne(inversedBy: 'items')]
     #[ORM\JoinColumn(nullable: false)]
@@ -40,7 +40,7 @@ class Item
 
     public function __construct()
     {
-        $this->menu_has_item = new ArrayCollection();
+        $this->menus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,23 +111,23 @@ class Item
     /**
      * @return Collection<int, Menu>
      */
-    public function getMenuHasItem(): Collection
+    public function getMenus(): Collection
     {
-        return $this->menu_has_item;
+        return $this->menus;
     }
 
-    public function addMenuHasItem(Menu $menuHasItem): self
+    public function addMenus(Menu $menus): self
     {
-        if (!$this->menu_has_item->contains($menuHasItem)) {
-            $this->menu_has_item->add($menuHasItem);
+        if (!$this->menus->contains($menus)) {
+            $this->menus->add($menus);
         }
 
         return $this;
     }
 
-    public function removeMenuHasItem(Menu $menuHasItem): self
+    public function removeMenus(Menu $menus): self
     {
-        $this->menu_has_item->removeElement($menuHasItem);
+        $this->menus->removeElement($menus);
 
         return $this;
     }
