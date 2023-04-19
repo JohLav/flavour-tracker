@@ -215,22 +215,22 @@ class Restaurant
         return $this->menus;
     }
 
-    public function addMenus(Menu $menus): self
+    public function addMenu(Menu $menu): self
     {
-        if (!$this->menus->contains($menus)) {
-            $this->menus->add($menus);
-            $menus->setRestaurant($this);
+        if (!$this->menus->contains($menu)) {
+            $this->menus->add($menu);
+            $menu->setRestaurant($this);
         }
 
         return $this;
     }
 
-    public function removeMenus(Menu $menus): self
+    public function removeMenu(Menu $menu): self
     {
-        if ($this->menus->removeElement($menus)) {
+        if ($this->menus->removeElement($menu)) {
             // set the owning side to null (unless already changed)
-            if ($menus->getRestaurant() === $this) {
-                $menus->setRestaurant(null);
+            if ($menu->getRestaurant() === $this) {
+                $menu->setRestaurant(null);
             }
         }
 

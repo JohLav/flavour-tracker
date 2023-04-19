@@ -116,18 +116,18 @@ class Item
         return $this->menus;
     }
 
-    public function addMenus(Menu $menus): self
+    public function addMenu(Menu $menu): self
     {
-        if (!$this->menus->contains($menus)) {
-            $this->menus->add($menus);
+        if (!$this->menus->contains($menu)) {
+            $this->menus->add($menu);
         }
 
         return $this;
     }
 
-    public function removeMenus(Menu $menus): self
+    public function removeMenu(Menu $menu): self
     {
-        $this->menus->removeElement($menus);
+        $this->menus->removeElement($menu);
 
         return $this;
     }
