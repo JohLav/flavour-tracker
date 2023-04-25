@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un menu{% endblock %}
+
+{% block body %}
+
+    <h1>Ajouter un menu</h1>
+    <div class="container">
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.reduction) }}
+            {{ form_widget(form.reduction) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.diets) }}
+            {{ form_widget(form.diets) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.items) }}
+            {{ form_widget(form.items) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

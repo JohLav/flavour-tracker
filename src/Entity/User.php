@@ -44,6 +44,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Reservation::class, orphanRemoval: true)]
     private Collection $reservations;
 
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Restaurant $restaurant = null;
+
     public function __construct()
     {
         $this->favorites = new ArrayCollection();
@@ -206,6 +209,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $reservation->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant(?Restaurant $restaurant): self
+    {
+        $this->restaurant = $restaurant;
 
         return $this;
     }
