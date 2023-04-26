@@ -41,11 +41,11 @@ class MenuController extends AbstractController
         $menu = new Menu();
         $form = $this->createForm(MenuType::class, $menu);
         $form->handleRequest($request);
-        /** @var User $connectedUser */
-        $connectedUser = $this->getUser();
-        $restaurant = $connectedUser->getRestaurant();
+//        /** @var User $connectedUser */
+//        $connectedUser = $this->getUser();
+//        $restaurant = $connectedUser->getRestaurant();
         if ($form->isSubmitted() && $form->isValid()) {
-            $menu->setRestaurant($restaurant);
+//            $menu->setRestaurant($restaurant);
             $menuRepository->save($menu, true);
             $this->addFlash('success', 'Le menu a bien été ajouté.');
 
@@ -57,25 +57,25 @@ class MenuController extends AbstractController
         ]);
     }
 
-//    #[Route('/carte', name: 'carte')]
-//    public function carte(Request $request, ItemRepository $itemRepository): Response
-//    {
-//        $item = new Item();
-//        $form = $this->createForm(ALaCarteType::class, $item);
-//        $form->handleRequest($request);
+    #[Route('/carte', name: 'carte')]
+    public function carte(Request $request, ItemRepository $itemRepository): Response
+    {
+        $item = new Item();
+        $form = $this->createForm(ALaCarteType::class, $item);
+        $form->handleRequest($request);
 //        /** @var User $connectedUser */
 //        $connectedUser = $this->getUser();
 //        $restaurant = $connectedUser->getRestaurant();
-//        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 //            $item->setRestaurant($restaurant);
-//            $itemRepository->save($item, true);
-//            $this->addFlash('success', "L'élément a bien été ajouté.");
-//
-//            return $this->redirectToRoute('dashboard_menu');
-//        }
-//
-//        return $this->renderForm('menu/carte.html.twig', [
-//        'form' => $form,
-//        ]);
-//    }
+            $itemRepository->save($item, true);
+            $this->addFlash('success', "L'élément a bien été ajouté.");
+
+            return $this->redirectToRoute('dashboard_menu');
+        }
+
+        return $this->renderForm('menu/carte.html.twig', [
+            'form' => $form,
+        ]);
+    }
 }

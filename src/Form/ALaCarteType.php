@@ -7,6 +7,7 @@
     use Symfony\Bridge\Doctrine\Form\Type\EntityType;
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\Extension\Core\Type\NumberType;
+    use Symfony\Component\Form\Extension\Core\Type\SubmitType;
     use Symfony\Component\Form\Extension\Core\Type\TextareaType;
     use Symfony\Component\Form\Extension\Core\Type\TextType;
     use Symfony\Component\Form\FormBuilderInterface;
@@ -53,7 +54,7 @@ class ALaCarteType extends AbstractType
             ->add('category', TextType::class, [
                 'label' => 'Catégorie',
                 'attr' => [
-                    'placeholder' => 'Entrée'
+                    'placeholder' => 'Entrée, plat, dessert, boisson, etc.'
                 ],
                 'row_attr' => [
                     'class' => "form-floating",
@@ -93,7 +94,9 @@ class ALaCarteType extends AbstractType
 //                'required' => true,
 //                'help' => 'Sélectionner le menu relié à cet élément.',
 //            ])
-        ;
+            ->add('submit', SubmitType::class, [
+                'label' => 'Ajouter',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -58,8 +58,8 @@ class MenuType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'label' => 'Régime alimentaire',
-                'attr' => [
-                    'placeholder' => 'Végétarien'
+                'label_attr' => [
+                    'class' => 'checkbox-inline',
                 ],
                 'row_attr' => [
                     'class' => "form-floating",
@@ -73,16 +73,20 @@ class MenuType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
                 'attr' => [
-                    'placeholder' => 'Boeuf bourguignon'
+                    'placeholder' => 'Boeuf bourguignon',
+//                    'class' => 'form-select'
                 ],
                 'row_attr' => [
-                    'class' => "form-floating",
+                    'class' => "form-select",
                 ],
                 'required' => true,
                 'help' => 'Sélectionner les plats qui composent votre menu.',
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Ajouter',
+                'row_attr' => [
+                    'class' => "btn-secondary",
+                ]
             ]);
     }
 

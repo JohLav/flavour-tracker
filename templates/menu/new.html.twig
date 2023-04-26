@@ -24,7 +24,18 @@
             {{ form_widget(form.diets) }}
         </div>
         <div class="form-group">
+            <select class="form-select" id="floatingSelectGrid">
+                <option selected disabled>Élément</option>
+
+                {% for choice in form.items.vars.choices %}
+                <option value="{{ choice.value }}">{{ choice.label }}</option>
+                {% endfor %}
+
+            </select>
+            <label for="floatingSelectGrid">Sélectionner un élément</label>
+
             {{ form_label(form.items) }}
+            {{ dump(form.items) }}
             {{ form_widget(form.items) }}
         </div>
         {{ form_end(form) }}
