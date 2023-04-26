@@ -24,6 +24,16 @@ class MenuType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Menu du midi'
                 ],
+//                'constraints' => [
+//                    new NotBlank([
+//                        'message' => 'Please enter a password',
+//                    ]),
+//                    new Length([
+//                        'min' => 6,
+//                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+//                        // max length allowed by Symfony for security reasons
+//                        'max' => 4096,
+//                    ]),
                 'row_attr' => [
                     'class' => "form-floating",
                 ],
@@ -35,9 +45,6 @@ class MenuType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Tous les jours de la semaine de 12h à 14h.'
                 ],
-                'row_attr' => [
-                    'class' => "form-floating",
-                ],
                 'required' => false,
                 'help' => 'Saisir la description de votre menu.',
             ])
@@ -45,9 +52,6 @@ class MenuType extends AbstractType
                 'label' => 'Promotion',
                 'attr' => [
                     'placeholder' => '20'
-                ],
-                'row_attr' => [
-                    'class' => "form-floating",
                 ],
                 'required' => true,
                 'help' => 'Saisir la réduction en pourcentage, par exemple 15,55%',
@@ -61,9 +65,6 @@ class MenuType extends AbstractType
                 'label_attr' => [
                     'class' => 'checkbox-inline',
                 ],
-                'row_attr' => [
-                    'class' => "form-floating",
-                ],
                 'required' => true,
                 'help' => 'Sélectionner le(s) régime(s) alimentaire(s) qui correspondent à votre menu.',
             ])
@@ -72,13 +73,10 @@ class MenuType extends AbstractType
                 'class' => Item::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'attr' => [
-                    'placeholder' => 'Boeuf bourguignon',
-//                    'class' => 'form-select'
-                ],
-                'row_attr' => [
-                    'class' => "form-select",
-                ],
+//                'attr' => [
+//                    'placeholder' => 'Boeuf bourguignon'
+//                ],
+                'autocomplete' => true,
                 'required' => true,
                 'help' => 'Sélectionner les plats qui composent votre menu.',
             ])

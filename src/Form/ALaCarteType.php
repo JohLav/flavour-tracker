@@ -6,6 +6,7 @@
     use App\Entity\Menu;
     use Symfony\Bridge\Doctrine\Form\Type\EntityType;
     use Symfony\Component\Form\AbstractType;
+    use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
     use Symfony\Component\Form\Extension\Core\Type\NumberType;
     use Symfony\Component\Form\Extension\Core\Type\SubmitType;
     use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -21,10 +22,7 @@ class ALaCarteType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Titre',
                 'attr' => [
-                    'placeholder' => 'À la carte'
-                ],
-                'row_attr' => [
-                    'class' => "form-floating",
+                    'placeholder' => 'Coca-cola'
                 ],
                 'required' => true,
                 'help' => 'Saisir le titre de votre carte.',
@@ -34,9 +32,6 @@ class ALaCarteType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Saisir une description.'
                 ],
-                'row_attr' => [
-                    'class' => "form-floating",
-                ],
                 'required' => false,
                 'help' => 'Saisir une description pour votre carte.',
             ])
@@ -45,41 +40,25 @@ class ALaCarteType extends AbstractType
                 'attr' => [
                     'placeholder' => '12'
                 ],
-                'row_attr' => [
-                    'class' => "form-floating",
-                ],
                 'required' => true,
                 'help' => "Saisir le prix de l'élément à la carte.",
             ])
             ->add('category', TextType::class, [
                 'label' => 'Catégorie',
-                'attr' => [
-                    'placeholder' => 'Entrée, plat, dessert, boisson, etc.'
-                ],
-                'row_attr' => [
-                    'class' => "form-floating",
-                ],
+                'autocomplete' => true,
                 'required' => true,
                 'help' => "Saisir la catégorie de l'élément",
             ])
 
-            /** Faire une checkbox type ? */
+            ->add('visible', CheckboxType::class, [
+                'label' => 'À la carte',
+                'label_attr' => [
+                    'class' => 'checkbox-inline',
+                ],
+                'required' => true,
+                'help' => "Préciser si l'élément est également accessible 'à la carte' en plus du menu.",
+            ])
 
-//            ->add('visible', TextType::class, [
-//                'label' => 'Visibilité',
-//                'attr' => [
-//                    'placeholder' => 'À la carte'
-//                ],
-//                'row_attr' => [
-//                    'class' => "form-floating",
-//                ],
-//                'required' => false,
-//                'help' => 'Saisir le titre de votre carte.',
-//            ])
-
-        /** Est-ce utile ? Ou bien, on ne fait que récupérer les menus ?
-         *  Ou est-ce inutile ?
-         */
 //            ->add('menus', EntityType::class, [
 //                'label' => 'Menus',
 //                'class' => Menu::class,
@@ -94,6 +73,7 @@ class ALaCarteType extends AbstractType
 //                'required' => true,
 //                'help' => 'Sélectionner le menu relié à cet élément.',
 //            ])
+
             ->add('submit', SubmitType::class, [
                 'label' => 'Ajouter',
             ]);
