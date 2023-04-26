@@ -39,6 +39,66 @@ class RestaurantRepository extends ServiceEntityRepository
         }
     }
 
+    public function findFiltered(array $filters): array
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->leftJoin('r.items', 'i')
+            ->leftJoin('r.menus', 'm')
+            ->leftJoin('r.timeslots', 't')
+            ->leftJoin('r.categories', 'c')
+            ->leftJoin('r.diets', 'd');
+
+        if (!empty($filters['item'])) {
+            $qb->andWhere($qb->expr()->like('i.name', ':item'))
+                ->setParameter('item', '%' . $filters['item'] . '%');
+        }
+
+        if (!empty($filters['city'])) {
+            $qb->andWhere($qb->expr()->orX(
+                $qb->expr()->like('r.address', ':city'),
+                $qb->expr()->like('r.zip_code', ':city')
+            ))
+                ->setParameter('city', '%' . $filters['city'] . '%');
+        }
+
+        if (!empty($filters['timeslot'])) {
+            $qb->andWhere($qb->expr()->andX(
+                $qb->expr()->lte('t.opening', ':time'),
+                $qb->expr()->gte('t.closing', ':time'),
+                $qb->expr()->eq('t.day', ':day')
+            ))
+                ->setParameter('time', $filters['timeslot']['time'])
+                ->setParameter('day', $filters['timeslot']['day']);
+        }
+
+        if (!empty($filters['menu'])) {
+            $qb->andWhere($qb->expr()->like('m.name', ':menu'))
+                ->setParameter('menu', '%' . $filters['menu'] . '%');
+        }
+
+        if (!empty($filters['category'])) {
+            $qb->andWhere('c.name IN (:category)')
+                ->setParameter('category', $filters['category']);
+        }
+
+        if (!empty($filters['diet'])) {
+            $qb->andWhere('d.name IN (:diets)')
+                ->setParameter('diet', $filters['diet']);
+        }
+
+        if (!empty($filters['price'])) {
+            $qb->andWhere($qb->expr()->andX(
+                $qb->expr()->lte('i.price', ':maxPrice'),
+                $qb->expr()->gte('m.reduction', ':minReduction')
+            ))
+                ->setParameter('maxPrice', $filters['priceRange']['maxPrice'])
+                ->setParameter('minReduction', $filters['priceRange']['minReduction']);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+
 //    /**
 //     * @return Restaurant[] Returns an array of Restaurant objects
 //     */

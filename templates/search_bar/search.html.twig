@@ -1,0 +1,10 @@
+{#{% include 'search_bar.html.twig' with {'form': form} %}#}
+
+{% extends 'base.html.twig' %}
+
+{% block search %}
+    <h1>Rechercher un restaurant</h1>
+    {% include 'search_bar/_SearchBar.html.twig' %}
+    {% include 'search_bar/_search_results.html.twig' %}
+
+{% endblock %}

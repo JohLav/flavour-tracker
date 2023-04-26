@@ -1,0 +1,34 @@
+{# templates/search/index.html.twig #}
+ {{ form_start(form) }}
+
+    <div class="form-group">
+        {{ form_label(form.item) }}
+        {{ form_widget(form.item, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.city) }}
+        {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.availability) }}
+        {{ form_widget(form.availability, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.category) }}
+        {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.diet) }}
+        {{ form_widget(form.diet) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.price) }}
+        {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {{ form_end(form) }}
