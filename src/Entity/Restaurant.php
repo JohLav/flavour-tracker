@@ -7,7 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+
 #[ORM\Entity(repositoryClass: RestaurantRepository::class)]
+#[Vich\Uploadable]
 class Restaurant
 {
     #[ORM\Id]
@@ -52,6 +57,13 @@ class Restaurant
     #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Item::class, orphanRemoval: true)]
     private Collection $items;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $poster;
+
+    #[Vich\UploadableField(mapping: 'poster_file', fileNameProperty: 'poster')]
+    private ?File $posterFile = null;
+
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -60,6 +72,19 @@ class Restaurant
         $this->timeSlots = new ArrayCollection();
         $this->items = new ArrayCollection();
     }
+    public function setPosterFile(File $image = null): Restaurant
+    {
+        $this->posterFile = $image;
+        return $this;
+    }
+
+    public function getPosterFile(): ?File
+    {
+        return $this->postersFile;
+    }
+
+
+
 
     public function getId(): ?int
     {
@@ -83,7 +108,7 @@ class Restaurant
         return $this->address;
     }
 
-    public function setAddress(string $address): self
+    public function setAdress(string $address): self
     {
         $this->address = $address;
 

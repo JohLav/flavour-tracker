@@ -19,6 +19,14 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+# config/services.yaml
+parameters:
+    upload_directory: '%kernel.project_dir%/public/uploads/images/posters/'
+
+    # ```alert-warning
+    # Attention, le répertoire va contenir des images des utilisateurs.
+    # Celles-ci ne doivent **pas** être versionnées (au risque de se retrouver publiquement sur GitHub).
+    # Pense à mettre à jour ton .gitignore en conséquences.
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
