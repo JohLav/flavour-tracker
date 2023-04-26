@@ -17,8 +17,21 @@
         {% endblock %}
     </head>
     <body>
-    {% block search %}{% endblock %}
 
-    {% block body %}{% endblock %}
+        <header>
+            {% block header %}
+                {% include 'home/_navbar.html.twig' %}
+            {% endblock %}
+            {% block search %}{% endblock %}
+        </header>
+
+        {% block body %}{% endblock %}
+
+        <footer>
+            {% block footer %}
+                {% include 'home/_footer.html.twig' %}
+            {% endblock %}
+        </footer>
+
     </body>
 </html>
