@@ -1,0 +1,95 @@
+{# templates/reservation/reserv.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle réservation{% endblock %}
+
+{% block body %}
+    <h1>Nouvelle réservation</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+<div class="container rounded shadow-sm">
+    <form action="{{ path('app_reservation') }}" method="POST">
+        <div class="row">
+            <div class="col-md-2 pe-0 col-sm-12">
+                <div class="btn radio-btn mb-3">
+                    <label class="radio">
+                        <input type="radio" value="a" name="book" checked> Roundtrip <span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2 pe-0 col-sm-12">
+                <div class="btn radio-btn mb-3">
+                    <label class="radio">
+                        <input type="radio" value="a" name="book"> One way <span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2 pe-0 col-sm-12">
+                <div class="btn radio-btn mb-3">
+                    <label class="radio">
+                        <input type="radio" value="a" name="book"> Multi-City <span></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-12 mb-4">
+                <div class="form-control d-flex flex-column">
+                    <p class="h-blue">FLYING FROM</p>
+                    <input class="inputbox" placeholder="City or Airport" type="text" name="departure">
+                </div>
+            </div>
+            <div class="col-md-6 col-12 mb-4">
+                <div class="form-control d-flex flex-column">
+                    <p class="h-blue">FLYING TO</p>
+                    <input class="inputbox" placeholder="City or Airport" type="text" name="destination">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-12 mb-4">
+                <div class="form-control d-flex flex-column">
+                    <p class="h-blue">DEPARTING</p>
+                    <input class="inputbox text-muted" type="date" name="departure_date">
+                </div>
+            </div>
+            <div class="col-md-6 col-12 mb-4">
+                <div class="form-control d-flex flex-column">
+                    <p class="h-blue">RETURNING</p>
+                    <input class="inputbox text-muted" type="date" name="return_date">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="form-control d-flex flex-column">
+                    <p class="h-blue">ADULTS(18+)</p>
+                    <select class="border-0 outline-none" name="adult_nb">
+                        <option value="" hidden selected>0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="form-control d-flex flex-column">
+                    <p class="h-blue">CHILDREN(0-17)</p>
+                    <select class="border-0 outline-none" name="kid_nb">
+                        <option value="" hidden selected>0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    </div>
+{% endblock %}
