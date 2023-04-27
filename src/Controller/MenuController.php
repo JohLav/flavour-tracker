@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/dashboard', name: 'dashboard_')]
+#[Route('/agenda', name: 'dashboard_')]
 class MenuController extends AbstractController
 {
     public function __construct(
@@ -88,8 +88,8 @@ class MenuController extends AbstractController
         ]);
     }
 
-    #[Route('/carte', name: 'carte')]
-    public function carte(Request $request, ItemRepository $itemRepository): Response
+    #[Route('/item', name: 'item')]
+    public function item(Request $request, ItemRepository $itemRepository): Response
     {
         $item = new Item();
         $form = $this->createForm(ALaCarteType::class, $item);
@@ -105,7 +105,7 @@ class MenuController extends AbstractController
             return $this->redirectToRoute('dashboard_index');
         }
 
-        return $this->renderForm('menu/carte.html.twig', [
+        return $this->renderForm('menu/item.html.twig', [
             'form' => $form,
         ]);
     }

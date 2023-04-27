@@ -1,0 +1,65 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}Ajouter un élément{% endblock %}
+
+{% block content %}
+
+    {% for year,months in activityByDay %}
+        {% for month, days in months %}
+            {% set execution = days|first|first %}
+            {% set time = execution.actionStamp|date("U") %}
+            <table class="table table-bordered">
+                <thead>
+                <tr class="month-name">
+                    <th colspan="7" class="text-center">{{ time|date('F Y') }}</th>
+                </tr>
+                <tr class="week-name">
+                    <th>Sunday</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% set daysInMonth = time|date('t') %}
+                    {% set startDow = time|date('F 1\\s\\t Y')|date('w') %}
+                    {% set dow = startDow %}
+                    {% for day in range(1,daysInMonth) %}
+                    {% if loop.first and startDow != 0 %}
+                        <td colspan="{{ startDow }}"></td>
+                    {% endif %}
+                    <td>
+                        <div>
+                            <div>{{ day }}</div>
+                            <div class="day">
+                                {% if days[day] is defined %}
+                                    {% for activity in days[day] %}
+                                        <a href="{{ path('activity_page', {'activityId':activity.id}) }}">{{ activity.name }}</a>
+                                        <br>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </td>
+                    {% if loop.last and dow != 6 %}
+                        <td colspan="{{ 6 - dow }}">&nbsp;</td>
+                    {% endif %}
+                    {% if dow == 6 %}
+                    {% set dow = 0 %}
+                </tr>
+                <tr>
+                    {% else %}
+                        {% set dow = dow + 1 %}
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        {% endfor %}
+    {% endfor %}
+
+{% endblock %}
