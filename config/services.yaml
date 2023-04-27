@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    restaurant_directory: '%kernel.project_dir%/public/uploads/restaurant'
 
 services:
     # default configuration for services in *this* file
@@ -19,14 +20,3 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-# config/services.yaml
-parameters:
-    upload_directory: '%kernel.project_dir%/public/uploads/images/posters/'
-
-    # ```alert-warning
-    # Attention, le répertoire va contenir des images des utilisateurs.
-    # Celles-ci ne doivent **pas** être versionnées (au risque de se retrouver publiquement sur GitHub).
-    # Pense à mettre à jour ton .gitignore en conséquences.
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones

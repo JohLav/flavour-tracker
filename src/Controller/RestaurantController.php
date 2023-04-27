@@ -2,18 +2,18 @@
 
 namespace App\Controller;
 
-
+use App\Entity\Image;
 use App\Form\RestaurantType;
+use App\Repository\ImageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\RestaurantRepository;
 use App\Entity\Restaurant;
-
-
-
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route(path: '/restaurant', name: 'app_restaurant_')]
 class RestaurantController extends AbstractController
@@ -21,18 +21,41 @@ class RestaurantController extends AbstractController
     #[Route(path: '/', name: 'index')]
     public function index(): Response
     {
-       return $this->render('restaurant/index.html.twig');
+        return $this->render('restaurant/index.html.twig');
     }
-
     #[Route(path: '/new', name: 'new')]
-    public function new(Request $request, RestaurantRepository $restaurantRepository): Response
-    {
+    public function new(
+        Request $request,
+        RestaurantRepository $restaurantRepository,
+        SluggerInterface $slugger,
+        ImageRepository $imageRepository,
+    ): Response {
         $restaurant = new Restaurant();
         $form = $this->createForm(RestaurantType::class, $restaurant);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $files = $form[ 'images']->getData();
+
+            if ($files) {
+                foreach ($files as $file) {
+                    $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeFilename = $slugger->slug($originalFilename);
+                    $newFilename = $safeFilename . '_' . uniqid() . '_' . $file->guessExtention();
+
+                    try {
+                        $files->move(
+                            $this->getParameter('restaurant_directory'),
+                            $newFilename
+                        );
+                    } catch (FileException $e) {
+                    }
+                    $image = new Image();
+                    $image->setUrl('uploads/restaurant/' . $newFilename);
+                    $imageRepository->save($image);
+                    $restaurant->addImage($image);
+                }
+            }
             $restaurantRepository->save($restaurant, true);
 
             return $this->redirectToRoute('app_restaurant_index');
@@ -43,6 +66,4 @@ class RestaurantController extends AbstractController
             'form' => $form,
         ]);
     }
-
 }
-

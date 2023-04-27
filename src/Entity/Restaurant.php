@@ -6,13 +6,9 @@ use App\Repository\RestaurantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
-
 
 #[ORM\Entity(repositoryClass: RestaurantRepository::class)]
-#[Vich\Uploadable]
 class Restaurant
 {
     #[ORM\Id]
@@ -27,7 +23,7 @@ class Restaurant
     private ?string $address = null;
 
     #[ORM\Column]
-    private ?int $zip_code = null;
+    private ?int $zipCode = null;
 
     #[ORM\Column(length: 100)]
     private ?string $city = null;
@@ -57,13 +53,6 @@ class Restaurant
     #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Item::class, orphanRemoval: true)]
     private Collection $items;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private string $poster;
-
-    #[Vich\UploadableField(mapping: 'poster_file', fileNameProperty: 'poster')]
-    private ?File $posterFile = null;
-
-
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -72,19 +61,6 @@ class Restaurant
         $this->timeSlots = new ArrayCollection();
         $this->items = new ArrayCollection();
     }
-    public function setPosterFile(File $image = null): Restaurant
-    {
-        $this->posterFile = $image;
-        return $this;
-    }
-
-    public function getPosterFile(): ?File
-    {
-        return $this->postersFile;
-    }
-
-
-
 
     public function getId(): ?int
     {
@@ -117,12 +93,12 @@ class Restaurant
 
     public function getZipCode(): ?int
     {
-        return $this->zip_code;
+        return $this->zipCode;
     }
 
-    public function setZipCode(int $zip_code): self
+    public function setZipCode(int $zipCode): self
     {
-        $this->zip_code = $zip_code;
+        $this->zipCode = $zipCode;
 
         return $this;
     }
