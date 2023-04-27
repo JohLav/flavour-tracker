@@ -26,7 +26,7 @@ class Reservation
     #[ORM\Column]
     private ?int $kid_nb = null;
 
-    #[ORM\Column(length: 45)]
+    #[ORM\Column(length: 45, nullable: true)]
     private ?string $service = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
