@@ -7,6 +7,7 @@
     use Symfony\Bridge\Doctrine\Form\Type\EntityType;
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+    use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
     use Symfony\Component\Form\Extension\Core\Type\NumberType;
     use Symfony\Component\Form\Extension\Core\Type\SubmitType;
     use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -43,15 +44,23 @@ class ALaCarteType extends AbstractType
                 'required' => true,
                 'help' => "Saisir le prix de l'élément à la carte.",
             ])
-            ->add('category', TextType::class, [
+            ->add('category', ChoiceType::class, [
                 'label' => 'Catégorie',
                 'autocomplete' => true,
+                'choices' => [
+                    'Sélectionner une catégorie' => null,
+                    'Entrée' => 'Entrée',
+                    'Plat' => 'Plat',
+                    'Dessert' => 'Dessert',
+                    'Boisson' => 'Boisson',
+                    'Vin' => 'Vin',
+                ],
                 'required' => true,
                 'help' => "Saisir la catégorie de l'élément",
             ])
 
             ->add('visible', CheckboxType::class, [
-                'label' => 'À la carte',
+                'label' => "Ajouter 'À la carte'",
                 'label_attr' => [
                     'class' => 'checkbox-inline',
                 ],

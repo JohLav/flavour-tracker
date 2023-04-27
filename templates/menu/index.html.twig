@@ -1,24 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tableau de bord {{ menu_controller }}{% endblock %}
+{% block title %}Tableau de bord{% endblock %}
 
 {% block body %}
-    <style>
-        .example-wrapper {
-            margin: 1em auto;
-            max-width: 800px;
-            width: 95%;
-            font: 18px/1.5 sans-serif;
-        }
 
-        .example-wrapper code {
-            background: #F5F5F5;
-            padding: 2px 6px;
-        }
-    </style>
-
-     <div class="example-wrapper">
-        <h1>Hello {{ menu_controller }}! ✅</h1>
-     </div>
+    {% for menu in menus %}
+    {% include 'menu/_menu.html.twig' %}
+    {% else %}
+    <div>
+        Il n'y a pas encore de menus.
+    </div>
+    {% endfor %}
 
 {% endblock %}
