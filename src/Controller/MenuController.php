@@ -1,41 +1,47 @@
 <?php
 
-namespace App\Controller;
+    namespace App\Controller;
 
-use App\Entity\Item;
-use App\Entity\Menu;
-use App\Entity\User;
-use App\Form\ALaCarteType;
-use App\Form\MenuType;
-use App\Repository\ItemRepository;
-use App\Repository\MenuRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+    use App\Entity\Item;
+    use App\Entity\Menu;
+    use App\Entity\User;
+    use App\Form\ALaCarteType;
+    use App\Form\MenuType;
+    use App\Repository\ItemRepository;
+    use App\Repository\MenuRepository;
+    use App\Repository\RestaurantRepository;
+    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/dashboard', name: 'dashboard_')]
+    #[Route('/menus', name: 'menus_')]
 class MenuController extends AbstractController
 {
     public function __construct(
         private MenuRepository $menuRepository
-    )
-    {
+    ) {
     }
 
-    #[Route('/menus', name: 'index')]
-    public function index(MenuRepository $menuRepository): Response
-    {
-//        /** @var User $connectedUser */
+    /**
+     * List menus
+     */
+    #[Route('/list', name: 'list')]
+    public function menusList(
+        MenuRepository $menuRepository,
+        RestaurantRepository $restaurantRepository /** A supprimer après le test User */
+    ): Response {
+        /** @var User $connectedUser */
 //        $connectedUser = $this->getUser();
 //        $restaurant = $connectedUser->getRestaurant();
-//
-//        $menus = $this->menuRepository->findBy([
-//            'restaurant' => $restaurant
-//        ]);
+        $restaurant = $restaurantRepository->findOneBy([]); /** A supprimer après le test User */
 
-        return $this->render('menu/index.html.twig', [
+        $menus = $this->menuRepository->findBy([
+            'restaurant' => $restaurant
+        ]);
 
+        return $this->render('menu/list.html.twig', [
+            'menus' => $menus
         ]);
     }
 
@@ -65,6 +71,9 @@ class MenuController extends AbstractController
 //        ]);
 //    }
 
+    /**
+     * Add a new menu
+     */
     #[Route('/new', name: 'new')]
     public function new(Request $request, MenuRepository $menuRepository): Response
     {
@@ -80,7 +89,7 @@ class MenuController extends AbstractController
             $menuRepository->save($menu, true);
             $this->addFlash('success', 'Le menu a bien été ajouté.');
 
-            return $this->redirectToRoute('dashboard_index');
+            return $this->redirectToRoute('menus_list');
         }
 
         return $this->renderForm('menu/new.html.twig', [
@@ -88,25 +97,46 @@ class MenuController extends AbstractController
         ]);
     }
 
-    #[Route('/item', name: 'item')]
-    public function item(Request $request, ItemRepository $itemRepository): Response
-    {
-        $item = new Item();
-        $form = $this->createForm(ALaCarteType::class, $item);
+    /**
+     * Edit a specific menu
+     */
+    #[Route('/edit/{id}', name: 'edit')]
+    public function edit(
+        Request $request,
+        Menu $menu,
+        MenuRepository $menuRepository
+    ): Response {
+        $form = $this->createForm(MenuType::class, $menu);
         $form->handleRequest($request);
 //        /** @var User $connectedUser */
 //        $connectedUser = $this->getUser();
 //        $restaurant = $connectedUser->getRestaurant();
         if ($form->isSubmitted() && $form->isValid()) {
-//            $item->setRestaurant($restaurant);
-            $itemRepository->save($item, true);
-            $this->addFlash('success', "L'élément a bien été ajouté.");
+//            $menu->setRestaurant($restaurant);
+            $menuRepository->save($menu, true);
+            $this->addFlash('success', 'Le menu a bien été ajouté.');
 
-            return $this->redirectToRoute('dashboard_index');
+            return $this->redirectToRoute('menus_list');
         }
 
-        return $this->renderForm('menu/item.html.twig', [
+        return $this->renderForm('menu/edit.html.twig', [
             'form' => $form,
         ]);
+    }
+
+    /**
+     * Delete a specific menu
+     */
+    #[Route('/delete/{id}', name: 'delete')]
+    public function delete(
+        Request $request,
+        Menu $menu,
+        MenuRepository $menuRepository
+    ): Response {
+
+        $menuRepository->remove($menu, true);
+        $this->addFlash('success', 'Le menu a bien été supprimé.');
+
+        return $this->redirectToRoute('menus_list');
     }
 }

@@ -11,44 +11,57 @@
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                         data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                    Tableau de bord
+                    Menus
                 </button>
                 <div class="collapse show" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-{#                        <li><a href="{{ path('dashboard_index') }}"#}
-{#                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Afficher les menus</a>#}
-{#                        </li>#}
-                        <li><a href="{{ path('dashboard_new') }}"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Ajouter un menu</a>
+                        <li><a href="{{ path('menus_list') }}"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Afficher</a>
                         </li>
-                        <li><a href="{{ path('dashboard_item') }}"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Ajouter un élément</a>
+                        <li><a href="{{ path('menus_new') }}"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Ajouter</a>
                         </li>
                     </ul>
                 </div>
             </li>
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                    Agenda
+                        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                    Éléments
                 </button>
-                <div class="collapse" id="dashboard-collapse">
+                <div class="collapse show" id="home-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Aperçu</a>
+                        <li><a href="{{ path('items_list') }}"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Afficher</a>
                         </li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Semaines</a>
-                        </li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Mois</a>
-                        </li>
-                        <li><a href="#"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Années</a>
+                        <li><a href="{{ path('items_new') }}"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Ajouter</a>
                         </li>
                     </ul>
                 </div>
             </li>
+{#            <li class="mb-1">#}
+{#                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"#}
+{#                        data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">#}
+{#                    Agenda#}
+{#                </button>#}
+{#                <div class="collapse" id="dashboard-collapse">#}
+{#                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">#}
+{#                        <li><a href="#"#}
+{#                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Aperçu</a>#}
+{#                        </li>#}
+{#                        <li><a href="#"#}
+{#                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Semaines</a>#}
+{#                        </li>#}
+{#                        <li><a href="#"#}
+{#                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Mois</a>#}
+{#                        </li>#}
+{#                        <li><a href="#"#}
+{#                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">Années</a>#}
+{#                        </li>#}
+{#                    </ul>#}
+{#                </div>#}
+{#            </li>#}
             <li class="border-top my-3"></li>
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"

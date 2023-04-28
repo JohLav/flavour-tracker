@@ -3,10 +3,12 @@
 {% block title %}{% endblock %}
 
 {% block body %}
+
     <div class="row">
-        {% include 'menu/_sidenav.html.twig' %}
+        {% include '_sidenav.html.twig' %}
 
         {% block content %}
         {% endblock %}
     </div>
+
 {% endblock %}

@@ -73,9 +73,6 @@ class MenuType extends AbstractType
                 'class' => Item::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-//                'attr' => [
-//                    'placeholder' => 'Boeuf bourguignon'
-//                ],
                 'autocomplete' => true,
                 'required' => true,
                 'help' => 'Sélectionner les plats qui composent votre menu.',

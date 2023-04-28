@@ -28,7 +28,7 @@ class Menu
     #[ORM\ManyToMany(targetEntity: Diet::class, mappedBy: 'menus')]
     private Collection $diets;
 
-    #[ORM\ManyToMany(targetEntity: Item::class, mappedBy: 'menu')]
+    #[ORM\ManyToMany(targetEntity: Item::class, mappedBy: 'menus')]
     private Collection $items;
 
     #[ORM\ManyToOne(inversedBy: 'menu')]

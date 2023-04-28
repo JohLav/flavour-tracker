@@ -1,0 +1,20 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}Liste des menus{% endblock %}
+
+{% block content %}
+
+    <div class="col-9">
+        <h1>Liste des menus</h1>
+        <div class="d-flex justify-content-between">
+            {% for menu in menus %}
+                {% include 'menu/_card.html.twig' %}
+            {% else %}
+                <div>
+                    Il n'y a pas encore de menus.
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
