@@ -20,19 +20,17 @@ class ItemController extends AbstractController
 {
     public function __construct(
         private ItemRepository $itemRepository
-    )
-    {
+    ) {
     }
 
     /**
-     * List items
+     * Items list
      */
     #[Route('/list', name: 'list')]
     public function itemsList(
         ItemRepository $itemRepository,
         RestaurantRepository $restaurantRepository  /** A supprimer après le test User */
-    ): Response
-    {
+    ): Response {
         /** @var User $connectedUser */
 //        $connectedUser = $this->getUser();
 //        $restaurant = $connectedUser->getRestaurant();
@@ -42,7 +40,7 @@ class ItemController extends AbstractController
             'restaurant' => $restaurant
         ]);
 
-        return $this->render('item/list.html.twig', [
+        return $this->render('admin/item/list.html.twig', [
             'items' => $items
         ]);
     }
@@ -67,7 +65,7 @@ class ItemController extends AbstractController
             return $this->redirectToRoute('items_list');
         }
 
-        return $this->renderForm('item/new.html.twig', [
+        return $this->renderForm('admin/item/new.html.twig', [
             'form' => $form,
         ]);
     }
@@ -94,7 +92,7 @@ class ItemController extends AbstractController
             return $this->redirectToRoute('items_list');
         }
 
-        return $this->renderForm('item/edit.html.twig', [
+        return $this->renderForm('admin/item/edit.html.twig', [
             'form' => $form,
         ]);
     }
@@ -114,5 +112,4 @@ class ItemController extends AbstractController
 
         return $this->redirectToRoute('items_list');
     }
-
 }

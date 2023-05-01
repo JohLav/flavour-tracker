@@ -1,4 +1,4 @@
-{% extends 'admin.base.html.twig' %}
+{% extends 'admin/admin.base.html.twig' %}
 
 {% block title %}Liste des éléments{% endblock %}
 
@@ -8,7 +8,7 @@
         <h1>Liste des éléments</h1>
         <div class="d-flex ">
             {% for item in items %}
-                {% include 'item/_card.html.twig' %}
+                {% include 'admin/item/_card.html.twig' %}
             {% else %}
                 <div>
                     Il n'y a pas encore de menus.

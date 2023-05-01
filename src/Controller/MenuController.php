@@ -24,7 +24,7 @@ class MenuController extends AbstractController
     }
 
     /**
-     * List menus
+     * Menus list
      */
     #[Route('/list', name: 'list')]
     public function menusList(
@@ -40,7 +40,7 @@ class MenuController extends AbstractController
             'restaurant' => $restaurant
         ]);
 
-        return $this->render('menu/list.html.twig', [
+        return $this->render('admin/menu/list.html.twig', [
             'menus' => $menus
         ]);
     }
@@ -92,7 +92,7 @@ class MenuController extends AbstractController
             return $this->redirectToRoute('menus_list');
         }
 
-        return $this->renderForm('menu/new.html.twig', [
+        return $this->renderForm('admin/menu/new.html.twig', [
             'form' => $form,
         ]);
     }
@@ -119,7 +119,7 @@ class MenuController extends AbstractController
             return $this->redirectToRoute('menus_list');
         }
 
-        return $this->renderForm('menu/edit.html.twig', [
+        return $this->renderForm('admin/menu/edit.html.twig', [
             'form' => $form,
         ]);
     }
