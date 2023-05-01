@@ -2,6 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
+use App\Entity\Diet;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,31 +25,29 @@ class SearchType extends AbstractType
                 'required' => false,
                 'label' => 'Ville',
             ])
-            ->add('availability', DateTimeType::class, [
+            ->add('timeSlot', DateTimeType::class, [
                 'required' => false,
                 'label' => 'Date et heure',
+                'widget' => 'single_text',
+                'attr' => ['class' => 'form-control']
             ])
             ->add('item', TextType::class, [
                 'required' => false,
                 'label' => 'Ingrédient ou plat',
             ])
-            ->add('category', ChoiceType::class, [
+            /*            ->add('submit', SubmitType::class, [
+                            'label' => 'Recherche',
+                            'attr' => [
+                                'class' => 'btn btn-success',
+                            ],
+                        ])*/
+            ->add('category', EntityType::class, [
                 'required' => false,
-                'label' => 'Type de cuisine',
-                'choices' => [
-                    'Cuisine française' => 'french',
-                    'Cuisine asiatique' => 'asian',
-                    'Cuisine italienne' => 'italian',
-                    'Cuisine africaine' => 'african',
-                    'Cuisine indienne' => 'indian',
-                    'Cuisine libanaise' => 'lebanese',
-                    'Cuisine mexicaine' => 'mexican',
-                    'Cuisine orientale' => 'oriental',
-                ],
+                'class' => Category::class,
+                'choice_label' => 'name',
             ])
             ->add('diet', CheckboxType::class, [
                 'required' => false,
-                'label' => 'Régime alimentaire',
                 'attr' => [
                     'Végétarien' => 'vegetarian',
                     'Sans gluten' => 'gluten_free',
@@ -55,17 +56,18 @@ class SearchType extends AbstractType
                     'Casher' => 'kosher',
                 ],
             ])
+//            ->add('diet', Diet::class, [
+//                'class' => Diet::class,
+//                'choice_label' => 'name',
+//                'multiple' => true,
+//                'expanded' => true,
+//            ])
+
             ->add('price', IntegerType::class, [
                 'required' => false,
                 'label' => 'Fourchette de prix',
                 'attr' => [
                     'placeholder' => '€€ - €€€',
-                ],
-            ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Recherche',
-                'attr' => [
-                    'class' => 'btn btn-success',
                 ],
             ]);
     }

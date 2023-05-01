@@ -1,6 +1,7 @@
 {# templates/search/index.html.twig #}
- {{ form_start(form) }}
 
+ {{ form_start(form) }}
+<div class="block1 d-flex">
     <div class="form-group">
         {{ form_label(form.item) }}
         {{ form_widget(form.item, {'attr': {'class': 'form-control'}}) }}
@@ -12,23 +13,37 @@
     </div>
 
     <div class="form-group">
-        {{ form_label(form.availability) }}
-        {{ form_widget(form.availability, {'attr': {'class': 'form-control'}}) }}
+        {{ form_label(form.timeSlot) }}
+        {{ form_widget(form.timeSlot, {'attr': {'class': 'form-control'}}) }}
     </div>
 
+    <button type="submit" class="btn btn-primary">Recherche</button>
+
+</div>
+
+<div class="block2 d-flex">
     <div class="form-group">
         {{ form_label(form.category) }}
         {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
     </div>
 
-    <div class="form-group">
+  <div class="form-group">
         {{ form_label(form.diet) }}
         {{ form_widget(form.diet) }}
+    </div>
+
+    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+        {% for key, diet in form.diet.vars.attr %}
+            <input type="checkbox" class="btn-check" id='' {{ "btncheck" ~ loop.index }}' autocomplete="off">
+            <label class="btn btn-outline-primary" value="" for='{{ "btncheck" ~ loop.index }}' >{{ key }}</label>
+        {% endfor %}
     </div>
 
     <div class="form-group">
         {{ form_label(form.price) }}
         {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
     </div>
+</div>
 
     {{ form_end(form) }}
+

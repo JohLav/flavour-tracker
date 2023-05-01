@@ -39,7 +39,17 @@ class DietRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
+    public function findFiltered(array $filters): array
+    {
+        $qb = $this->createQueryBuilder('d')
+            ->leftJoin('d.menus', 'm');
+
+        if (!empty($filters['menu'])) {
+            $qb->andWhere($qb->expr()->like('m.name', ':menu'))
+                ->setParameter('menu', '%' . $filters['menu'] . '%');
+        }
+        return $qb->getQuery()->getResult();
+    }
 //     * @return Diet[] Returns an array of Diet objects
 //     */
 //    public function findByExampleField($value): array

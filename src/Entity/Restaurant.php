@@ -22,7 +22,7 @@ class Restaurant
     private ?string $address = null;
 
     #[ORM\Column]
-    private ?int $zip_code = null;
+    private ?int $zipCode = null;
 
     #[ORM\Column(length: 100)]
     private ?string $city = null;
@@ -92,12 +92,12 @@ class Restaurant
 
     public function getZipCode(): ?int
     {
-        return $this->zip_code;
+        return $this->zipCode;
     }
 
-    public function setZipCode(int $zip_code): self
+    public function setZipCode(int $zipCode): self
     {
-        $this->zip_code = $zip_code;
+        $this->zipCode = $zipCode;
 
         return $this;
     }

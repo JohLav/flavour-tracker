@@ -26,11 +26,12 @@ class SearchController extends AbstractController
             $data = $form->getData();
 
             $restaurants = $repository->findFiltered($data);
+            $restaurants;
         }
 
-        return $this->render('search_bar/search.html.twig', [
+        return $this->render('home/search.html.twig', [
             'form' => $form->createView(),
-            'restaurants' => $restaurants,
+            'restaurants' => $repository->findAll(),
         ]);
     }
 }

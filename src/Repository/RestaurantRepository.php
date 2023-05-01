@@ -44,9 +44,9 @@ class RestaurantRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('r')
             ->leftJoin('r.items', 'i')
             ->leftJoin('r.menus', 'm')
-            ->leftJoin('r.timeslots', 't')
-            ->leftJoin('r.categories', 'c')
-            ->leftJoin('r.diets', 'd');
+            ->leftJoin('r.timeSlots', 't')
+            ->leftJoin('r.category', 'c');
+
 
         if (!empty($filters['item'])) {
             $qb->andWhere($qb->expr()->like('i.name', ':item'))
@@ -61,23 +61,23 @@ class RestaurantRepository extends ServiceEntityRepository
                 ->setParameter('city', '%' . $filters['city'] . '%');
         }
 
-        if (!empty($filters['timeslot'])) {
+        if (!empty($filters['timeSlot'])) {
             $qb->andWhere($qb->expr()->andX(
                 $qb->expr()->lte('t.opening', ':time'),
                 $qb->expr()->gte('t.closing', ':time'),
                 $qb->expr()->eq('t.day', ':day')
             ))
-                ->setParameter('time', $filters['timeslot']['time'])
-                ->setParameter('day', $filters['timeslot']['day']);
+                ->setParameter('time', $filters['timeSlot'])
+                ->setParameter('day', $filters['timeSlot']);
         }
 
         if (!empty($filters['menu'])) {
             $qb->andWhere($qb->expr()->like('m.name', ':menu'))
-                ->setParameter('menu', '%' . $filters['menu'] . '%');
+               ->setParameter('menu', '%' . $filters['menu'] . '%');
         }
 
         if (!empty($filters['category'])) {
-            $qb->andWhere('c.name IN (:category)')
+            $qb->andWhere('r.category = :category')
                 ->setParameter('category', $filters['category']);
         }
 
