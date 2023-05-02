@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" type="image/png" href="{{ asset('build/images/favicon.png') }}"/>
-        <title>
-            {% block title %}Projet 3 Name{% endblock %}
-        </title>
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="{{ asset('build/images/favicon.png') }}"/>
+    <title>
+        {% block title %}Projet 3 Name{% endblock %}
+    </title>
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        <header>
-            {% block header %}
-                {% include 'home/_navbar.html.twig' %}
-            {% endblock %}
-        </header>
+    <script src="https://kit.fontawesome.com/2283b728c7.js" crossorigin="anonymous"></script>
 
-        {% block body %}
 
-        {% endblock %}
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
 
-        <footer>
-            {% block footer %}
-                {% include 'home/_footer.html.twig' %}
-            {% endblock %}
-        </footer>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+<header>
+    {% block header %}
+        {% include 'home/_navbar.html.twig' %}
+    {% endblock %}
+</header>
 
-    </body>
+{% block body %}{% endblock %}
+
+<footer>
+    {% block footer %}
+        {% include 'home/_footer.html.twig' %}
+    {% endblock %}
+</footer>
+
+</body>
 </html>

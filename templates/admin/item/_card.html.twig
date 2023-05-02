@@ -1,0 +1,8 @@
+<div class="card m-2" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <p class="card-text">{{ item.description }}</p>
+        <a href="{{ path('items_edit', {'id': item.id})}}" class="btn btn-primary">Éditer <i class="fa-solid fa-pen-to-square"></i></a>
+        <a href="{{ path('items_delete', {'id': item.id})}}" class="btn btn-danger">Supprimer <i class="fa-solid fa-trash"></i></a>
+    </div>
+</div>
