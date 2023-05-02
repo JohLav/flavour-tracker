@@ -15,6 +15,7 @@ class SearchController extends AbstractController
 {
     #[Route("/", name: "index")]
     public function index(Request $request, RestaurantRepository $repository): Response
+    //ajouter les autres tables concernés par le trie, ex diet / category etc?
     {
 
         $restaurants = [];
@@ -26,7 +27,6 @@ class SearchController extends AbstractController
             $data = $form->getData();
 
             $restaurants = $repository->findFiltered($data);
-            $restaurants;
         }
 
         return $this->render('home/search.html.twig', [
