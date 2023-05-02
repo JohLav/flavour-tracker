@@ -28,14 +28,7 @@ class ReservationType extends AbstractType
                 'attr' => ['class' => 'form-control', 'min' => 0],
                'label' => 'Enfant',
             ])
-            ->add('payment_mode', TextType::class, [
-                'attr' => ['class' => 'form-control'],
-                'label' => 'Mode de payement',
-                'required' => false,
-            ])
-            ->add('submit', SubmitType::class, ['label' => 'Réserver',
-                'attr' => ['class' => 'btn btn-primary']
-            ]);
+
 
         ;
     }
