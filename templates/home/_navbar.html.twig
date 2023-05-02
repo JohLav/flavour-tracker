@@ -1,14 +1,34 @@
 {#_navbar.html.twig#}
 
-<nav class="navbar bg-primary d-flex mb-3 px-4">
+<nav class="navbar bg-primary d-flex px-5">
     <div>
-        <a class="navbar-brand link-light d-flex" href="#">
-            <img src="{{ asset('build/images/tds_logo.png') }}" width="70px" alt="">
-            <h1 class="ps-2">Trackers de Saveurs</h1>
+        <a class="navbar-brand link-light d-flex" href="/">
+            <img src="{{ asset('build/images/tds_logo.png') }}" width="70px" alt="" id="logo">
+            <h1 class="ps-4">Trackers de Saveurs</h1>
         </a>
     </div>
     <div class="mb-2">
-        <button type="button" class="btn btn-light me-2">Inscription</button>
-        <button type="button" class="btn btn-light">Connexion</button>
+        {% if app.user is null %}
+            <a href="{{ path('app_register') }}">
+                <button type="button" class="btn btn-light me-2">Inscription</button>
+            </a>
+        {% endif %}
+        {% if app.user %}
+            <a href="{{ path('app_login_profil') }}">
+                <button type="button" class="btn btn-secondary me-2">Mon Profil</button>
+            </a>
+        {% endif %}
+        {% if app.user is null %}
+            <a href="{{ path('app_login') }}">
+                <button type="button" class="btn btn-light">Connexion</button>
+            </a>
+        {% endif %}
+
+        {% if app.user %}
+            <a href="{{ path('app_logout') }}">
+                <button type="button" class="btn btn-danger">Déconnexion</button>
+            </a>
+        {% endif %}
+
     </div>
 </nav>
