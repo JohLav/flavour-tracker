@@ -53,6 +53,9 @@ class Restaurant
     #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Item::class, orphanRemoval: true)]
     private Collection $items;
 
+    #[ORM\OneToOne(mappedBy: 'restaurant', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -294,6 +297,23 @@ class Restaurant
                 $item->setRestaurant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        // set the owning side of the relation if necessary
+        if ($user->getRestaurant() !== $this) {
+            $user->setRestaurant($this);
+        }
+
+        $this->user = $user;
 
         return $this;
     }

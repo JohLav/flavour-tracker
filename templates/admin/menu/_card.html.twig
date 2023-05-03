@@ -1,0 +1,8 @@
+<div class="card m-2" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{ menu.name }}</h5>
+        <p class="card-text">{{ menu.description }}</p>
+        <a href="{{ path('menus_edit', {'id': menu.id})}}" class="btn btn-primary">Éditer <i class="fa-solid fa-pen-to-square"></i></a>
+        <a href="{{ path('menus_delete', {'id': menu.id})}}" class="btn btn-danger">Supprimer <i class="fa-solid fa-trash"></i></a>
+    </div>
+</div>

@@ -1,15 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <div class="pink-stripe">
-        <h1>
-            Let's start coding&nbsp;&#129304;
-        </h1>
+
+    <div class="container-fluid d-flex ps-5">
+        <div class="pt-5">
+            <h1 class="text-start">
+                Bienvenue!
+            </h1>
+            <p class="py-4
+">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Ut libero nisi, dignissim nec augue ut, fringilla elementum arcu.
+                Etiam suscipit vel justo laoreet egestas.<br>
+                Cras pharetra urna sit amet felis egestas, at hendrerit nisi lacinia.
+                Mauris dictum commodo ipsum quis cursus. Fusce fermentum vel erat eu viverra.
+            </p>
+            <div class="container-fluid d-block shadow-lg p-5 m-5 bg-body-tertiary rounded" id="home_form">
+                <input class="form-control " type="search" placeholder="Quoi ?" aria-label="Search">
+                <input class="form-control mt-4" type="search" placeholder="Où ?" aria-label="Search">
+                <button class="btn btn-primary mt-4" type="submit">Rechercher</button>
+            </div>
+        </div>
+        <div class="">
+            <img src="{{ asset('build/images/fruits.jpg') }}"
+                 id="home_img"
+                 alt="">
+        </div>
     </div>
-    <div class="white-stripe">
-        <img src="{{ asset('build/images/LOGO_WILD_CODE_SCHOOL.png') }}"
-             alt="">
-    </div>
+
+
+
+
+
 {% endblock %}

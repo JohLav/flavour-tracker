@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        {% include 'admin/_sidenav.html.twig' %}
+
+        {% block content %}
+        {% endblock %}
+    </div>
+
+{% endblock %}
