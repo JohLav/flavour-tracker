@@ -25,10 +25,10 @@ class Menu
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
     private ?string $reduction = null;
 
-    #[ORM\ManyToMany(targetEntity: Diet::class, mappedBy: 'diet_has_menu')]
+    #[ORM\ManyToMany(targetEntity: Diet::class, mappedBy: 'menus')]
     private Collection $diets;
 
-    #[ORM\ManyToMany(targetEntity: Item::class, mappedBy: 'menu_has_item')]
+    #[ORM\ManyToMany(targetEntity: Item::class, mappedBy: 'menus')]
     private Collection $items;
 
     #[ORM\ManyToOne(inversedBy: 'menu')]

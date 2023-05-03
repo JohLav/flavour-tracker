@@ -22,7 +22,12 @@
             {% block header %}
                 {% include 'home/_navbar.html.twig' %}
             {% endblock %}
-            {% block search %}{% endblock %}
+            {% block search %}
+{#                {% include '/home/_search_bar.html.twig' %}#}
+                {{ render(controller(
+                    'App\\Controller\\SearchController::index'
+                )) }}
+            {% endblock %}
         </header>
 
         {% block body %}{% endblock %}

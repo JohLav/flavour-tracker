@@ -16,22 +16,23 @@ class SearchController extends AbstractController
     #[Route("/", name: "index")]
     public function index(Request $request, RestaurantRepository $repository): Response
     {
-
-        $restaurants = [];
-        $form = $this->createForm(SearchType::class);
+        $form = $this->createForm(SearchType::class, [
+            'items' => $request->request->all('search')['items'] ?? []
+        ]);
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
             $restaurants = $repository->findFiltered($data);
-            $restaurants;
+
+            return $this->render('home/_search_results.html.twig', [
+                'restaurants' => $restaurants ?? $repository->findAll(),
+            ]);
         }
 
-        return $this->render('home/search.html.twig', [
+        return $this->render('home/_search_bar.html.twig', [
             'form' => $form->createView(),
-            'restaurants' => $repository->findAll(),
         ]);
     }
 }

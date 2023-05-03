@@ -1,6 +1,7 @@
+{% extends 'base.html.twig' %}
 
-<div class="result d-flex flex-column">
-{% block content %}
+
+{% block body %}
     {% if restaurants|length == 0 %}
         <p>Aucun restaurant trouvé.</p>
     {% else %}
@@ -9,7 +10,7 @@
             {% for restaurant in restaurants %}
             <div class="card" style="width: 18rem;">
 {#                <img src="..." class="card-img-top" alt="...">  ajouter un carrousel à la place image#}
-                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                <div id="carouselExampleAutoplaying{{ loop.index }}" class="carousel slide" data-bs-ride="carousel">
 
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -22,11 +23,11 @@
                             <img src="https://th.bing.com/th/id/R.efa8f447cba810a15ea303ae6767ff0c?rik=%2fgk%2fCOIEkQwYaw&pid=ImgRaw&r=0" class="d-block w-100" alt="...">
                         </div>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying{{ loop.index }}" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying{{ loop.index }}" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
@@ -42,4 +43,3 @@
     </div>
     {% endif %}
 {% endblock %}
-

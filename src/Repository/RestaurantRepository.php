@@ -42,38 +42,39 @@ class RestaurantRepository extends ServiceEntityRepository
     public function findFiltered(array $filters): array
     {
         $qb = $this->createQueryBuilder('r')
-            ->leftJoin('r.items', 'i')
-            ->leftJoin('r.menus', 'm')
-            ->leftJoin('r.timeSlots', 't')
-            ->leftJoin('r.category', 'c');
+            ->leftJoin('r.items', 'items')
+            ->leftJoin('r.menus', 'menus')
+            ->leftJoin('r.timeSlots', 'timeSlots')
+            ->leftJoin('r.category', 'category')
+            ->leftJoin('menus.diets', 'diets');
 
-
-        if (!empty($filters['item'])) {
-            $qb->andWhere($qb->expr()->like('i.name', ':item'))
-                ->setParameter('item', '%' . $filters['item'] . '%');
+        if (!empty($filters['items'])) {
+            foreach ($filters['items'] as $i => $name) {
+                $qb
+                    ->orWhere("items.name LIKE :item{$i}")
+                    ->setParameter("item{$i}", "%{$name}%")
+                    ->orWhere("menus.name LIKE :menu{$i}")
+                    ->setParameter("menu{$i}", "%{$name}%")
+                ;
+            }
         }
 
-        if (!empty($filters['city'])) {
-            $qb->andWhere($qb->expr()->orX(
-                $qb->expr()->like('r.address', ':city'),
-                $qb->expr()->like('r.zip_code', ':city')
-            ))
-                ->setParameter('city', '%' . $filters['city'] . '%');
-        }
+//        if (!empty($filters['city'])) {
+//            $qb->andWhere($qb->expr()->orX(
+//                $qb->expr()->like('r.address', ':city'),
+//                $qb->expr()->like('r.zip_code', ':city')
+//            ))
+//                ->setParameter('city', '%' . $filters['city'] . '%');
+//        }
 
         if (!empty($filters['timeSlot'])) {
             $qb->andWhere($qb->expr()->andX(
-                $qb->expr()->lte('t.opening', ':time'),
-                $qb->expr()->gte('t.closing', ':time'),
-                $qb->expr()->eq('t.day', ':day')
+                $qb->expr()->lte('timeSlots.opening', ':time'),
+                $qb->expr()->gte('timeSlots.closing', ':time'),
+                $qb->expr()->eq('timeSlots.day', ':day')
             ))
-                ->setParameter('time', $filters['timeSlot'])
-                ->setParameter('day', $filters['timeSlot']);
-        }
-
-        if (!empty($filters['menu'])) {
-            $qb->andWhere($qb->expr()->like('m.name', ':menu'))
-               ->setParameter('menu', '%' . $filters['menu'] . '%');
+                ->setParameter('time', $filters['timeSlot']->format('H:i'))
+                ->setParameter('day', $filters['timeSlot']->format('N'));
         }
 
         if (!empty($filters['category'])) {
@@ -81,46 +82,17 @@ class RestaurantRepository extends ServiceEntityRepository
                 ->setParameter('category', $filters['category']);
         }
 
-        if (!empty($filters['diet'])) {
-            $qb->andWhere('d.name IN (:diets)')
-                ->setParameter('diet', $filters['diet']);
+        if (!empty($filters['diets'])) {
+            $qb->andWhere('diets IN (:diets)')
+                ->setParameter('diets', $filters['diets']);
         }
 
         if (!empty($filters['price'])) {
-            $qb->andWhere($qb->expr()->andX(
-                $qb->expr()->lte('i.price', ':maxPrice'),
-                $qb->expr()->gte('m.reduction', ':minReduction')
-            ))
-                ->setParameter('maxPrice', $filters['priceRange']['maxPrice'])
-                ->setParameter('minReduction', $filters['priceRange']['minReduction']);
+            $qb->andWhere('items.price <= :maxPrice')
+                ->setParameter('maxPrice', $filters['price'])
+//                ->setParameter('minReduction', $filters['priceRange']['minReduction'])
+            ;
         }
-
         return $qb->getQuery()->getResult();
     }
-
-
-//    /**
-//     * @return Restaurant[] Returns an array of Restaurant objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Restaurant
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }
