@@ -14,21 +14,35 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        <header>
-            {% block header %}
-                {% include 'home/_navbar.html.twig' %}
-            {% endblock %}
-            {% block search %}
-{#                {% include '/home/_search_bar.html.twig' %}#}
-                {{ render(controller(
-                    'App\\Controller\\SearchController::index'
-                )) }}
-            {% endblock %}
-        </header>
-    </body>
+
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+<header>
+    {% block header %}
+        {% include 'home/_navbar.html.twig' %}
+    {% endblock %}
+    {% block search %}
+        {{ render(controller(
+            'App\\Controller\\SearchController::index'
+        )) }}
+    {% endblock %}
+</header>
+
+{% block body %}{% endblock %}
+
+<footer>
+    {% block footer %}
+        {% include 'home/_footer.html.twig' %}
+    {% endblock %}
+</footer>
+
+</body>
 </html>
