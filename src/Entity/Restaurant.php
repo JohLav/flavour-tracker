@@ -18,15 +18,6 @@ class Restaurant
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $address = null;
-
-    #[ORM\Column]
-    private ?int $zipCode = null;
-
-    #[ORM\Column(length: 100)]
-    private ?string $city = null;
-
     #[ORM\Column]
     private ?int $phone = null;
 
@@ -52,6 +43,9 @@ class Restaurant
     #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Item::class, orphanRemoval: true)]
     private Collection $items;
 
+    #[ORM\OneToOne(mappedBy: 'restaurant', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -74,42 +68,6 @@ class Restaurant
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getZipCode(): ?int
-    {
-        return $this->zipCode;
-    }
-
-    public function setZipCode(int $zipCode): self
-    {
-        $this->zipCode = $zipCode;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
 
         return $this;
     }
@@ -293,6 +251,23 @@ class Restaurant
                 $item->setRestaurant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        // set the owning side of the relation if necessary
+        if ($user->getRestaurant() !== $this) {
+            $user->setRestaurant($this);
+        }
+
+        $this->user = $user;
 
         return $this;
     }

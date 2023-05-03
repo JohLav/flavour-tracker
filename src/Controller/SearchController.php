@@ -15,6 +15,7 @@ class SearchController extends AbstractController
 {
     #[Route("/", name: "index")]
     public function index(Request $request, RestaurantRepository $repository): Response
+    //ajouter les autres tables concernés par le trie, ex diet / category etc?
     {
         $form = $this->createForm(SearchType::class, [
             'items' => $request->request->all('search')['items'] ?? []
