@@ -18,15 +18,6 @@ class Restaurant
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $address = null;
-
-    #[ORM\Column]
-    private ?int $zipCode = null;
-
-    #[ORM\Column(length: 100)]
-    private ?string $city = null;
-
     #[ORM\Column]
     private ?int $phone = null;
 
@@ -77,42 +68,6 @@ class Restaurant
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getZipCode(): ?int
-    {
-        return $this->zipCode;
-    }
-
-    public function setZipCode(int $zipCode): self
-    {
-        $this->zipCode = $zipCode;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
 
         return $this;
     }
