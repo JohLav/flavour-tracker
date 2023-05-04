@@ -46,6 +46,10 @@ class Restaurant
     #[ORM\OneToOne(mappedBy: 'restaurant', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
+    #[ORM\ManyToOne(inversedBy: 'restaurants')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?City $city = null;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -268,6 +272,18 @@ class Restaurant
         }
 
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

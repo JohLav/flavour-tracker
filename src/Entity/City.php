@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -53,21 +55,13 @@ class City
     #[ORM\Column(nullable: true)]
     private ?float $latitudeDeg = null;
 
-    #[ORM\Column(length: 9, nullable: true)]
-    private ?string $longitudeGrd = null;
+    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Restaurant::class)]
+    private Collection $restaurants;
 
-    #[ORM\Column(length: 8, nullable: true)]
-    private ?string $latitudeGrd = null;
-
-    #[ORM\Column(length: 9, nullable: true)]
-    private ?string $longitudeDms = null;
-
-    #[ORM\Column(length: 8, nullable: true)]
-    private ?string $latitudeDms = null;
-
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Restaurant $restaurant = null;
+    public function __construct()
+    {
+        $this->restaurants = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -230,62 +224,32 @@ class City
         return $this;
     }
 
-    public function getLongitudeGrd(): ?string
+    /**
+     * @return Collection<int, Restaurant>
+     */
+    public function getRestaurants(): Collection
     {
-        return $this->longitudeGrd;
+        return $this->restaurants;
     }
 
-    public function setLongitudeGrd(?string $longitudeGrd): self
+    public function addRestaurant(Restaurant $restaurant): self
     {
-        $this->longitudeGrd = $longitudeGrd;
+        if (!$this->restaurants->contains($restaurant)) {
+            $this->restaurants->add($restaurant);
+            $restaurant->setCity($this);
+        }
 
         return $this;
     }
 
-    public function getLatitudeGrd(): ?string
+    public function removeRestaurant(Restaurant $restaurant): self
     {
-        return $this->latitudeGrd;
-    }
-
-    public function setLatitudeGrd(?string $latitudeGrd): self
-    {
-        $this->latitudeGrd = $latitudeGrd;
-
-        return $this;
-    }
-
-    public function getLongitudeDms(): ?string
-    {
-        return $this->longitudeDms;
-    }
-
-    public function setLongitudeDms(?string $longitudeDms): self
-    {
-        $this->longitudeDms = $longitudeDms;
-
-        return $this;
-    }
-
-    public function getLatitudeDms(): ?string
-    {
-        return $this->latitudeDms;
-    }
-
-    public function setLatitudeDms(?string $latitudeDms): self
-    {
-        $this->latitudeDms = $latitudeDms;
-
-        return $this;
-    }
-
-    public function getRestaurant(): ?Restaurant
-    {
-        return $this->restaurant;
-    }
-
-    public function setRestaurant(?Restaurant $restaurant): self
-    {
-        $this->restaurant = $restaurant;
+        if ($this->restaurants->removeElement($restaurant)) {
+            // set the owning side to null (unless already changed)
+            if ($restaurant->getCity() === $this) {
+                $restaurant->setCity(null);
+            }
+        }
 
         return $this;
     }
