@@ -55,6 +55,9 @@ class Restaurant
     #[ORM\OneToOne(mappedBy: 'restaurant', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
+    #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Reservation::class)]
+    private Collection $reservations;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -62,6 +65,7 @@ class Restaurant
         $this->menus = new ArrayCollection();
         $this->timeSlots = new ArrayCollection();
         $this->items = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -313,6 +317,36 @@ class Restaurant
         }
 
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->setRestaurant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getRestaurant() === $this) {
+                $reservation->setRestaurant(null);
+            }
+        }
 
         return $this;
     }

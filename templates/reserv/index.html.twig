@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes réservations{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-center">
+        <div class="col-6">
+            <h1>Mes réservations</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Heure</th>
+                    <th scope="col">Restaurant</th>
+                    <th scope="col">Nb personnes</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation.datetime | date('d/m/Y') }}</td>
+                        <td>{{ reservation.datetime | date('H:i') }}</td>
+                        <td>{{ reservation.restaurant.name }}</td>
+                        <td>{{ reservation.getAdultNb() }} adultes - {{ reservation.getKidNb() }} enfants</td>
+                        <td>
+                            <a href="{{ path('reservation_edit', {'id': reservation.id}) }}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                            <a href="{{ path('reservation_delete', {'id': reservation.id}) }}" class="btn btn-danger"><i class="bi bi-trash3"></i></a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">Aucune réservation trouvée.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+    </div>
+
+    {# templates/reservation/index.html.twig #}
+{% endblock %}
