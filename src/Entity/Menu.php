@@ -31,7 +31,7 @@ class Menu
     #[ORM\ManyToMany(targetEntity: Item::class, mappedBy: 'menus')]
     private Collection $items;
 
-    #[ORM\ManyToOne(inversedBy: 'menu')]
+    #[ORM\ManyToOne(inversedBy: 'menus')]
     private ?Restaurant $restaurant = null;
 
     public function __construct()
@@ -146,5 +146,4 @@ class Menu
 
         return $this;
     }
-
 }

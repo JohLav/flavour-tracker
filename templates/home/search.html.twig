@@ -1,0 +1,8 @@
+{#{% include 'search_bar.html.twig' with {'form': form} %}#}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include '/home/_search_results.html.twig' %}
+    {% include '/home/_map.html.twig' %}
+{% endblock %}

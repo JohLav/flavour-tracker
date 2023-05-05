@@ -32,8 +32,8 @@ class MenuController extends AbstractController
         RestaurantRepository $restaurantRepository /** A supprimer après le test User */
     ): Response {
         /** @var User $connectedUser */
-//        $connectedUser = $this->getUser();
-//        $restaurant = $connectedUser->getRestaurant();
+        $connectedUser = $this->getUser();
+        $restaurant = $connectedUser->getRestaurant();
         $restaurant = $restaurantRepository->findOneBy([]); /** A supprimer après le test User */
 
         $menus = $this->menuRepository->findBy([
