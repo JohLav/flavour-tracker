@@ -1,0 +1,31 @@
+{# templates/search/index.html.twig #}
+
+{{ form_start(form, {'attr': {'action': path('search_index')} }) }}
+    <div class="d-flex align-items-center flex-column">
+
+        <div class="row m-1">
+            <div class="col-6">
+                {{ form_row(form.items) }}
+                {{ form_row(form.city) }}
+                {{ form_row(form.timeSlot) }}
+            </div>
+            <div class="col-6">
+                {{ form_row(form.category) }}
+                {{ form_row(form.diets) }}
+                {{ form_row(form.price) }}
+            </div>
+        </div>
+        <div class="row m-1">
+            <button type="submit" class="btn btn-primary">Recherche</button>
+        </div>
+
+        {#    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">#}
+        {#        {% for key, diet in form.diet.vars.attr %}#}
+        {#            <input type="checkbox" class="btn-check" id='{{ "btncheck" ~ loop.index }}' autocomplete="off">#}
+        {#            <label class="btn btn-outline-primary" value="" for='{{ "btncheck" ~ loop.index }}' >{{ key }}</label>#}
+        {#        {% endfor %}#}
+        {#    </div>#}
+
+    </div>
+{{ form_end(form) }}
+
