@@ -36,15 +36,16 @@ class RestaurantController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $files = $form[ 'images']->getData();
+            $restaurant->setUser($this->getUser());
 
             if ($files) {
                 foreach ($files as $file) {
                     $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                     $safeFilename = $slugger->slug($originalFilename);
-                    $newFilename = $safeFilename . '_' . uniqid() . '_' . $file->guessExtention();
+                    $newFilename = $safeFilename . '_' . uniqid() . '_' . $file->guessExtension();
 
                     try {
-                        $files->move(
+                        $file->move(
                             $this->getParameter('restaurant_directory'),
                             $newFilename
                         );

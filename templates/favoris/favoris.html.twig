@@ -2,6 +2,16 @@
 
 {% block title %}Hello FavorisController!{% endblock %}
 
+{% block search %}{% endblock %}
+
 {% block body %}
 
+    <div class="m-5">
+        <h1 class="m-3">Mes Favoris</h1>
+        <div class="d-flex">
+        {% for restaurant in app.user.favorites %}
+            {% include 'restaurant/_restaurant.html.twig' %}
+        {% endfor %}
+        </div>
+    </div>
 {% endblock %}

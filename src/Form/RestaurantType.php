@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\City;
 use App\Entity\Restaurant;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,28 +22,25 @@ class RestaurantType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-            'label' => 'Name',
-            'attr' => ['class' => 'item'],
+                'label' => 'Name',
+                'attr' => ['class' => 'item'],
            ])
-
-            ->add('address', TextareaType::class)
-            ->add('city', TextType::class)
-            ->add('zip_code', TextType::class)
+            ->add('city', EntityType::class, [
+                'class' => City::class,
+                'choice_label' => 'realName',
+                'autocomplete' => true
+            ])
             ->add('phone', TextType::class)
-            ->add('capacity', TextType::class)
-            ->add('category', EntityType::class)
-            ->add('users', TextType::class)
-
+            ->add('capacity', IntegerType::class)
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
+                'autocomplete' => true
             ])
             ->add('images', FileType::class, [
                 'multiple' => true,
                 'mapped' => false,
             ])
-
-
             ->add('save', SubmitType::class)
         ;
     }
