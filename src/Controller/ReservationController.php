@@ -26,9 +26,10 @@ class ReservationController extends AbstractController
         $this->security = $security;
         $this->authorizationChecker = $authorizationChecker;
     }
-    #[Route('/reservation/new', name: 'app_reservation', methods: ["GET", "POST"])]
+    #[Route('/reservation/new/{id}', name: 'app_reservation_new', methods: ["GET", "POST"])]
     public function new(
         Request               $request,
+        Restaurant $restaurant,
         RestaurantRepository  $restaurantRepository,
         ReservationRepository $reservationRepository,
     ): Response {
@@ -45,6 +46,7 @@ class ReservationController extends AbstractController
 
             $user = $this->security->getUser();
             $reservation->setUser($user);
+            $reservation->setRestaurant($restaurant);
 
 
             // A SUPPRIMER QUAND J'AURAIS LA PARTI D'INES
@@ -64,6 +66,7 @@ class ReservationController extends AbstractController
 
         return $this->render('reservation/reserv.html.twig', [
             'form' => $form->createView(),
+            'restaurant' => $restaurant
         ]);
     }
     #[Route('/reservation/confirmation', name:'reservation_confirmation')]

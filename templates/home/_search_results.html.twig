@@ -34,9 +34,8 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{ restaurant.name }}</h5>
-                    <p class="card-text">{{ restaurant.address }}</p>
-                    <p class="card-text">{{ restaurant.zipCode }}</p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="{{ path('app_reservation_new', {'id': restaurant.id}) }}" class="btn btn-info">Reserver</a>
                 </div>
             </div>
         {% endfor %}
