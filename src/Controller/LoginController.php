@@ -22,15 +22,6 @@ class LoginController extends AbstractController
         ]);
     }
 
-    #[Route('/login', name: 'app_login_profil')]
-    #[isGranted]
-    public function profil(): Response
-    {
-
-        return $this->render('login/profil.html.twig');
-    }
-
-
     #[Route('/logout', name: 'app_logout', methods: ['GET'])]
     public function logout()
     {
