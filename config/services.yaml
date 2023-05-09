@@ -20,5 +20,9 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+#    App\Service\TimeSlotService:
+#        arguments:
+#            $restaurantRepository: App\Repository\RestaurantRepository
+#            $reservationRepository: App\Repository\ReservationRepository
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -45,31 +45,31 @@ class MenuController extends AbstractController
         ]);
     }
 
-//    #[Route('/{categoryName}', name: 'show')]
-//    public function show(string $categoryName, MenuRepository $menuRepository): Response
-//    {
-//        /** @var User $connectedUser */
-//        $connectedUser = $this->getUser();
-//        $restaurant = $connectedUser->getRestaurant();
-//
-//        $menus = $this->menuRepository->findBy([
-//            'restaurant' => $restaurant
-//        ]);
-//
-//        $category = $this->menuRepository->findOneBy(
-//            ['name' => $categoryName],
-//        );
-//
-//        if (!$category) {
-//            throw $this->createNotFoundException(
-//                "La catégorie $categoryName est introuvable."
-//            );
-//        }
-//
-//        return $this->render('menu/show.html.twig', [
-//            'category' => $category,
-//        ]);
-//    }
+    #[Route('/{categoryName}', name: 'show')]
+    public function show(string $categoryName, MenuRepository $menuRepository): Response
+    {
+        /** @var User $connectedUser */
+        $connectedUser = $this->getUser();
+        $restaurant = $connectedUser->getRestaurant();
+
+        $menus = $this->menuRepository->findBy([
+            'restaurant' => $restaurant
+        ]);
+
+        $category = $this->menuRepository->findOneBy(
+            ['name' => $categoryName],
+        );
+
+        if (!$category) {
+            throw $this->createNotFoundException(
+                "La catégorie $categoryName est introuvable."
+            );
+        }
+
+        return $this->render('admin/menu/show.html.twig', [
+            'category' => $category,
+        ]);
+    }
 
     /**
      * Add a new menu
@@ -81,11 +81,11 @@ class MenuController extends AbstractController
         $menu = new Menu();
         $form = $this->createForm(MenuType::class, $menu);
         $form->handleRequest($request);
-//        /** @var User $connectedUser */
-//        $connectedUser = $this->getUser();
-//        $restaurant = $connectedUser->getRestaurant();
+        /** @var User $connectedUser */
+        $connectedUser = $this->getUser();
+        $restaurant = $connectedUser->getRestaurant();
         if ($form->isSubmitted() && $form->isValid()) {
-//            $menu->setRestaurant($restaurant);
+            $menu->setRestaurant($restaurant);
             $menuRepository->save($menu, true);
             $this->addFlash('success', 'Le menu a bien été ajouté.');
 
@@ -108,11 +108,11 @@ class MenuController extends AbstractController
     ): Response {
         $form = $this->createForm(MenuType::class, $menu);
         $form->handleRequest($request);
-//        /** @var User $connectedUser */
-//        $connectedUser = $this->getUser();
-//        $restaurant = $connectedUser->getRestaurant();
+       /** @var User $connectedUser */
+        $connectedUser = $this->getUser();
+        $restaurant = $connectedUser->getRestaurant();
         if ($form->isSubmitted() && $form->isValid()) {
-//            $menu->setRestaurant($restaurant);
+            $menu->setRestaurant($restaurant);
             $menuRepository->save($menu, true);
             $this->addFlash('success', 'Le menu a bien été ajouté.');
 

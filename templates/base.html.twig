@@ -22,11 +22,7 @@
             {% block header %}
                 {% include 'home/_navbar.html.twig' %}
             {% endblock %}
-            {% block search %}
-                {{ render(controller(
-                    'App\\Controller\\SearchController::index'
-                )) }}
-            {% endblock %}
+            {% block search %}{% endblock %}
         </header>
 
         {% block body %}{% endblock %}
@@ -36,5 +32,9 @@
                 {% include 'home/_footer.html.twig' %}
             {% endblock %}
         </footer>
+        {% block script %}
+            
+        {% endblock %}
+
     </body>
 </html>

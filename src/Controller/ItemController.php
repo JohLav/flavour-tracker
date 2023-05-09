@@ -54,11 +54,11 @@ class ItemController extends AbstractController
         $item = new Item();
         $form = $this->createForm(ALaCarteType::class, $item);
         $form->handleRequest($request);
-//        /** @var User $connectedUser */
-//        $connectedUser = $this->getUser();
-//        $restaurant = $connectedUser->getRestaurant();
+        /** @var User $connectedUser */
+        $connectedUser = $this->getUser();
+        $restaurant = $connectedUser->getRestaurant();
         if ($form->isSubmitted() && $form->isValid()) {
-//            $item->setRestaurant($restaurant);
+            $item->setRestaurant($restaurant);
             $itemRepository->save($item, true);
             $this->addFlash('success', "L'élément a bien été ajouté.");
 
@@ -81,11 +81,11 @@ class ItemController extends AbstractController
     ): Response {
         $form = $this->createForm(ALaCarteType::class, $item);
         $form->handleRequest($request);
-//        /** @var User $connectedUser */
-//        $connectedUser = $this->getUser();
-//        $restaurant = $connectedUser->getRestaurant();
+        /** @var User $connectedUser */
+        $connectedUser = $this->getUser();
+        $restaurant = $connectedUser->getRestaurant();
         if ($form->isSubmitted() && $form->isValid()) {
-//            $item->setRestaurant($restaurant);
+            $item->setRestaurant($restaurant);
             $itemRepository->save($item, true);
             $this->addFlash('success', "L'élément a bien été ajouté.");
 

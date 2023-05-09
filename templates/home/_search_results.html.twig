@@ -1,14 +1,14 @@
-{% extends 'base.html.twig' %}
 
-
-{% block body %}
     {% if restaurants|length == 0 %}
         <p>Aucun restaurant trouvé.</p>
     {% else %}
-        <h1>Résultats de la recherche</h1>
-    <div class="result d-flex">
+        <h1 class="m-5">Résultats de la recherche</h1>
+    <div class="result d-flex flex-lg-wrap m-5 gap-2">
             {% for restaurant in restaurants %}
             <div class="card" style="width: 18rem;">
+                {% if timeSlot is defined %}
+                    {{ time_slot_service.checkAvailable(restaurant, timeSlot) }}
+                {% endif %}
 {#                <img src="..." class="card-img-top" alt="...">  ajouter un carrousel à la place image#}
                 <div id="carouselExampleAutoplaying{{ loop.index }}" class="carousel slide" data-bs-ride="carousel">
 
@@ -34,12 +34,12 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{ restaurant.name }}</h5>
-                    <p class="card-text">{{ restaurant.address }}</p>
-                    <p class="card-text">{{ restaurant.zipCode }}</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <p class="card-text">{{ restaurant.city.name }}</p>
+                    <p class="card-text">{{ restaurant.city.zipCode }}</p>
+                    <a href="#" class="btn btn-primary">En savoir plus</a>
                 </div>
             </div>
         {% endfor %}
+        {% include '/home/_map.html.twig' %}
     </div>
     {% endif %}
-{% endblock %}

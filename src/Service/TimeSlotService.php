@@ -2,12 +2,32 @@
 
 namespace App\Service;
 
+use App\Entity\Restaurant;
+use App\Repository\ReservationRepository;
+use App\Repository\RestaurantRepository;
+use App\Repository\TimeSlotRepository;
+
 class TimeSlotService
 {
-// recuperer dans la base de donnée la capacité du restaurant (repo) et reservation repo,
-// ensuite on récupeère toutes les résa pour le meme resto, meeme jour
-//meme service.
-//Calcule: Capacité total du resto - resa du jour = place dispo
-//Afficher dans la page "restaurant" + sur la carte search_results
-//Ne pas l'ajouter au filtre'
+    public function __construct(private RestaurantRepository $restaurantRepository, private ReservationRepository $reservationRepository)
+    {
+    }
+    public function checkAvailable(Restaurant $restaurant, \DateTime $dateTime)
+    {
+        $capacity = $restaurant->getCapacity();
+        $reservations = $this->reservationRepository->findBy([
+            'restaurant' => $restaurant,
+            'datetime' => $dateTime->format('y-m-d')
+        ]);
+
+        $total = 0;
+        foreach ($reservations as $reservation) {
+            $total += $reservation->getAdultNb() + $reservation->getKidNb();
+        }
+
+        dd($total);
+        return $capacity - $total > 0;
+
+    }
+
 }
