@@ -39,28 +39,60 @@ class RestaurantRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Restaurant[] Returns an array of Restaurant objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findFiltered(array $filters): array
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->leftJoin('r.items', 'items')
+            ->leftJoin('r.menus', 'menus')
+            ->leftJoin('r.timeSlots', 'timeSlots')
+            ->leftJoin('r.category', 'category')
+            ->leftJoin('menus.diets', 'diets');
 
-//    public function findOneBySomeField($value): ?Restaurant
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        if (!empty($filters['items'])) {
+            foreach ($filters['items'] as $i => $name) {
+                $qb
+                    ->orWhere("items.name LIKE :item{$i}")
+                    ->setParameter("item{$i}", "%{$name}%")
+                    ->orWhere("menus.name LIKE :menu{$i}")
+                    ->setParameter("menu{$i}", "%{$name}%")
+                ;
+            }
+        }
+
+//        if (!empty($filters['city'])) {
+//            $qb->andWhere($qb->expr()->orX(
+//                $qb->expr()->like('r.address', ':city'),
+//                $qb->expr()->like('r.zip_code', ':city')
+//            ))
+//                ->setParameter('city', '%' . $filters['city'] . '%');
+//        }
+
+        if (!empty($filters['timeSlot'])) {
+            $qb->andWhere($qb->expr()->andX(
+                $qb->expr()->lte('timeSlots.opening', ':time'),
+                $qb->expr()->gte('timeSlots.closing', ':time'),
+                $qb->expr()->eq('timeSlots.day', ':day')
+            ))
+                ->setParameter('time', $filters['timeSlot']->format('H:i'))
+                ->setParameter('day', $filters['timeSlot']->format('N'));
+        }
+
+        if (!empty($filters['category'])) {
+            $qb->andWhere('r.category = :category')
+                ->setParameter('category', $filters['category']);
+        }
+
+        if (!empty($filters['diets'])) {
+            $qb->andWhere('diets IN (:diets)')
+                ->setParameter('diets', $filters['diets']);
+        }
+
+        if (!empty($filters['price'])) {
+            $qb->andWhere('items.price <= :maxPrice')
+                ->setParameter('maxPrice', $filters['price'])
+//                ->setParameter('minReduction', $filters['priceRange']['minReduction'])
+            ;
+        }
+        return $qb->getQuery()->getResult();
+    }
 }

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    {% if restaurants|length == 0 %}
+        <p>Aucun restaurant trouvé.</p>
+    {% else %}
+        <h1>Résultats de la recherche</h1>
+    <div class="result d-flex">
+        {% for restaurant in restaurants %}
+            {% include 'restaurant/_restaurant.html.twig' %}
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endblock %}
