@@ -13,7 +13,7 @@ use App\Repository\RestaurantRepository;
 #[Route("/search", name: "search_")]
 class SearchController extends AbstractController
 {
-    #[Route("/", name: "index")]
+    #[Route("/", name: "index", methods: ['POST'])]
     public function index(Request $request, RestaurantRepository $repository): Response
     {
         //ajouter les autres tables concernés par le trie, ex diet / category etc?
@@ -25,11 +25,13 @@ class SearchController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            $timeSlot = $data['timeSlot'];
 
             $restaurants = $repository->findFiltered($data);
 
-            return $this->render('home/_search_results.html.twig', [
-                'restaurants' => $restaurants,
+            return $this->render('home/search.html.twig', [
+                'restaurants' => $restaurants ?? $repository->findAll(),
+                'timeSlot' => $timeSlot,
             ]);
         }
 

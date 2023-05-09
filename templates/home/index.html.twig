@@ -17,11 +17,13 @@
                 Cras pharetra urna sit amet felis egestas, at hendrerit nisi lacinia.
                 Mauris dictum commodo ipsum quis cursus. Fusce fermentum vel erat eu viverra.
             </p>
+            {{ form_start(form, {'attr': {'action': path('home_index')} }) }}
             <div class="container-fluid d-block shadow-lg p-5 m-5 bg-body-tertiary rounded" id="home_form">
-                <input class="form-control " type="search" placeholder="Quoi ?" aria-label="Search">
-                <input class="form-control mt-4" type="search" placeholder="Où ?" aria-label="Search">
+                {{ form_widget(form.items) }}
+                {{ form_widget(form.city) }}
                 <button class="btn btn-primary mt-4" type="submit">Rechercher</button>
             </div>
+            {{ form_end(form) }}
         </div>
         <div class="">
             <img src="{{ asset('build/images/fruits.jpg') }}"

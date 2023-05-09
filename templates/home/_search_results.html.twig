@@ -1,7 +1,4 @@
-{% extends 'base.html.twig' %}
 
-
-{% block body %}
     {% if restaurants|length == 0 %}
         <p>Aucun restaurant trouvé.</p>
     {% else %}
@@ -10,6 +7,6 @@
         {% for restaurant in restaurants %}
             {% include 'restaurant/_restaurant.html.twig' %}
         {% endfor %}
+        {% include '/home/_map.html.twig' %}
     </div>
     {% endif %}
-{% endblock %}

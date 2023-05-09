@@ -45,31 +45,31 @@ class MenuController extends AbstractController
         ]);
     }
 
-//    #[Route('/{categoryName}', name: 'show')]
-//    public function show(string $categoryName, MenuRepository $menuRepository): Response
-//    {
-//        /** @var User $connectedUser */
-//        $connectedUser = $this->getUser();
-//        $restaurant = $connectedUser->getRestaurant();
-//
-//        $menus = $this->menuRepository->findBy([
-//            'restaurant' => $restaurant
-//        ]);
-//
-//        $category = $this->menuRepository->findOneBy(
-//            ['name' => $categoryName],
-//        );
-//
-//        if (!$category) {
-//            throw $this->createNotFoundException(
-//                "La catégorie $categoryName est introuvable."
-//            );
-//        }
-//
-//        return $this->render('menu/show.html.twig', [
-//            'category' => $category,
-//        ]);
-//    }
+    #[Route('/{categoryName}', name: 'show')]
+    public function show(string $categoryName, MenuRepository $menuRepository): Response
+    {
+        /** @var User $connectedUser */
+        $connectedUser = $this->getUser();
+        $restaurant = $connectedUser->getRestaurant();
+
+        $menus = $this->menuRepository->findBy([
+            'restaurant' => $restaurant
+        ]);
+
+        $category = $this->menuRepository->findOneBy(
+            ['name' => $categoryName],
+        );
+
+        if (!$category) {
+            throw $this->createNotFoundException(
+                "La catégorie $categoryName est introuvable."
+            );
+        }
+
+        return $this->render('admin/menu/show.html.twig', [
+            'category' => $category,
+        ]);
+    }
 
     /**
      * Add a new menu

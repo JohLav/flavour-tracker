@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\City;
 use App\Entity\Diet;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -28,7 +29,7 @@ class SearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('city', TextType::class, [
+            ->add('city', CityAutocompleteField::class, [
                 'required' => false,
                 'label' => false,
                 'attr' => [
@@ -73,16 +74,6 @@ class SearchType extends AbstractType
                     'class' => 'm-1',
                 ]
             ])
-//            ->add('diet', CheckboxType::class, [
-//                'required' => false,
-//                'attr' => [
-//                    'Végétarien' => 'vegetarian',
-//                    'Sans gluten' => 'gluten_free',
-//                    'Végan' => 'vegan',
-//                    'Halal' => 'halal',
-//                    'Casher' => 'kosher',
-//                ],
-//            ])
             ->add('diets', EntityType::class, [
                 'required' => false,
                 'label' => false,
@@ -96,16 +87,23 @@ class SearchType extends AbstractType
                     'class' => 'm-1',
                 ],
             ])
-
-            ->add('price', IntegerType::class, [
+            ->add('price', RangeType::class, [
                 'required' => false,
-                'label' => false,
-                'attr' => ['placeholder' => 'Prix maximum'],
+                'label' => '50 €',
+                'attr' => [
+                    'min' => 1,
+                    'max' => 100
+                ],
+                'label_attr' => [
+                    'id' => 'container_price',
+                    'class' => 'm-0'
+                ],
                 'row_attr' => [
                     'class' => 'm-1',
+
                 ],
-            ])
-        ;
+            ]);
+
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
             $form = $event->getForm();
