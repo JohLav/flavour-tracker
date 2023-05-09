@@ -1,17 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin.base.html.twig' %}
 
 {% block title %}Hello FavorisController!{% endblock %}
 
-{% block search %}{% endblock %}
 
-{% block body %}
+{% block content %}
+    <div class="col-9">
+        <h1>Mes favoris</h1>
+        {% if app.user.favorites is not empty %}
+            {% for restaurant in app.user.favorites %}
+                {% include 'restaurant/_restaurant.html.twig' %}
+            {% endfor %}
+        {% else %}
+            <p>Aucun favoris</p>
+        {% endif %}
 
-    <div class="m-5">
-        <h1 class="m-3">Mes Favoris</h1>
-        <div class="d-flex">
-        {% for restaurant in app.user.favorites %}
-            {% include 'restaurant/_restaurant.html.twig' %}
-        {% endfor %}
-        </div>
     </div>
 {% endblock %}

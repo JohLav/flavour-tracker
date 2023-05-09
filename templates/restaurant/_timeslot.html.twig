@@ -1,0 +1,40 @@
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Jour</th>
+        <th scope="col">Ouverture</th>
+        <th scope="col">Fermeture</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for timeSlot in restaurant.timeSlots  %}
+        <tr>
+            <th scope="row">
+                {% if timeSlot.day == '1' %}
+                    Lundi
+                {% elseif timeSlot.day == '2' %}
+                    Mardi
+                {% elseif timeSlot.day == '3' %}
+                    Mercredi
+                {% elseif timeSlot.day == '4' %}
+                    Jeudi
+                {% elseif timeSlot.day == '5' %}
+                    Vendredi
+                {% elseif timeSlot.day == '6' %}
+                    Samedi
+                {% elseif timeSlot.day == '7' %}
+                    Dimanche
+                {% endif %}
+            </th>
+            <td>{{ timeSlot.opening|date('H:m') }}</td>
+            <td>{{ timeSlot.closing|date('H:m') }}</td>
+            <td>
+                <a class="btn btn-primary" href="{{ path('app_time_slot_edit', {'id': timeSlot.id}) }}">Modifier</a>
+                {% include('time_slot/_delete_form.html.twig') %}
+            </td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
