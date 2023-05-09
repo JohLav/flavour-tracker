@@ -6,9 +6,6 @@
     <div class="result d-flex flex-lg-wrap m-5 gap-2">
             {% for restaurant in restaurants %}
             <div class="card" style="width: 18rem;">
-                {% if timeSlot is defined %}
-                    {{ time_slot_service.checkAvailable(restaurant, timeSlot) }}
-                {% endif %}
 {#                <img src="..." class="card-img-top" alt="...">  ajouter un carrousel à la place image#}
                 <div id="carouselExampleAutoplaying{{ loop.index }}" class="carousel slide" data-bs-ride="carousel">
 
@@ -36,6 +33,14 @@
                     <h5 class="card-title">{{ restaurant.name }}</h5>
                     <p class="card-text">{{ restaurant.city.name }}</p>
                     <p class="card-text">{{ restaurant.city.zipCode }}</p>
+                    {% if timeSlot is not empty %}
+                        {% set isFull = time_slot_service.checkAvailable(restaurant, timeSlot) %}
+                        {% if not isFull %}
+                            <p class="card-text text-danger">Complet</p>
+                        {% else %}
+                            <p class="card-text text-success">Place restante</p>
+                        {% endif %}
+                    {% endif %}
                     <a href="#" class="btn btn-primary">En savoir plus</a>
                 </div>
             </div>
