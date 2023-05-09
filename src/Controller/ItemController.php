@@ -10,12 +10,14 @@ use App\Form\MenuType;
 use App\Repository\ItemRepository;
 use App\Repository\MenuRepository;
 use App\Repository\RestaurantRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/items', name: 'items_')]
+#[IsGranted('ROLE_OWNER')]
 class ItemController extends AbstractController
 {
     public function __construct(
@@ -29,12 +31,10 @@ class ItemController extends AbstractController
     #[Route('/list', name: 'list')]
     public function itemsList(
         ItemRepository $itemRepository,
-        RestaurantRepository $restaurantRepository  /** A supprimer après le test User */
     ): Response {
         /** @var User $connectedUser */
         $connectedUser = $this->getUser();
         $restaurant = $connectedUser->getRestaurant();
-        $restaurant = $restaurantRepository->findOneBy([]); /** A supprimer après le test User */
 
         $items = $this->itemRepository->findBy([
             'restaurant' => $restaurant
@@ -54,9 +54,11 @@ class ItemController extends AbstractController
         $item = new Item();
         $form = $this->createForm(ALaCarteType::class, $item);
         $form->handleRequest($request);
+
         /** @var User $connectedUser */
         $connectedUser = $this->getUser();
         $restaurant = $connectedUser->getRestaurant();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $item->setRestaurant($restaurant);
             $itemRepository->save($item, true);
@@ -81,11 +83,8 @@ class ItemController extends AbstractController
     ): Response {
         $form = $this->createForm(ALaCarteType::class, $item);
         $form->handleRequest($request);
-        /** @var User $connectedUser */
-        $connectedUser = $this->getUser();
-        $restaurant = $connectedUser->getRestaurant();
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $item->setRestaurant($restaurant);
             $itemRepository->save($item, true);
             $this->addFlash('success', "L'élément a bien été ajouté.");
 
