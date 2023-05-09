@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 
 class RestaurantType extends AbstractType
 {
@@ -22,15 +23,15 @@ class RestaurantType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Name',
+                'label' => 'Nom',
                 'attr' => ['class' => 'item'],
            ])
             ->add('city', EntityType::class, [
+                'label' => 'Ville',
                 'class' => City::class,
                 'choice_label' => 'realName',
                 'autocomplete' => true
             ])
-            ->add('phone', TextType::class)
             ->add('capacity', IntegerType::class)
             ->add('category', EntityType::class, [
                 'class' => Category::class,
@@ -38,10 +39,12 @@ class RestaurantType extends AbstractType
                 'autocomplete' => true
             ])
             ->add('images', FileType::class, [
+                'label' => 'Photos',
                 'multiple' => true,
                 'mapped' => false,
             ])
-            ->add('save', SubmitType::class)
+            ->add('Sauvegarde', SubmitType::class)
+
         ;
     }
 
