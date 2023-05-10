@@ -3,9 +3,7 @@
 {% extends 'base.html.twig' %}
 
 {% block search %}
-    {{ render(controller(
-        'App\\Controller\\SearchController::index'
-    )) }}
+    {% include 'home/_search_bar.html.twig' %}
 {% endblock %}
 
 {% block body %}

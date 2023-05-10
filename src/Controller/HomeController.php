@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +20,10 @@ class HomeController extends AbstractController
             'items' => $request->request->all('home_search')['items'] ?? []
         ]);
 
+        $searchForm = $this->createForm(SearchType::class, [
+            'items' => $request->request->all('search')['items'] ?? []
+        ]);
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
@@ -27,6 +32,7 @@ class HomeController extends AbstractController
 
             return $this->render('home/search.html.twig', [
                 'restaurants' => $restaurants ?? $repository->findAll(),
+                'form' => $searchForm->createView(),
             ]);
         }
         return $this->render('home/index.html.twig', [
