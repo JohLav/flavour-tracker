@@ -14,13 +14,13 @@ class TimeSlot
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $day = null;
+    #[ORM\Column]
+    private ?int $day = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $opening = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $closing = null;
 
     #[ORM\ManyToOne(inversedBy: 'timeSlots')]
@@ -32,12 +32,12 @@ class TimeSlot
         return $this->id;
     }
 
-    public function getDay(): ?\DateTimeInterface
+    public function getDay(): int
     {
         return $this->day;
     }
 
-    public function setDay(\DateTimeInterface $day): self
+    public function setDay(?int $day): self
     {
         $this->day = $day;
 

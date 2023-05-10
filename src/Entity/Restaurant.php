@@ -6,6 +6,7 @@ use App\Repository\RestaurantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: RestaurantRepository::class)]
 class Restaurant
@@ -17,15 +18,6 @@ class Restaurant
 
     #[ORM\Column(length: 50)]
     private ?string $name = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $address = null;
-
-    #[ORM\Column]
-    private ?int $zip_code = null;
-
-    #[ORM\Column(length: 100)]
-    private ?string $city = null;
 
     #[ORM\Column]
     private ?int $phone = null;
@@ -55,6 +47,13 @@ class Restaurant
     #[ORM\OneToOne(mappedBy: 'restaurant', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
+    #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Reservation::class)]
+    private Collection $reservations;
+
+    #[ORM\ManyToOne(inversedBy: 'restaurants')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?City $city = null;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -62,6 +61,22 @@ class Restaurant
         $this->menus = new ArrayCollection();
         $this->timeSlots = new ArrayCollection();
         $this->items = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
+    }
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $address = null;
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -77,42 +92,6 @@ class Restaurant
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getZipCode(): ?int
-    {
-        return $this->zip_code;
-    }
-
-    public function setZipCode(int $zip_code): self
-    {
-        $this->zip_code = $zip_code;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
 
         return $this;
     }
@@ -313,6 +292,47 @@ class Restaurant
         }
 
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->setRestaurant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getRestaurant() === $this) {
+                $reservation->setRestaurant(null);
+            }
+        }
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

@@ -1,0 +1,25 @@
+{#{% include 'search_bar.html.twig' with {'form': form} %}#}
+
+{% extends 'base.html.twig' %}
+
+{% block search %}
+    {% include 'home/_search_bar.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    {% include '/home/_search_results.html.twig' %}
+{% endblock %}
+
+{% block script %}
+    <script>
+        let price = document.getElementById('search_price');
+        let container = document.getElementById('container_price');
+
+        price.addEventListener('change', () => {
+            let currentPrice = price.value;
+            container.innerText = currentPrice + ' €';
+        })
+    </script>
+
+{% endblock %}
+

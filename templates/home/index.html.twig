@@ -17,11 +17,13 @@
                 Dites adieu aux heures de recherche fastidieuse et bonjour à une expérience culinaire
                 délicieuse et personnalisée !
             </p>
-            <div class="container-fluid d-sm-block shadow-lg p-5 m-5 bg-body-tertiary rounded" id="home_form">
-                <input class="form-control " type="search" placeholder="Quoi ?" aria-label="Search">
-                <input class="form-control mt-4" type="search" placeholder="Où ?" aria-label="Search">
+            {{ form_start(form, {'attr': {'action': path('home_index')} }) }}
+            <div class="container-fluid d-block shadow-lg p-5 m-5 bg-body-tertiary rounded" id="home_form">
+                {{ form_widget(form.items) }}
+                {{ form_widget(form.city) }}
                 <button class="btn btn-primary mt-4" type="submit">Rechercher</button>
             </div>
+            {{ form_end(form) }}
         </div>
         <div class="ms-4">
             <img src="{{ asset('build/images/fruits.jpg') }}"
