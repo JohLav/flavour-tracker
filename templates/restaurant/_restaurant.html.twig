@@ -41,6 +41,6 @@
                 <p class="card-text text-success">Place restante</p>
             {% endif %}
         {% endif %}
-        <a href="#" class="btn btn-primary">En savoir plus</a>
+        <a href="{{ path('app_reservation_new', {'id': restaurant.id}) }}" class="btn btn-primary">Reserver</a>
     </div>
 </div>

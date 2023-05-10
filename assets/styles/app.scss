@@ -4,3 +4,17 @@
 @import "_base.scss";
 @import "_sidebar.scss";
 @import "~bootstrap/scss/bootstrap";
+
+
+.my-form-class input[type="text"],
+.my-form-class select {
+    width: 100%;
+    max-width: 400px; /* ou la largeur que vous préférez */
+}
+
+
+.image-reservation {
+    object-fit: cover;
+    width: 100%;
+    height: 400px;
+}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de réservation{% endblock %}
+
+{% block body %}
+
+<div style="text-align: center;">
+    <h1>Merci pour votre réservation !</h1>
+    <p>Votre réservation a bien été prise en compte. Vous recevrez bientôt un e-mail de confirmation avec les détails de votre réservation.</p>
+</div>
+    <a href="{{ path('app_home') }}">Retour à la page d'accueil</a>
+{% endblock %}
