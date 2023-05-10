@@ -49,14 +49,18 @@
                 </button>
                 <div class="collapse" id="account-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="{{ path('app_favoris') }}" class="link-dark d-inline-flex text-decoration-none rounded">Mes favoris</a>
-                        </li>
-                        <li><a href="{{ path('app_reservation_list') }}" class="link-dark d-inline-flex text-decoration-none rounded">Mes réservations</a>
-                        </li>
-                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Paramètres</a>
-                        </li>
-                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Déconnexion</a>
-                        </li>
+                        {% if not is_granted('ROLE_OWNER') %}
+                            <li><a href="{{ path('app_favoris') }}" class="link-dark d-inline-flex text-decoration-none rounded">Mes favoris</a></li>
+                            <li><a href="{{ path('app_reservation_list') }}" class="link-dark d-inline-flex text-decoration-none rounded">Mes réservations</a></li>
+                        {% else %}
+                            {% if app.user.restaurant is not empty %}
+                                <li><a href="{{ path('app_restaurant_show', {'id': app.user.restaurant.id}) }}" class="link-dark d-inline-flex text-decoration-none rounded">Mon restaurant</a></li>
+                            {% else %}
+                                <li><a href="{{ path('app_restaurant_new') }}" class="link-dark d-inline-flex text-decoration-none rounded">Créer mon restaurant</a></li>
+                            {% endif %}
+                        {% endif %}
+                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Paramètres</a></li>
+                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Déconnexion</a></li>
                     </ul>
                 </div>
             </li>

@@ -17,10 +17,10 @@ class TimeSlot
     #[ORM\Column]
     private ?int $day = null;
 
-    #[ORM\Column(type: Types::TIME_IMMUTABLE)]
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $opening = null;
 
-    #[ORM\Column(type: Types::TIME_IMMUTABLE)]
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $closing = null;
 
     #[ORM\ManyToOne(inversedBy: 'timeSlots')]

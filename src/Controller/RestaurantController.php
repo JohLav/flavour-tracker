@@ -61,10 +61,55 @@ class RestaurantController extends AbstractController
             }
             $restaurantRepository->save($restaurant, true);
 
-            return $this->redirectToRoute('app_restaurant_index');
+            return $this->redirectToRoute('app_restaurant_show', ['id' => $restaurant->getId()]);
         }
 
         return $this->renderForm('restaurant/new.html.twig', [
+            'restaurant' => $restaurant,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route(path: '/edit/{id}', name: 'edit')]
+    public function edit(
+        Request $request,
+        Restaurant $restaurant,
+        RestaurantRepository $restaurantRepository,
+        SluggerInterface $slugger,
+        ImageRepository $imageRepository,
+    ): Response {
+        $form = $this->createForm(RestaurantType::class, $restaurant);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $files = $form[ 'images']->getData();
+            $restaurant->setUser($this->getUser());
+
+            if ($files) {
+                foreach ($files as $file) {
+                    $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeFilename = $slugger->slug($originalFilename);
+                    $newFilename = $safeFilename . '_' . uniqid() . '_' . $file->guessExtension();
+
+                    try {
+                        $file->move(
+                            $this->getParameter('restaurant_directory'),
+                            $newFilename
+                        );
+                    } catch (FileException $e) {
+                    }
+                    $image = new Image();
+                    $image->setUrl('uploads/restaurant/' . $newFilename);
+                    $imageRepository->save($image);
+                    $restaurant->addImage($image);
+                }
+            }
+            $restaurantRepository->save($restaurant, true);
+
+            return $this->redirectToRoute('app_restaurant_show', ['id' => $restaurant->getId()]);
+        }
+
+        return $this->renderForm('restaurant/edit.html.twig', [
             'restaurant' => $restaurant,
             'form' => $form,
         ]);
