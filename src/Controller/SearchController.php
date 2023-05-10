@@ -13,7 +13,7 @@ use App\Repository\RestaurantRepository;
 #[Route("/search", name: "search_")]
 class SearchController extends AbstractController
 {
-    #[Route("/", name: "index", methods: ['POST'])]
+    #[Route("/", name: "index")]
     public function index(Request $request, RestaurantRepository $repository): Response
     {
         //ajouter les autres tables concernés par le trie, ex diet / category etc?
