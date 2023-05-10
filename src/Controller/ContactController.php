@@ -33,11 +33,40 @@ class ContactController extends AbstractController
                 ->text($content);
 
             $mailer->send($email);
-            $this->addFlash('success', 'Votre message a été envoyé');
+            $this->addFlash('success', message: 'Votre message a été envoyé');
             return $this->redirectToRoute('app_home');
         }
         return $this->render('contact/index.html.twig', [
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @throws TransportExceptionInterface
+     */
+    #[Route('/reply', name: 'app_reply')]
+    public function new(Request $request, MailerInterface $mailer): Response
+    {
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $contactData = $form->getData();
+            $content = $contactData['message'];
+
+            $email = (new Email())
+                ->from($this->getParameter('mailer_from'))
+                ->to($contactData['email'])
+                ->subject('Confirmation de votre demande')
+                ->text($content);
+
+            $mailer->send($email);
+            return $this->redirectToRoute('app_home');
+        }
+        return $this->render('contact/reply.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 }
+
+
+

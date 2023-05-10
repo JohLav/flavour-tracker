@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contactez-nous{% endblock %}
+
+{% block body %}
+    {% if is_granted('ROLE_SUPER_ADMIN')%}
+    <div class="container d-block justify-content-center py-1 my-5">
+        <div class="shadow-lg p-5 m-5 bg-body-tertiary rounded">
+            <h2 class="pb-3">Répondre à la demande</h2>
+            {{ form_start(form) }}
+                {{ form_row(form.name) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.message) }}
+                {{ form_row(form.send) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+
