@@ -15,8 +15,9 @@ class SearchController extends AbstractController
 {
     #[Route("/", name: "index")]
     public function index(Request $request, RestaurantRepository $repository): Response
-    //ajouter les autres tables concernés par le trie, ex diet / category etc?
     {
+        //ajouter les autres tables concernés par le trie, ex diet / category etc?
+        $timeSlot = null;
         $form = $this->createForm(SearchType::class, [
             'items' => $request->request->all('search')['items'] ?? []
         ]);
@@ -24,16 +25,15 @@ class SearchController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            $timeSlot = $data['timeSlot'];
 
             $restaurants = $repository->findFiltered($data);
-
-            return $this->render('home/_search_results.html.twig', [
-                'restaurants' => $restaurants ?? $repository->findAll(),
-            ]);
         }
 
-        return $this->render('home/_search_bar.html.twig', [
+        return $this->render('home/search.html.twig', [
             'form' => $form->createView(),
+            'restaurants' => $restaurants ?? $repository->findAll(),
+            'timeSlot' => $timeSlot,
         ]);
     }
 }

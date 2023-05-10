@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Reservation;
+use App\Entity\Restaurant;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +39,21 @@ class ReservationRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findReservationByTimeSlot(Restaurant $restaurant, ?DateTime $dateTime): array
+    {
+        $qb = $this->createQueryBuilder('r');
+        $qb
+            ->andWhere('r.restaurant = :restaurant')
+            ->andWhere('r.datetime >= :date_start')
+            ->andWhere('r.datetime <= :date_end')
+            ->setParameter('date_start', $dateTime->format('Y-m-d 00:00:00'))
+            ->setParameter('date_end', $dateTime->format('Y-m-d 23:59:59'))
+            ->setParameter('restaurant', $restaurant)
+        ;
+
+        return $qb->getQuery()->getResult();
     }
 
 //    /**

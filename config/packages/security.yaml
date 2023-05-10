@@ -12,7 +12,8 @@ security:
                 property: email
 
     role_hierarchy:
-        ROLE_ADMIN: ROLE_USER
+        ROLE_OWNER: ROLE_USER
+        ROLE_ADMIN: ROLE_OWNER
         ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
 
     firewalls:

@@ -6,6 +6,7 @@ use App\Repository\RestaurantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: RestaurantRepository::class)]
 class Restaurant
@@ -52,6 +53,9 @@ class Restaurant
     #[ORM\ManyToOne(inversedBy: 'restaurants')]
     #[ORM\JoinColumn(nullable: false)]
     private ?City $city = null;
+
+    #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Reservation::class)]
+    private Collection $reservations;
 
     public function __construct()
     {
@@ -332,6 +336,36 @@ class Restaurant
     public function setCity(?City $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->setRestaurant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getRestaurant() === $this) {
+                $reservation->setRestaurant(null);
+            }
+        }
 
         return $this;
     }

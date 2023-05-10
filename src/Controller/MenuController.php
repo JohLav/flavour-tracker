@@ -1,21 +1,23 @@
 <?php
 
-    namespace App\Controller;
+namespace App\Controller;
 
-    use App\Entity\Item;
-    use App\Entity\Menu;
-    use App\Entity\User;
-    use App\Form\ALaCarteType;
-    use App\Form\MenuType;
-    use App\Repository\ItemRepository;
-    use App\Repository\MenuRepository;
-    use App\Repository\RestaurantRepository;
-    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-    use Symfony\Component\HttpFoundation\Request;
-    use Symfony\Component\HttpFoundation\Response;
-    use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Item;
+use App\Entity\Menu;
+use App\Entity\User;
+use App\Form\ALaCarteType;
+use App\Form\MenuType;
+use App\Repository\ItemRepository;
+use App\Repository\MenuRepository;
+use App\Repository\RestaurantRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-    #[Route('/menus', name: 'menus_')]
+#[Route('/menus', name: 'menus_')]
+#[IsGranted('ROLE_OWNER')]
 class MenuController extends AbstractController
 {
     public function __construct(
@@ -29,12 +31,10 @@ class MenuController extends AbstractController
     #[Route('/list', name: 'list')]
     public function menusList(
         MenuRepository $menuRepository,
-        RestaurantRepository $restaurantRepository /** A supprimer après le test User */
     ): Response {
         /** @var User $connectedUser */
         $connectedUser = $this->getUser();
         $restaurant = $connectedUser->getRestaurant();
-        $restaurant = $restaurantRepository->findOneBy([]); /** A supprimer après le test User */
 
         $menus = $this->menuRepository->findBy([
             'restaurant' => $restaurant
@@ -45,31 +45,31 @@ class MenuController extends AbstractController
         ]);
     }
 
-//    #[Route('/{categoryName}', name: 'show')]
-//    public function show(string $categoryName, MenuRepository $menuRepository): Response
-//    {
-//        /** @var User $connectedUser */
-//        $connectedUser = $this->getUser();
-//        $restaurant = $connectedUser->getRestaurant();
-//
-//        $menus = $this->menuRepository->findBy([
-//            'restaurant' => $restaurant
-//        ]);
-//
-//        $category = $this->menuRepository->findOneBy(
-//            ['name' => $categoryName],
-//        );
-//
-//        if (!$category) {
-//            throw $this->createNotFoundException(
-//                "La catégorie $categoryName est introuvable."
-//            );
-//        }
-//
-//        return $this->render('menu/show.html.twig', [
-//            'category' => $category,
-//        ]);
-//    }
+    #[Route('/{categoryName}', name: 'show')]
+    public function show(string $categoryName, MenuRepository $menuRepository): Response
+    {
+        /** @var User $connectedUser */
+        $connectedUser = $this->getUser();
+        $restaurant = $connectedUser->getRestaurant();
+
+        $menus = $this->menuRepository->findBy([
+            'restaurant' => $restaurant
+        ]);
+
+        $category = $this->menuRepository->findOneBy(
+            ['name' => $categoryName],
+        );
+
+        if (!$category) {
+            throw $this->createNotFoundException(
+                "La catégorie $categoryName est introuvable."
+            );
+        }
+
+        return $this->render('admin/menu/show.html.twig', [
+            'category' => $category,
+        ]);
+    }
 
     /**
      * Add a new menu
@@ -81,11 +81,13 @@ class MenuController extends AbstractController
         $menu = new Menu();
         $form = $this->createForm(MenuType::class, $menu);
         $form->handleRequest($request);
-//        /** @var User $connectedUser */
-//        $connectedUser = $this->getUser();
-//        $restaurant = $connectedUser->getRestaurant();
+
+        /** @var User $connectedUser */
+        $connectedUser = $this->getUser();
+        $restaurant = $connectedUser->getRestaurant();
+
         if ($form->isSubmitted() && $form->isValid()) {
-//            $menu->setRestaurant($restaurant);
+            $menu->setRestaurant($restaurant);
             $menuRepository->save($menu, true);
             $this->addFlash('success', 'Le menu a bien été ajouté.');
 
@@ -108,11 +110,8 @@ class MenuController extends AbstractController
     ): Response {
         $form = $this->createForm(MenuType::class, $menu);
         $form->handleRequest($request);
-//        /** @var User $connectedUser */
-//        $connectedUser = $this->getUser();
-//        $restaurant = $connectedUser->getRestaurant();
+
         if ($form->isSubmitted() && $form->isValid()) {
-//            $menu->setRestaurant($restaurant);
             $menuRepository->save($menu, true);
             $this->addFlash('success', 'Le menu a bien été ajouté.');
 

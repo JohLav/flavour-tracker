@@ -6,7 +6,7 @@
 
     <div class="col-9">
         <h1>Liste des éléments</h1>
-        <div class="d-flex ">
+        <div class="d-flex row">
             {% for item in items %}
                 {% include 'admin/item/_card.html.twig' %}
             {% else %}
