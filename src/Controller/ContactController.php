@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\ContactType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,6 +46,7 @@ class ContactController extends AbstractController
      * @throws TransportExceptionInterface
      */
     #[Route('/reply', name: 'app_reply')]
+    #[IsGranted('ROLE_SUPER_ADMIN')]
     public function new(Request $request, MailerInterface $mailer): Response
     {
         $form = $this->createForm(ContactType::class);
