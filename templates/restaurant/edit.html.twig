@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Edit Restaurant{% endblock %}
+{% block search %}{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-center">
+        <div class="col-6">
+            <h1>Modifier son restaurant</h1>
+            {{ form_start(form) }}
+                {{ form_row(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}
+

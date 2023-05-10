@@ -35,7 +35,7 @@ class TimeSlotController extends AbstractController
             $timeSlot->setRestaurant($restaurant);
             $timeSlotRepository->save($timeSlot, true);
 
-            return $this->redirectToRoute('app_time_slot_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_restaurant_show', ['id' => $restaurant->getId()]);
         }
 
         return $this->renderForm('time_slot/new.html.twig', [
@@ -59,9 +59,10 @@ class TimeSlotController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $restaurant = $timeSlot->getRestaurant();
             $timeSlotRepository->save($timeSlot, true);
 
-            return $this->redirectToRoute('app_time_slot_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_restaurant_show', ['id' => $restaurant->getId()]);
         }
 
         return $this->renderForm('time_slot/edit.html.twig', [
