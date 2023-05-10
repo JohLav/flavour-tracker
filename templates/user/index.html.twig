@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index d'Utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="container-fluid d-sm-block justify-content-center">
+        <div class="shadow-lg p-5 m-5 bg-body-tertiary rounded">
+            <h2 class="py-3">Index d'Utilisateurs</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Mot de Passe</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Téléphone</th>
+                    <th>IsVerified</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                        <td>{{ user.password }}</td>
+                        <td>{{ user.firstname }}</td>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                        <td>
+                            <a class="text-decoration-none" href="{{ path('app_user_show', {'id': user.id}) }}">voir</a>
+                            <a class="text-decoration-none" href="{{ path('app_user_edit', {'id': user.id}) }}">modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="9">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ path('app_user_new') }}">
+                <button class="btn btn-primary">Créer un nouvel utilisateur</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}

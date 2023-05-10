@@ -7,7 +7,7 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <div class="justify-content-center" id="reg_form">
+    <div class="container d-sm-block justify-content-center" id="reg_form">
         <div class="shadow-lg p-5 m-5 bg-body-tertiary rounded">
             <h2>Créer un compte</h2>
             <div class="p-2">
@@ -37,8 +37,12 @@
                         label: 'Téléphone :'
                     }) }}
                 </div>
-                <div class="py-4">
-                    {{ form_row(registrationForm.agreeTerms) }}
+                <div class="p-2">
+                    {{ form_row(registrationForm.agreeTerms, {label: 'Accepter les termes et les conditions'}) }}
+                </div>
+                <div class="p-2">
+                    {{ form_row(registrationForm.submit, {
+                        label: 'S\'inscrire'}) }}
                 </div>
                 {{ form_end(registrationForm) }}
             </div>

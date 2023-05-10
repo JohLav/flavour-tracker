@@ -4,18 +4,18 @@
 
 {% block body %}
 
-    <div class="container-fluid d-flex ps-5">
+    <div class="container-fluid d-flex">
         <div class="pt-5">
-            <h1 class="text-start">
+            <h1 class="text-start ps-5">
                 Bienvenue!
             </h1>
-            <p class="py-4
-">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Ut libero nisi, dignissim nec augue ut, fringilla elementum arcu.
-                Etiam suscipit vel justo laoreet egestas.<br>
-                Cras pharetra urna sit amet felis egestas, at hendrerit nisi lacinia.
-                Mauris dictum commodo ipsum quis cursus. Fusce fermentum vel erat eu viverra.
+            <p class="py-3 ps-5 fs-5">
+                Trouvez le restaurant parfait pour vous en quelques clics grâce à notre site !
+                Que vous suiviez un régime alimentaire particulier ou que vous ayez des restrictions budgétaires,
+                notre outil de filtrage intuitif vous permettra de trouver rapidement les meilleurs restaurants
+                de votre ville.<br><br>
+                Dites adieu aux heures de recherche fastidieuse et bonjour à une expérience culinaire
+                délicieuse et personnalisée !
             </p>
             {{ form_start(form, {'attr': {'action': path('home_index')} }) }}
             <div class="container-fluid d-block shadow-lg p-5 m-5 bg-body-tertiary rounded" id="home_form">
@@ -25,15 +25,12 @@
             </div>
             {{ form_end(form) }}
         </div>
-        <div class="">
+        <div class="ms-4">
             <img src="{{ asset('build/images/fruits.jpg') }}"
+                 class="img-fluid"
                  id="home_img"
                  alt="">
         </div>
     </div>
-
-
-
-
 
 {% endblock %}

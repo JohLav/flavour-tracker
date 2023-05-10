@@ -4,9 +4,11 @@
 
 {% block content %}
 
-    <div class="col-9">
-        <h1>Ajouter un menu</h1>
-        {% include 'admin/menu/_form.html.twig' %}
+    <div class="container-fluid col-9 mt-5">
+        <h2 class="ps-5">Ajouter un menu</h2>
+        <div class="shadow-lg p-5 m-5 bg-body-tertiary rounded">
+            {% include 'admin/menu/_form.html.twig' %}
+        </div>
     </div>
 
 {% endblock %}

@@ -16,20 +16,13 @@ class LoginController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        $this->addFlash('success', message: 'Vous êtes connecté');
+
         return $this->render('login/index.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error
         ]);
     }
-
-    #[Route('/login', name: 'app_login_profil')]
-    #[isGranted]
-    public function profil(): Response
-    {
-
-        return $this->render('login/profil.html.twig');
-    }
-
 
     #[Route('/logout', name: 'app_logout', methods: ['GET'])]
     public function logout()

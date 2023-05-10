@@ -21,7 +21,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email]
+    #[Assert\NotBlank]
     private ?string $email = null;
+
 
     #[ORM\Column]
     private array $roles = [];
@@ -33,12 +36,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max:50)]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max:50)]
     private ?string $lastname = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column]
+    #[Assert\NotBlank]
     private ?int $phone = null;
 
     #[ORM\ManyToMany(targetEntity: Restaurant::class, inversedBy: 'users')]

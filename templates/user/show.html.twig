@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Compte{% endblock %}
+
+{% block body %}
+    <div class="container d-sm-block justify-content-center">
+        <div class="shadow-lg p-5 m-5 bg-body-tertiary rounded">
+            <h2 class="mb-5">Mon Compte</h2>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prénom</th>
+                        <td>{{ user.firstname }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ user.lastname }}</td>
+                    </tr>
+                    <tr>
+                        <th>Téléphone</th>
+                        <td>{{ user.phone }}</td>
+                    </tr>
+            </table>
+            <div class="">
+                <a href="{{ path('app_user_edit', {'id': user.id}) }}">
+                    <button class="btn btn-primary">Modifier</button>
+                </a>
+            </div>
+            <div class="mt-2">
+            {% if is_granted('ROLE_SUPER_ADMIN')%}
+                <a class="text-decoration-none" href="{{ path('app_user_index') }}">
+                    Retour à la listes
+                </a>
+            </div>
+            {% endif%}
+        </div>
+    </div>
+{% endblock %}
