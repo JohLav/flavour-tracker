@@ -63,6 +63,21 @@ class Restaurant
         $this->reservations = new ArrayCollection();
     }
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $address = null;
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

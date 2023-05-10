@@ -8,7 +8,8 @@
         <h1>Résultats de la recherche</h1>
     <div class="result d-flex">
             {% for restaurant in restaurants %}
-            <div class="card" style="width: 18rem;">
+
+            <div class="card m-5" style="width: 18rem;">
 {#                <img src="..." class="card-img-top" alt="...">  ajouter un carrousel à la place image#}
                 <div id="carouselExampleAutoplaying{{ loop.index }}" class="carousel slide" data-bs-ride="carousel">
 
@@ -33,9 +34,8 @@
                     </button>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{ restaurant.name }}</h5>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                    <a href="{{ path('app_reservation_new', {'id': restaurant.id}) }}" class="btn btn-info">Reserver</a>
+                    <h5 class="card-title">{{ restaurant.name }}</h5><a></a>
+                    <a href="{{ path('app_reservation_new', {'id': restaurant.id}) }}" class="btn btn-primary">Reserver</a>
                 </div>
             </div>
         {% endfor %}

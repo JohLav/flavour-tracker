@@ -21,38 +21,22 @@ class ReservationController extends AbstractController
     private Security $security;
     private AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(Security $security,AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(Security $security, AuthorizationCheckerInterface $authorizationChecker)
     {
         $this->security = $security;
         $this->authorizationChecker = $authorizationChecker;
     }
     #[Route('/reservation/new/{id}', name: 'app_reservation_new', methods: ["GET", "POST"])]
-    public function new(
-        Request               $request,
-        Restaurant $restaurant,
-        RestaurantRepository  $restaurantRepository,
-        ReservationRepository $reservationRepository,
-    ): Response {
+    public function new(Request $request, Restaurant $restaurant, ReservationRepository $reservationRepository,): Response
+    {
         $reservation = new  Reservation();
         $form = $this->createForm(ReservationType::class, $reservation, [
             'attr' => ['class' => 'my-form-class']
         ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            if (!$this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-                // Redirigez les utilisateurs non connectés vers la page de connexion/inscription
-                return $this->redirectToRoute('app_login'); // Remplacez 'app_login' par le nom de la route de votre page de connexion/inscription
-            }
-
             $user = $this->security->getUser();
             $reservation->setUser($user);
-            $reservation->setRestaurant($restaurant);
-
-
-            // A SUPPRIMER QUAND J'AURAIS LA PARTI D'INES
-            $restaurant = new Restaurant();
-            $restaurant = $restaurantRepository->find(['id' => 1]);
-            //
             $reservation->setRestaurant($restaurant);
             $reservation->setPaymentMode('CREDIT_CARD');
 
@@ -97,7 +81,7 @@ class ReservationController extends AbstractController
                 if ($action === 'edit') {
                     if (is_scalar($selectedReservations[0])) {
                     // Redirigez vers la route 'reservation_edit' avec l'ID de la première réservation sélectionnée
-                    return $this->redirectToRoute('reservation_edit', ['id' => $selectedReservations[0]]);
+                        return $this -> redirectToRoute('reservation_edit', ['id' => $selectedReservations[0]]);
                     } else {
                         $this->addFlash('error', 'Une erreur s\'est produite lors de la sélection des réservations.');
                     }
@@ -119,7 +103,7 @@ class ReservationController extends AbstractController
 
 
     #[Route('/reservation/{id}/edit', name: 'reservation_edit', methods: ["GET", "POST"])]
-    public function editReservation(Request $request, Reservation $reservation,  ReservationRepository $reservationRepository): Response
+    public function editReservation(Request $request, Reservation $reservation, ReservationRepository $reservationRepository): Response
     {
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
@@ -147,5 +131,4 @@ class ReservationController extends AbstractController
 
         return $this->redirectToRoute('app_reservation_list');
     }
-
 }
