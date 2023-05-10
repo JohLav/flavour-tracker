@@ -3,10 +3,12 @@
         <p>Aucun restaurant trouvé.</p>
     {% else %}
         <h1>Résultats de la recherche</h1>
-    <div class="result d-flex">
+    <div class="result d-flex justify-content-center row m-4">
         {% for restaurant in restaurants %}
             {% include 'restaurant/_restaurant.html.twig' %}
         {% endfor %}
-        {% include '/home/_map.html.twig' %}
     </div>
+        <div class="row">
+            {% include '/home/_map.html.twig' %}
+        </div>
     {% endif %}

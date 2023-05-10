@@ -1,35 +1,46 @@
-<h1>Résultats de la recherche</h1>
-<div class="result d-flex">
-    {% for restaurant in restaurants %}
-    <div class="card" style="width: 18rem;">
-        {#                <img src="..." class="card-img-top" alt="...">  ajouter un carrousel à la place image#}
-        <div id="carouselExampleAutoplaying{{ loop.index }}" class="carousel slide" data-bs-ride="carousel">
+<div class="card col-3 m-2" style="width: 18rem;">
+    {#                <img src="..." class="card-img-top" alt="...">  ajouter un carrousel à la place image#}
+    <div id="carouselExampleAutoplaying{{ loop.index }}" class="carousel slide" data-bs-ride="carousel">
 
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="https://th.bing.com/th/id/OIP.6_UzrWzOBF_KDtJ6vwaV_wHaEw?pid=ImgDet&rs=1" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://www.restaurant-anglet.com/wp-content/uploads/2020/10/2-scaled.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://th.bing.com/th/id/R.efa8f447cba810a15ea303ae6767ff0c?rik=%2fgk%2fCOIEkQwYaw&pid=ImgRaw&r=0" class="d-block w-100" alt="...">
-                </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://th.bing.com/th/id/OIP.6_UzrWzOBF_KDtJ6vwaV_wHaEw?pid=ImgDet&rs=1" class="d-block w-100" alt="...">
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying{{ loop.index }}" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying{{ loop.index }}" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+            <div class="carousel-item">
+                <img src="https://www.restaurant-anglet.com/wp-content/uploads/2020/10/2-scaled.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://th.bing.com/th/id/R.efa8f447cba810a15ea303ae6767ff0c?rik=%2fgk%2fCOIEkQwYaw&pid=ImgRaw&r=0" class="d-block w-100" alt="...">
+            </div>
         </div>
-        <div class="card-body">
-            <h5 class="card-title">{{ restaurant.name }}</h5>
-            <p class="card-text">{{ restaurant.address }}</p>
-            <p class="card-text">{{ restaurant.zipCode }}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying{{ loop.index }}" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying{{ loop.index }}" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">
+            {{ restaurant.name }}
+            {% if restaurant in app.user.favorites %}
+                <a href="{{ path('app_favoris_remove', {'id': restaurant.id}) }}" class="m-2"><i class="bi bi-heart-fill"></i></a>
+            {% else %}
+                <a href="{{ path('app_favoris_new', {'id': restaurant.id}) }}" class="m-2"><i class="bi bi-heart"></i></a>
+            {% endif %}
+        </h5>
+        <p class="card-text">{{ restaurant.city.name }}</p>
+        <p class="card-text">{{ restaurant.city.zipCode }}</p>
+        {% if timeSlot is defined and timeSlot is not empty %}
+            {% set isFull = time_slot_service.checkAvailable(restaurant, timeSlot) %}
+            {% if not isFull %}
+                <p class="card-text text-danger">Complet</p>
+            {% else %}
+                <p class="card-text text-success">Place restante</p>
+            {% endif %}
+        {% endif %}
+        <a href="#" class="btn btn-primary">En savoir plus</a>
     </div>
 </div>
