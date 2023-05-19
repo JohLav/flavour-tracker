@@ -1,21 +1,24 @@
 <?php
 
-namespace App\Controller;
+    namespace App\Controller;
 
-use App\Entity\Reservation;
-use App\Entity\Restaurant;
-use App\Form\ReservationType;
-use DateTime;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+    use App\Entity\Reservation;
+    use App\Entity\Restaurant;
+    use App\Form\ReservationType;
+    use DateTime;
+    use Doctrine\ORM\EntityManagerInterface;
+    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\Routing\Annotation\Route;
+
 class AvailabilityController extends AbstractController
 {
     #[Route('/reserve', name: 'reserve_table')]
-    public function reserveTable(Request $request, EntityManagerInterface $em): Response
-    {
+    public function reserveTable(
+        Request $request,
+        EntityManagerInterface $em
+    ): Response {
         // create reservation form
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation);
@@ -23,7 +26,11 @@ class AvailabilityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // check if a reservation is possible
-            $availableSeats = $this->getAvailableSeats($reservation->getRestaurant(), $reservation->getDate(), $reservation->getTime());
+            $availableSeats = $this->getAvailableSeats(
+                $reservation->getRestaurant(),
+                $reservation->getDate(),
+                $reservation->getTime()
+            );
 
             if ($availableSeats >= $reservation->getSeats()) {
                 // save reservation if enough seats are available
@@ -50,13 +57,13 @@ class AvailabilityController extends AbstractController
         ]);
     }
 
-    private function getAvailableTimes(Restaurant $restaurant, \DateTime $date)
+    private function getAvailableTimes(Restaurant $restaurant, DateTime $date)
     {
         // ...
     }
 
     #[Route('/available-times/{restaurant}/{date}', name: 'available_times')]
-    public function availableTimes(Restaurant $restaurant, \DateTime $date)
+    public function availableTimes(Restaurant $restaurant, DateTime $date)
     {
         $availableTimes = $this->getAvailableTimes($restaurant, $date);
 

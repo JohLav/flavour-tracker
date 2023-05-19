@@ -1,14 +1,13 @@
-
-    {% if restaurants|length == 0 %}
-        <p>Aucun restaurant trouvé.</p>
-    {% else %}
-        <h1>Résultats de la recherche</h1>
+{% if restaurants|length == 0 %}
+    <p>Aucun restaurant trouvé.</p>
+{% else %}
+    <h1>Résultats de la recherche</h1>
     <div class="result d-flex justify-content-center row m-4">
         {% for restaurant in restaurants %}
             {% include 'restaurant/_restaurant.html.twig' %}
         {% endfor %}
     </div>
-        <div class="row">
-            {% include '/home/_map.html.twig' %}
-        </div>
-    {% endif %}
+    <div class="row">
+        {% include '/home/_map.html.twig' %}
+    </div>
+{% endif %}

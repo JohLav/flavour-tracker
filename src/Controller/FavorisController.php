@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Controller;
+    namespace App\Controller;
 
-use App\Entity\Restaurant;
-use App\Entity\User;
-use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+    use App\Entity\Restaurant;
+    use App\Entity\User;
+    use App\Repository\UserRepository;
+    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\Routing\Annotation\Route;
 
 class FavorisController extends AbstractController
 {
@@ -21,14 +21,17 @@ class FavorisController extends AbstractController
     }
 
     #[Route('/favoris/new/{id}', name: 'app_favoris_new')]
-    public function addFavoris(Request $request, Restaurant $restaurant, UserRepository $userRepository): Response
-    {
+    public function addFavoris(
+        Request $request,
+        Restaurant $restaurant,
+        UserRepository $userRepository
+    ): Response {
         /** @var User $user */
         $user = $this->getUser();
         $user->addFavorites($restaurant);
 
         $userRepository->save($user, true);
-        
+
         return $this->redirectToRoute('search_index');
     }
 

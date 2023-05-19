@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Controller;
+    namespace App\Controller;
 
-use App\Entity\Restaurant;
-use App\Entity\TimeSlot;
-use App\Form\TimeSlotType;
-use App\Repository\TimeSlotRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+    use App\Entity\Restaurant;
+    use App\Entity\TimeSlot;
+    use App\Form\TimeSlotType;
+    use App\Repository\TimeSlotRepository;
+    use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/time/slot')]
-#[IsGranted('ROLE_OWNER')]
+    #[Route('/time/slot')]
+    #[IsGranted('ROLE_OWNER')]
 class TimeSlotController extends AbstractController
 {
     #[Route('/', name: 'app_time_slot_index', methods: ['GET'])]
@@ -25,8 +25,11 @@ class TimeSlotController extends AbstractController
     }
 
     #[Route('/new/{id}', name: 'app_time_slot_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, Restaurant $restaurant, TimeSlotRepository $timeSlotRepository): Response
-    {
+    public function new(
+        Request $request,
+        Restaurant $restaurant,
+        TimeSlotRepository $timeSlotRepository
+    ): Response {
         $timeSlot = new TimeSlot();
         $form = $this->createForm(TimeSlotType::class, $timeSlot);
         $form->handleRequest($request);
@@ -53,8 +56,11 @@ class TimeSlotController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_time_slot_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, TimeSlot $timeSlot, TimeSlotRepository $timeSlotRepository): Response
-    {
+    public function edit(
+        Request $request,
+        TimeSlot $timeSlot,
+        TimeSlotRepository $timeSlotRepository
+    ): Response {
         $form = $this->createForm(TimeSlotType::class, $timeSlot);
         $form->handleRequest($request);
 
@@ -72,11 +78,14 @@ class TimeSlotController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_time_slot_delete', methods: ['POST'])]
-    public function delete(Request $request, TimeSlot $timeSlot, TimeSlotRepository $timeSlotRepository): Response
-    {
+    public function delete(
+        Request $request,
+        TimeSlot $timeSlot,
+        TimeSlotRepository $timeSlotRepository
+    ): Response {
         $restaurant = $timeSlot->getRestaurant();
 
-        if ($this->isCsrfTokenValid('delete'.$timeSlot->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $timeSlot->getId(), $request->request->get('_token'))) {
             $timeSlotRepository->remove($timeSlot, true);
         }
 

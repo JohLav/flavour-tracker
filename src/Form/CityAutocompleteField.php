@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Form;
+    namespace App\Form;
 
-use App\Entity\City;
-use App\Repository\CityRepository;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
-use Symfony\UX\Autocomplete\Form\ParentEntityAutocompleteType;
+    use App\Entity\City;
+    use App\Repository\CityRepository;
+    use Symfony\Component\Form\AbstractType;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
+    use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
+    use Symfony\UX\Autocomplete\Form\ParentEntityAutocompleteType;
 
-#[AsEntityAutocompleteField]
+    #[AsEntityAutocompleteField]
 class CityAutocompleteField extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver)
@@ -17,7 +17,7 @@ class CityAutocompleteField extends AbstractType
         $resolver->setDefaults([
             'class' => City::class,
             'placeholder' => 'Ville',
-            'choice_label' =>  function (City $city) {
+            'choice_label' => function (City $city) {
                 return $city->getRealName() . ' (' . $city->getZipCode() . ')';
             },
 //            'searchable_fields' => [

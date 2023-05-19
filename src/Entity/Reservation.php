@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ReservationRepository;
+use App\Repository\ReservRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ReservationRepository::class)]
+#[ORM\Entity(repositoryClass: ReservRepository::class)]
 class Reservation
 {
     #[ORM\Id]
@@ -15,16 +15,16 @@ class Reservation
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $datetime = null;
+    private ?\DateTimeInterface $dateTime = null;
 
     #[ORM\Column(length: 45, nullable: true)]
-    private ?string $payment_mode = null;
+    private ?string $paymentMode = null;
 
     #[ORM\Column]
-    private ?int $adult_nb = null;
+    private ?int $adultNb = null;
 
     #[ORM\Column]
-    private ?int $kid_nb = null;
+    private ?int $kidNb = null;
 
     #[ORM\Column(length: 45, nullable: true)]
     private ?string $service = null;
@@ -42,50 +42,50 @@ class Reservation
         return $this->id;
     }
 
-    public function getDatetime(): ?\DateTimeInterface
+    public function getDateTime(): ?\DateTimeInterface
     {
-        return $this->datetime;
+        return $this->dateTime;
     }
 
-    public function setDatetime(\DateTimeInterface $datetime): self
+    public function setDatetime(\DateTimeInterface $dateTime): self
     {
-        $this->datetime = $datetime;
+        $this->dateTime = $dateTime;
 
         return $this;
     }
 
     public function getPaymentMode(): ?string
     {
-        return $this->payment_mode;
+        return $this->paymentMode;
     }
 
-    public function setPaymentMode(?string $payment_mode): self
+    public function setPaymentMode(?string $paymentMode): self
     {
-        $this->payment_mode = $payment_mode;
+        $this->paymentMode = $paymentMode;
 
         return $this;
     }
 
     public function getAdultNb(): ?int
     {
-        return $this->adult_nb;
+        return $this->adultNb;
     }
 
-    public function setAdultNb(int $adult_nb): self
+    public function setAdultNb(int $adultNb): self
     {
-        $this->adult_nb = $adult_nb;
+        $this->adultNb = $adultNb;
 
         return $this;
     }
 
     public function getKidNb(): ?int
     {
-        return $this->kid_nb;
+        return $this->kidNb;
     }
 
-    public function setKidNb(int $kid_nb): self
+    public function setKidNb(int $kidNb): self
     {
-        $this->kid_nb = $kid_nb;
+        $this->kidNb = $kidNb;
 
         return $this;
     }

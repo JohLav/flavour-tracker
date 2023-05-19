@@ -4,33 +4,26 @@
 
 {% block body %}
 
-{% if app.user is not null %}
-<div class="flex-grow-1 ms-5">
+    {% if app.user is not null %}
+        <div class="flex-grow-1 ms-5">
 
-    <H2>
-        <div class="text-primary" style="--bs-text-opacity: .8;"><p>Bonjour vous êtes connecté dans votre espace<br>{{app.user.firstname}} {{app.user.lastname}}</p>
-            </div></H2>
-
-</div>
-{% endif %}
-
-
-            <div class="d-grid gap-2 col-2 mx-5">
-            <h4>Espace :</h4>
-
-
-        <button type="button" class="btn btn-outline-primary">Mes réservations</button>
-        <button type="button" class="btn btn-outline-primary">Points fidélité</button>
-                <a href="{{ path('app_favoris') }}">
-                    <button type="button" class="btn btn-outline-primary">Mes favoris</button></a>
-        <button type="button" class="btn btn-outline-primary">Parrainage</button>
-        <button type="button" class="btn btn-outline-primary">Payement</button>
-
+            <H2>
+                <div class="text-primary" style="--bs-text-opacity: .8;"><p>Bonjour vous êtes connecté dans votre espace<br>{{ app.user.firstname }} {{ app.user.lastname }}
+                    </p>
+                </div>
+            </H2>
 
         </div>
+    {% endif %}
 
-
-
-
-</div>
+    <div class="d-grid gap-2 col-2 mx-5">
+        <h4>Espace :</h4>
+        <button type="button" class="btn btn-outline-primary">Mes réservations</button>
+        <button type="button" class="btn btn-outline-primary">Points fidélité</button>
+        <a href="{{ path('app_favoris') }}">
+            <button type="button" class="btn btn-outline-primary">Mes favoris</button>
+        </a>
+        <button type="button" class="btn btn-outline-primary">Parrainage</button>
+        <button type="button" class="btn btn-outline-primary">Payement</button>
+    </div>
 {% endblock %}

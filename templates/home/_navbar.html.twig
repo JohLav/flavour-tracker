@@ -7,17 +7,16 @@
                 <img src="{{ asset('build/images/tds_logo.png') }}" width="70px" alt="" id="logo">
                 <h1 class="ps-4">Trackers de Saveurs</h1>
             </a>
-        {% endif %}
-        {% if app.user %}
-            <a href="{{ path('app_favoris') }}">
-                <button type="button" class="btn btn-secondary me-2">Mon espace</button>
-            </a>
-        {% endif %}
-        {% if app.user is null %}
-            <a href="{{ path('app_login') }}">
-                <button type="button" class="btn btn-light">Connexion</button>
-            </a>
-        {% endif %}
+            {% if app.user %}
+                <a href="{{ path('app_favoris') }}">
+                    <button type="button" class="btn btn-secondary me-2">Mon espace</button>
+                </a>
+            {% endif %}
+            {% if app.user is null %}
+                <a href="{{ path('app_login') }}">
+                    <button type="button" class="btn btn-light">Connexion</button>
+                </a>
+            {% endif %}
 
             {% if app.user %}
                 <a href="{{ path('app_logout') }}">

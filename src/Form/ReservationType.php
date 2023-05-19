@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Form;
+    namespace App\Form;
 
-use App\Entity\Reservation;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+    use App\Entity\Reservation;
+    use Symfony\Component\Form\AbstractType;
+    use Symfony\Component\Form\FormBuilderInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
+    use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+    use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+    use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+    use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ReservationType extends AbstractType
 {
@@ -17,20 +17,17 @@ class ReservationType extends AbstractType
     {
 
         $builder->add('datetime', DateTimeType::class, [
-                'widget' => 'single_text',
-                'attr' => ['class' => 'form-control']
-            ])
+            'widget' => 'single_text',
+            'attr' => ['class' => 'form-control']
+        ])
             ->add('adult_nb', IntegerType::class, [
-             'attr' => ['class' => 'form-control', 'min' => 0],
+                'attr' => ['class' => 'form-control', 'min' => 0],
                 'label' => 'Adulte',
             ])
             ->add('kid_nb', IntegerType::class, [
                 'attr' => ['class' => 'form-control', 'min' => 0],
-               'label' => 'Enfant',
-            ])
-
-
-        ;
+                'label' => 'Enfant',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

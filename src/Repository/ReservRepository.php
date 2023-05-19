@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Repository;
+    namespace App\Repository;
 
-use App\Entity\Reservation;
-use App\Entity\Restaurant;
-use DateTime;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+    use App\Entity\Reservation;
+    use App\Entity\Restaurant;
+    use DateTime;
+    use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+    use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<Reservation>
- *
- * @method Reservation|null find($id, $lockMode = null, $lockVersion = null)
- * @method Reservation|null findOneBy(array $criteria, array $orderBy = null)
- * @method Reservation[]    findAll()
- * @method Reservation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
-class ReservationRepository extends ServiceEntityRepository
+    /**
+     * @extends ServiceEntityRepository<Reservation>
+     *
+     * @method Reservation|null find($id, $lockMode = null, $lockVersion = null)
+     * @method Reservation|null findOneBy(array $criteria, array $orderBy = null)
+     * @method Reservation[]    findAll()
+     * @method Reservation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+     */
+class ReservRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -50,8 +50,7 @@ class ReservationRepository extends ServiceEntityRepository
             ->andWhere('r.datetime <= :date_end')
             ->setParameter('date_start', $dateTime->format('Y-m-d 00:00:00'))
             ->setParameter('date_end', $dateTime->format('Y-m-d 23:59:59'))
-            ->setParameter('restaurant', $restaurant)
-        ;
+            ->setParameter('restaurant', $restaurant);
 
         return $qb->getQuery()->getResult();
     }

@@ -7,8 +7,9 @@
         <th scope="col">Actions</th>
     </tr>
     </thead>
+
     <tbody>
-    {% for timeSlot in restaurant.timeSlots  %}
+    {% for timeSlot in restaurant.timeSlots %}
         <tr>
             <th scope="row">
                 {% if timeSlot.day == '1' %}
@@ -35,6 +36,6 @@
             </td>
         </tr>
     {% endfor %}
-
     </tbody>
+
 </table>

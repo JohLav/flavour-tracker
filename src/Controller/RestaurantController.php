@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Controller;
+    namespace App\Controller;
 
-use App\Entity\Image;
-use App\Form\RestaurantType;
-use App\Repository\ImageRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\RestaurantRepository;
-use App\Entity\Restaurant;
-use Symfony\Component\String\Slugger\SluggerInterface;
+    use App\Entity\Image;
+    use App\Form\RestaurantType;
+    use App\Repository\ImageRepository;
+    use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use Symfony\Component\Form\FormInterface;
+    use Symfony\Component\HttpFoundation\File\Exception\FileException;
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\Routing\Annotation\Route;
+    use App\Repository\RestaurantRepository;
+    use App\Entity\Restaurant;
+    use Symfony\Component\String\Slugger\SluggerInterface;
 
-#[Route(path: '/restaurant', name: 'app_restaurant_')]
-#[IsGranted('ROLE_OWNER')]
+    #[Route(path: '/restaurant', name: 'app_restaurant_')]
+    #[IsGranted('ROLE_OWNER')]
 class RestaurantController extends AbstractController
 {
     #[Route(path: '/', name: 'index')]
@@ -25,6 +25,7 @@ class RestaurantController extends AbstractController
     {
         return $this->render('restaurant/index.html.twig');
     }
+
     #[Route(path: '/new', name: 'new')]
     public function new(
         Request $request,
@@ -37,7 +38,7 @@ class RestaurantController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $files = $form[ 'images']->getData();
+            $files = $form['images']->getData();
             $restaurant->setUser($this->getUser());
 
             if ($files) {
@@ -82,7 +83,7 @@ class RestaurantController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $files = $form[ 'images']->getData();
+            $files = $form['images']->getData();
             $restaurant->setUser($this->getUser());
 
             if ($files) {

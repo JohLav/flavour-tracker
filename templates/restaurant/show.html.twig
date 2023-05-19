@@ -8,6 +8,6 @@
         <a href="{{ path('app_restaurant_edit', {'id': restaurant.id}) }}" class="btn btn-primary">Modifier</a>
 
         {% include 'restaurant/_timeslot.html.twig' %}
-        <a class="btn btn-primary" href="{{ path('app_time_slot_new', {'id': restaurant.id}) }}">Ajouter un crenaux d'ouverture</a>
+        <a class="btn btn-primary" href="{{ path('app_time_slot_new', {'id': restaurant.id}) }}">Ajouter un créneau d'ouverture</a>
     </div>
 {% endblock %}

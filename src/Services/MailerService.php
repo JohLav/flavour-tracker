@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services;
+    namespace App\Services;
 
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
+    use Symfony\Component\Mailer\MailerInterface;
+    use Symfony\Component\Mime\Email;
 
 class MailerService
 {

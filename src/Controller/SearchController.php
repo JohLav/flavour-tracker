@@ -1,22 +1,24 @@
 <?php
 
 // src/Controller/SearchController.php
-namespace App\Controller;
+    namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Form\SearchType;
-use App\Repository\RestaurantRepository;
+    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\Routing\Annotation\Route;
+    use App\Form\SearchType;
+    use App\Repository\RestaurantRepository;
 
-#[Route("/search", name: "search_")]
+    #[Route("/search", name: "search_")]
 class SearchController extends AbstractController
 {
     #[Route("/", name: "index")]
-    public function index(Request $request, RestaurantRepository $repository): Response
-    {
-        //ajouter les autres tables concernés par le trie, ex diet / category etc?
+    public function index(
+        Request $request,
+        RestaurantRepository $repository
+    ): Response {
+        // TODO : Ajouter autres tables concernées par le tri (ex. diet, category, etc.)
         $timeSlot = null;
         $form = $this->createForm(SearchType::class, [
             'items' => $request->request->all('search')['items'] ?? []

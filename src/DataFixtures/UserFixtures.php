@@ -1,12 +1,12 @@
 <?php
 
-namespace App\DataFixtures;
+    namespace App\DataFixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use App\Entity\User;
-use Faker\Factory;
+    use Doctrine\Bundle\FixturesBundle\Fixture;
+    use Doctrine\Persistence\ObjectManager;
+    use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+    use App\Entity\User;
+    use Faker\Factory;
 
 class UserFixtures extends Fixture
 {
@@ -17,6 +17,7 @@ class UserFixtures extends Fixture
         $this->faker = Factory::create('fr_FR');
         $this->passwordHasher = $passwordHasher;
     }
+
     public function load(ObjectManager $manager): void
     {
         for ($i = 0; $i < 10; $i++) {

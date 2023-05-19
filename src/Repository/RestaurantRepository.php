@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Repository;
+    namespace App\Repository;
 
-use App\Entity\Restaurant;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+    use App\Entity\Restaurant;
+    use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+    use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<Restaurant>
- *
- * @method Restaurant|null find($id, $lockMode = null, $lockVersion = null)
- * @method Restaurant|null findOneBy(array $criteria, array $orderBy = null)
- * @method Restaurant[]    findAll()
- * @method Restaurant[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
+    /**
+     * @extends ServiceEntityRepository<Restaurant>
+     *
+     * @method Restaurant|null find($id, $lockMode = null, $lockVersion = null)
+     * @method Restaurant|null findOneBy(array $criteria, array $orderBy = null)
+     * @method Restaurant[]    findAll()
+     * @method Restaurant[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+     */
 class RestaurantRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -54,8 +54,7 @@ class RestaurantRepository extends ServiceEntityRepository
                     ->orWhere("items.name LIKE :item{$i}")
                     ->setParameter("item{$i}", "%{$name}%")
                     ->orWhere("menus.name LIKE :menu{$i}")
-                    ->setParameter("menu{$i}", "%{$name}%")
-                ;
+                    ->setParameter("menu{$i}", "%{$name}%");
             }
         }
 
@@ -89,9 +88,8 @@ class RestaurantRepository extends ServiceEntityRepository
 
         if (!empty($filters['price'])) {
             $qb->andWhere('items.price <= :maxPrice')
-                ->setParameter('maxPrice', $filters['price'])
-//                ->setParameter('minReduction', $filters['priceRange']['minReduction'])
-            ;
+                // ->setParameter('minReduction', $filters['priceRange']['minReduction']);
+                ->setParameter('maxPrice', $filters['price']);
         }
         return $qb->getQuery()->getResult();
     }

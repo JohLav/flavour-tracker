@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Form;
+    namespace App\Form;
 
-use App\Entity\TimeSlot;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+    use App\Entity\TimeSlot;
+    use Symfony\Component\Form\AbstractType;
+    use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+    use Symfony\Component\Form\Extension\Core\Type\TimeType;
+    use Symfony\Component\Form\FormBuilderInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TimeSlotType extends AbstractType
 {
@@ -26,8 +26,7 @@ class TimeSlotType extends AbstractType
                 ]
             ])
             ->add('opening', TimeType::class)
-            ->add('closing', TimeType::class)
-        ;
+            ->add('closing', TimeType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

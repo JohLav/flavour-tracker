@@ -12,11 +12,11 @@ It's symfony website-skeleton project with some additional library (webpack, fix
     * PHPStan focuses on finding errors in your code (without actually running it)
     * PHPmd will check if you follow PHP best practices
 
-  If tests fail, the commit is canceled and a warning message is displayed to developper.
+  If tests fail, the commit is canceled and a warning message is displayed to developer.
 
-* Github Action as Continuous Integration will be run when a branch with active pull request is updated on github. It will run :
+* GitHub Action as Continuous Integration will be run when a branch with active pull request is updated on gitHub. It will run :
 
-    * Tasks to check if vendor, .idea, env.local are not versionned,
+    * Tasks to check if vendor, .idea, env.local are not versioned,
     * PHP_CodeSniffer, PHPStan and PHPmd with same configuration as GrumPHP.
 
 ## Getting Started for Students
@@ -47,7 +47,7 @@ It's symfony website-skeleton project with some additional library (webpack, fix
 
 ### Windows Users
 
-If you develop on Windows, you should edit you git configuration to change your end of line rules with this command:
+If you develop on Windows, you should edit your git configuration to change your end of line rules with this command:
 
 `git config --global core.autocrlf true`
 
@@ -66,7 +66,7 @@ docker-compose up -d
 
 ## Deployment
 
-Some files are used to manage automatic deployments (using tools as Caprover, Docker and Github Action). Please do not modify them.
+Some files are used to manage automatic deployments (using tools as Caprover, Docker and GitHub Action). Please do not modify them.
 
 * [captain-definition](/captain-definition) Caprover entry point
 * [Dockerfile](/Dockerfile) Web app configuration for Docker container

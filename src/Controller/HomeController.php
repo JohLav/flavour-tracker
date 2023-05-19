@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Controller;
+    namespace App\Controller;
 
-use App\Form\SearchType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\RestaurantRepository;
-use App\Form\HomeSearchType;
+    use App\Form\SearchType;
+    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\Routing\Annotation\Route;
+    use App\Repository\RestaurantRepository;
+    use App\Form\HomeSearchType;
 
-#[Route("/", name: "home_")]
+    #[Route("/", name: "home_")]
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'index')]

@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Repository;
+    namespace App\Repository;
 
-use App\Entity\Diet;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+    use App\Entity\Diet;
+    use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+    use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<Diet>
- *
- * @method Diet|null find($id, $lockMode = null, $lockVersion = null)
- * @method Diet|null findOneBy(array $criteria, array $orderBy = null)
- * @method Diet[]    findAll()
- * @method Diet[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
+    /**
+     * @extends ServiceEntityRepository<Diet>
+     *
+     * @method Diet|null find($id, $lockMode = null, $lockVersion = null)
+     * @method Diet|null findOneBy(array $criteria, array $orderBy = null)
+     * @method Diet[]    findAll()
+     * @method Diet[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+     */
 class DietRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

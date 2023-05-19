@@ -1,23 +1,24 @@
 <?php
 
-namespace App\Service;
+    namespace App\Service;
 
-use App\Entity\Restaurant;
-use App\Repository\ReservationRepository;
-use App\Repository\RestaurantRepository;
-use App\Repository\TimeSlotRepository;
-use DateTime;
+    use App\Entity\Restaurant;
+    use App\Repository\ReservRepository;
+    use App\Repository\RestaurantRepository;
+    use App\Repository\TimeSlotRepository;
+    use DateTime;
 
 class TimeSlotService
 {
-    public function __construct(private ReservationRepository $reservationRepository)
+    public function __construct(private ReservRepository $reservRepository)
     {
     }
+
     public function checkAvailable(Restaurant $restaurant, DateTime $dateTime): bool
     {
         $capacity = $restaurant->getCapacity();
 
-        $reservations = $this->reservationRepository->findReservationByTimeSlot(
+        $reservations = $this->reservRepository->findReservationByTimeSlot(
             $restaurant,
             $dateTime
         );

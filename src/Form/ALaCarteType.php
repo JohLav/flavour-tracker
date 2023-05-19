@@ -58,7 +58,6 @@ class ALaCarteType extends AbstractType
                 'required' => true,
                 'help' => "Saisir la catégorie de l'élément",
             ])
-
             ->add('visible', CheckboxType::class, [
                 'label' => "Ajouter 'À la carte'",
                 'label_attr' => [
