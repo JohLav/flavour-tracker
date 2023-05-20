@@ -18,13 +18,12 @@
 
 class ReservationController extends AbstractController
 {
-    private Security $security;
-    private AuthorizationCheckerInterface $authorizationChecker;
-
-    public function __construct(Security $security, AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        private Security $security,
+        //        private AuthorizationCheckerInterface $authorizationChecker
+    ) {
         $this->security = $security;
-        $this->authorizationChecker = $authorizationChecker;
+//        $this->authorizationChecker = $authorizationChecker;
     }
 
     #[Route('/reservation/new/{id}', name: 'app_reservation_new', methods: ["GET", "POST"])]

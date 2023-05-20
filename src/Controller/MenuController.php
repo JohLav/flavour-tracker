@@ -77,7 +77,6 @@ class MenuController extends AbstractController
     #[Route('/new', name: 'new')]
     public function new(Request $request, MenuRepository $menuRepository): Response
     {
-        // Créer une nouvelle instance de l'entité Menu
         $menu = new Menu();
         $form = $this->createForm(MenuType::class, $menu);
         $form->handleRequest($request);

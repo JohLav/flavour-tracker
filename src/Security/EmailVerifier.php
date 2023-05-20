@@ -19,6 +19,14 @@ class EmailVerifier
     ) {
     }
 
+    /**
+     * @param string $verifyEmailRouteName
+     * @param UserInterface $user
+     * @param TemplatedEmail $email
+     *
+     * @return void
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+     */
     public function sendEmailConfirmation(
         string $verifyEmailRouteName,
         UserInterface $user,
@@ -41,10 +49,16 @@ class EmailVerifier
     }
 
     /**
+     * @param Request $request
+     * @param UserInterface $user
+     *
+     * @return void
      * @throws VerifyEmailExceptionInterface
      */
-    public function handleEmailConfirmation(Request $request, UserInterface $user): void
-    {
+    public function handleEmailConfirmation(
+        Request $request,
+        UserInterface $user
+    ): void {
         $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
 
         $user->setIsVerified(true);
