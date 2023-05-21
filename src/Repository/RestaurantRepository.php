@@ -20,7 +20,12 @@ class RestaurantRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Restaurant::class);
     }
-
+    /**
+     * @param Restaurant $entity
+     * @param bool $flush
+     *
+     * @return void
+     */
     public function save(Restaurant $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -29,7 +34,12 @@ class RestaurantRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+    /**
+     * @param Restaurant $entity
+     * @param bool $flush
+     *
+     * @return void
+     */
     public function remove(Restaurant $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -39,6 +49,11 @@ class RestaurantRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @param array $filters
+     *
+     * @return array
+     */
     public function findFiltered(array $filters): array
     {
         $qb = $this->createQueryBuilder('r')
