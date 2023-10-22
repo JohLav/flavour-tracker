@@ -82,7 +82,7 @@ class SearchType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
                 'autocomplete' => true,
-                'attr' => ['placeholder' => 'Diets'],
+                'attr' => ['placeholder' => 'Alimentation'],
                 'row_attr' => [
                     'class' => 'm-1',
                 ],
@@ -111,7 +111,7 @@ class SearchType extends AbstractType
             $form->add('items', ChoiceType::class, [
                 'required' => false,
                 'label' => false,
-                'attr' => ['placeholder' => 'Ingrédient ou plat'],
+                'attr' => ['placeholder' => 'Ingrédient, plat'],
                 'multiple' => true,
                 'autocomplete' => true,
                 'tom_select_options' => [

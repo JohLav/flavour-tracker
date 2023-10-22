@@ -1,13 +1,16 @@
 {% if restaurants|length == 0 %}
     <p>Aucun restaurant trouvé.</p>
 {% else %}
-    <h1>Résultats de la recherche</h1>
-    <div class="result d-flex justify-content-center row m-4">
-        {% for restaurant in restaurants %}
-            {% include 'restaurant/_restaurant.html.twig' %}
-        {% endfor %}
+    <div class="container justify-content-center">
+        <h3 class="text-center mb-4">Résultats</h3>
+        <div class="row mx-4">
+            <div class="col-lg-3 col-sm-3">
+                {% for restaurant in restaurants %}
+                    {% include 'restaurant/_restaurant.html.twig' %}
+                {% endfor %}
+                {% include '/home/_map.html.twig' %}
+            </div>
+        </div>
     </div>
-    <div class="row">
-        {% include '/home/_map.html.twig' %}
-    </div>
+
 {% endif %}

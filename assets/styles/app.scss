@@ -1,17 +1,27 @@
-//start coding by removing this file and adding yours ;)
-@import "_wcs.scss";
-
 @import "_base.scss";
 @import "_sidebar.scss";
 @import "~bootstrap/scss/bootstrap";
 
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin:0;
+    height: 100%;
+}
+
+#home_form {
+    max-width: 600px;
+}
 
 .my-form-class input[type="text"],
 .my-form-class select {
     width: 100%;
-    max-width: 400px; /* ou la largeur que vous préférez */
+    max-width: 400px;
 }
-
 
 .image-reservation {
     object-fit: cover;

@@ -50,8 +50,8 @@
                 <div class="collapse" id="account-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         {% if not is_granted('ROLE_OWNER') %}
-                            <li><a href="{{ path('app_favoris') }}" class="link-dark d-inline-flex text-decoration-none rounded">Mes favoris</a></li>
-                            <li><a href="{{ path('app_reservation_list') }}" class="link-dark d-inline-flex text-decoration-none rounded">Mes réservations</a></li>
+                            <li><a href="{{ path('app_favorite') }}" class="link-dark d-inline-flex text-decoration-none rounded">Favoris</a></li>
+                            <li><a href="{{ path('app_reservation_list') }}" class="link-dark d-inline-flex text-decoration-none rounded">Réservations</a></li>
                         {% else %}
                             {% if app.user.restaurant is not empty %}
                                 <li><a href="{{ path('app_restaurant_show', {'id': app.user.restaurant.id}) }}" class="link-dark d-inline-flex text-decoration-none rounded">Mon restaurant</a></li>

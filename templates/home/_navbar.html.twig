@@ -1,15 +1,13 @@
-{# _navbar.html.twig #}
-
-<nav class="navbar navbar-expand-lg bg-primary d-flex px-5">
+<nav class="navbar navbar-expand-lg sticky-top bg-primary px-5">
     <div class="container-fluid">
+        <a class="navbar-brand link-light d-flex align-items-center" href="/">
+            <img src="{{ asset('build/images/tds_logo.png') }}" width="70px" alt="" id="logo">
+            <h1 class="ps-4">Tracker de Saveurs</h1>
+        </a>
         <div>
-            <a class="navbar-brand link-light d-flex" href="/">
-                <img src="{{ asset('build/images/tds_logo.png') }}" width="70px" alt="" id="logo">
-                <h1 class="ps-4">Trackers de Saveurs</h1>
-            </a>
             {% if app.user %}
-                <a href="{{ path('app_favoris') }}">
-                    <button type="button" class="btn btn-secondary me-2">Mon espace</button>
+                <a href="{{ path('app_favorite') }}">
+                    <button type="button" class="btn btn-secondary me-2">Profil</button>
                 </a>
             {% endif %}
             {% if app.user is null %}

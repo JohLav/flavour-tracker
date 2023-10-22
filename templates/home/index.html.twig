@@ -3,32 +3,27 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <div class="container-fluid d-flex">
-        <div class="pt-5">
-            <h1 class="text-start ps-5">
-                Bienvenue!
-            </h1>
-            <p class="py-3 ps-5 fs-5">
-                Trouvez le restaurant parfait pour vous en quelques clics grâce à notre site !
-                Que vous suiviez un régime alimentaire particulier ou que vous ayez des restrictions budgétaires,
-                notre outil de filtrage intuitif vous permettra de trouver rapidement les meilleurs restaurants
-                de votre ville.<br><br>
-                Dites adieu aux heures de recherche fastidieuse et bonjour à une expérience culinaire
-                délicieuse et personnalisée !
-            </p>
-            {{ form_start(form, {'attr': {'action': path('home_index')} }) }}
-            <div class="container-fluid d-block shadow-lg p-5 m-5 bg-body-tertiary rounded" id="home_form">
-                {{ form_widget(form.items) }}
-                {{ form_widget(form.city) }}
-                <button class="btn btn-primary mt-4" type="submit">Rechercher</button>
+    <div class="container">
+        <div class="row justify-content-end align-content-center">
+            <div class="col-lg-4 col-sm-12">
+                <h1 class="text-start pt-5 ps-5">
+                    Bienvenue!
+                </h1>
+                <p class="py-3 ps-5 fs-5">
+                    Trouvez le restaurant idéal en quelques clics sur notre site grâce à notre outil de filtrage
+                    intuitif. Fini les recherches fastidieuses, bonjour à une expérience culinaire personnalisée !
+                </p>
+                {{ form_start(form, {'attr': {'action': path('home_index')} }) }}
+                <div class="container-fluid d-block p-5 m-5 rounded" id="home_form">
+                    {{ form_widget(form.items) }}
+                    {{ form_widget(form.city) }}
+                    <button class="btn btn-primary mt-4" type="submit">Rechercher</button>
+                </div>
+                {{ form_end(form) }}
             </div>
-            {{ form_end(form) }}
-        </div>
-        <div class="ms-4">
-            <img src="{{ asset('build/images/fruits.jpg') }}"
-                 class="img-fluid"
-                 id="home_img"
-                 alt="">
+            <div class="col-lg-8 col-sm-12 align-self-center">
+                <img src="{{ asset('build/images/fruits.jpg') }}" class="img-fluid" alt="fruits">
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -1,10 +1,10 @@
 {% extends 'admin/admin.base.html.twig' %}
 
-{% block title %}Mes favoris{% endblock %}
+{% block title %}Favoris{% endblock %}
 
 {% block content %}
-    <div class="col-9 row">
-        <h1>Mes favoris</h1>
+    <div class="col-9">
+        <h1>Favoris</h1>
         {% if app.user.favorites is not empty %}
             {% for restaurant in app.user.favorites %}
                 {% include 'restaurant/_restaurant.html.twig' %}

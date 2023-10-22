@@ -1,20 +1,20 @@
 <div id="map" style="width: 600px; height: 400px;"></div>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-      crossorigin=""/>
-
 <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
         crossorigin=""></script>
 
 <script type="text/javascript">
-    var map = L.map('map').setView([51.505, -0.09], 13);
+    var lat = 45.7647885;
+    var lng = 4.8259724;
+
+    var map = L.map('map').setView([lat, lng], 14);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        minZoom: 1,
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map)
-    var marker = L.marker([51.5, -0.09]).addTo(map);
+    }).addTo(map);
+    var marker = L.marker([lat, lng]).addTo(map);
 
     function onMapClick(e) {
         alert("You clicked the map at " + e.latlng);
