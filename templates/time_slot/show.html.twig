@@ -1,34 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TimeSlot{% endblock %}
+{% block title %}Créneaux horaire{% endblock %}
 
 {% block body %}
-    <h1>TimeSlot</h1>
+    <h1>Créneaux horaire</h1>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ time_slot.id }}</td>
-            </tr>
-            <tr>
-                <th>Day</th>
-                <td>{{ time_slot.day }}</td>
-            </tr>
-            <tr>
-                <th>Opening</th>
-                <td>{{ time_slot.opening ? time_slot.opening|date('H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Closing</th>
-                <td>{{ time_slot.closing ? time_slot.closing|date('H:i:s') : '' }}</td>
-            </tr>
+        <tr>
+            <th>N°</th>
+            <td>{{ time_slot.id }}</td>
+        </tr>
+        <tr>
+            <th>Jour</th>
+            <td>{{ time_slot.day }}</td>
+        </tr>
+        <tr>
+            <th>Ouverture</th>
+            <td>{{ time_slot.opening ? time_slot.opening|date('H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Fermeture</th>
+            <td>{{ time_slot.closing ? time_slot.closing|date('H:i:s') : '' }}</td>
+        </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_time_slot_index') }}">back to list</a>
+    <div>
+        <a href="{{ path('timeslot_edit', {'id': time_slot.id}) }}">
+            <button class="btn btn-primary">Modifier</button>
+        </a>
+    </div>
 
-    <a href="{{ path('app_time_slot_edit', {'id': time_slot.id}) }}">edit</a>
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <div class="mt-2">
+            <a class="text-decoration-none" href="{{ path('timeslot_index') }}">
+                Retour à la liste
+            </a>
+        </div>
+    {% endif %}
+
 
     {{ include('time_slot/_delete_form.html.twig') }}
 {% endblock %}

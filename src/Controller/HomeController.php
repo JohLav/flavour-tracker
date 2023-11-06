@@ -30,7 +30,7 @@ class HomeController extends AbstractController
 
             $restaurants = $repository->findFiltered($data);
 
-            return $this->render('home/search.html.twig', [
+            return $this->render('search/search.html.twig', [
                 'restaurants' => $restaurants ?? $repository->findAll(),
                 'form' => $searchForm->createView(),
             ]);

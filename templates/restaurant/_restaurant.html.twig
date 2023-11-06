@@ -1,28 +1,30 @@
-<div class="card m-4" style="width: 18rem;">
+{# <div class="col-sm-12 col-md-6 col-lg-4"> #}
+<div class="card px-0 mx-3 mb-3" style="min-width: 18rem; max-width: 18rem; max-height: 365px;">
     {#                <img src="..." class="card-img-top" alt="...">  ajouter un carrousel à la place image #}
     <div id="carouselExampleAutoplaying{{ loop.index }}" class="carousel slide" data-bs-ride="carousel">
-
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="https://th.bing.com/th/id/OIP.6_UzrWzOBF_KDtJ6vwaV_wHaEw?pid=ImgDet&rs=1"
-                     class="d-block card-img-top w-100" alt="...">
+                     class="card-img-top" alt="...">
             </div>
             <div class="carousel-item">
                 <img src="https://www.restaurant-anglet.com/wp-content/uploads/2020/10/2-scaled.jpg"
-                     class="d-block card-img-top w-100" alt="...">
+                     class="card-img-top" alt="...">
             </div>
             <div class="carousel-item">
                 <img
                     src="https://th.bing.com/th/id/R.efa8f447cba810a15ea303ae6767ff0c?rik=%2fgk%2fCOIEkQwYaw&pid=ImgRaw&r=0"
-                    class="d-block card-img-top w-100" alt="...">
+                    class="card-img-top" alt="...">
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying{{ loop.index }}"
+        <button class="carousel-control-prev" type="button"
+                data-bs-target="#carouselExampleAutoplaying{{ loop.index }}"
                 data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying{{ loop.index }}"
+        <button class="carousel-control-next" type="button"
+                data-bs-target="#carouselExampleAutoplaying{{ loop.index }}"
                 data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
@@ -32,23 +34,23 @@
         <h5 class="card-title">
             {{ restaurant.name }}
             {% if restaurant in app.user.favorites %}
-                <a href="{{ path('app_favorite_remove', {'id': restaurant.id}) }}" class="m-2"><i
+                <a href="{{ path('favorite_delete', {'id': restaurant.id}) }}" class="m-2"><i
                         class="bi bi-heart-fill"></i></a>
             {% else %}
-                <a href="{{ path('app_favorite_new', {'id': restaurant.id}) }}" class="m-2"><i
+                <a href="{{ path('favorite_new', {'id': restaurant.id}) }}" class="m-2"><i
                         class="bi bi-heart"></i></a>
             {% endif %}
         </h5>
-        <p class="card-text">{{ restaurant.city.name }}</p>
-        <p class="card-text">{{ restaurant.city.zipCode }}</p>
+        <p class="card-text">{{ restaurant.city.name }}<br>
+            {{ restaurant.city.zipCode }}</p>
         {% if timeSlot is defined and timeSlot is not empty %}
             {% set isFull = time_slot_service.checkAvailable(restaurant, timeSlot) %}
             {% if not isFull %}
-                <p class="card-text text-danger">Complet</p>
-            {% else %}
                 <p class="card-text text-success">Places restantes</p>
+            {% else %}
+                <p class="card-text text-danger">Complet</p>
             {% endif %}
         {% endif %}
-        <a href="{{ path('app_reservation_new', {'id': restaurant.id}) }}" class="btn btn-primary">Réserver</a>
+        <a href="{{ path('reservation_new', {'id': restaurant.id}) }}" class="btn btn-primary">Réserver</a>
     </div>
 </div>

@@ -2,14 +2,10 @@
 
     namespace App\Controller;
 
-    use App\Entity\Item;
     use App\Entity\Menu;
     use App\Entity\User;
-    use App\Form\ALaCarteType;
     use App\Form\MenuType;
-    use App\Repository\ItemRepository;
     use App\Repository\MenuRepository;
-    use App\Repository\RestaurantRepository;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Request;
@@ -45,31 +41,31 @@ class MenuController extends AbstractController
         ]);
     }
 
-    #[Route('/{categoryName}', name: 'show')]
-    public function show(string $categoryName, MenuRepository $menuRepository): Response
-    {
-        /** @var User $connectedUser */
-        $connectedUser = $this->getUser();
-        $restaurant = $connectedUser->getRestaurant();
-
-        $menus = $this->menuRepository->findBy([
-            'restaurant' => $restaurant
-        ]);
-
-        $category = $this->menuRepository->findOneBy(
-            ['name' => $categoryName],
-        );
-
-        if (!$category) {
-            throw $this->createNotFoundException(
-                "La catégorie $categoryName est introuvable."
-            );
-        }
-
-        return $this->render('admin/menu/show.html.twig', [
-            'category' => $category,
-        ]);
-    }
+//    #[Route('/{categoryName}', name: 'show')]
+//    public function show(string $categoryName, MenuRepository $menuRepository): Response
+//    {
+//        /** @var User $connectedUser */
+//        $connectedUser = $this->getUser();
+//        $restaurant = $connectedUser->getRestaurant();
+//
+//        $menus = $this->menuRepository->findBy([
+//            'restaurant' => $restaurant
+//        ]);
+//
+//        $category = $this->menuRepository->findOneBy(
+//            ['name' => $categoryName],
+//        );
+//
+//        if (!$category) {
+//            throw $this->createNotFoundException(
+//                "La catégorie $categoryName est introuvable."
+//            );
+//        }
+//
+//        return $this->render('admin/menu/show.html.twig', [
+//            'category' => $category,
+//        ]);
+//    }
 
     /**
      * Add a new menu

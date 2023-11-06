@@ -86,7 +86,7 @@ class ItemController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $itemRepository->save($item, true);
-            $this->addFlash('success', "L'élément a bien été ajouté.");
+            $this->addFlash('success', "L'élément a bien été mis à jour.");
 
             return $this->redirectToRoute('items_list');
         }
@@ -107,7 +107,7 @@ class ItemController extends AbstractController
     ): Response {
 
         $itemRepository->remove($item, true);
-        $this->addFlash('success', 'Le menu a bien été supprimé.');
+        $this->addFlash('success', "L'élément a bien été supprimé.");
 
         return $this->redirectToRoute('items_list');
     }

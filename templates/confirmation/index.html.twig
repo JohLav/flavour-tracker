@@ -1,33 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ConfirmationController!{% endblock %}
+{% block title %}Confirmation de réservation{% endblock %}
 
 {% block body %}
-    <style>
-        .example-wrapper {
-            margin: 1em auto;
-            max-width: 800px;
-            width: 95%;
-            font: 18px/1.5 sans-serif;
-        }
-
-        .example-wrapper code {
-            background: #F5F5F5;
-            padding: 2px 6px;
-        }
-    </style>
-
-    <div class="example-wrapper">
-        <h1>Hello {{ controller_name }}! ✅</h1>
-
-        This friendly message is coming from:
-        <ul>
-            <li>Your controller at <code><a
-                        href="{{ '/home/ana/DocDaria/2023-01-PHP-SB-Lyon-Tracker-de-saveurs/src/Controller/ConfirmationController.php'|file_link(0) }}">src/Controller/ConfirmationController.php</a></code>
-            </li>
-            <li>Your template at <code><a
-                        href="{{ '/home/ana/DocDaria/2023-01-PHP-SB-Lyon-Tracker-de-saveurs/templates/confirmation/index.html.twig'|file_link(0) }}">templates/confirmation/index.html.twig</a></code>
-            </li>
-        </ul>
+    <div class="container my-5">
+        <h1>Votre réservation est confirmée !</h1>
+        <p>Nous vous remercions pour votre réservation. <br>
+            Nous vous avons envoyé un récapitulatif de votre réservation par mail.</p>
+        <a href="{{ path('reservation_list') }}">Voir mes réservations</a>
     </div>
 {% endblock %}

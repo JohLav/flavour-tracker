@@ -17,6 +17,7 @@
     use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
     use App\Repository\UserRepository;
 
+    #[Route('/register', name: "register_")]
 class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
@@ -26,8 +27,8 @@ class RegistrationController extends AbstractController
         $this->emailVerifier = $emailVerifier;
     }
 
-    #[Route('/register', name: 'app_register')]
-    public function register(
+    #[Route('/', name: 'index')]
+    public function index(
         Request $request,
         UserPasswordHasherInterface $userPasswordHasher,
         EntityManagerInterface $entityManager,
@@ -60,7 +61,6 @@ class RegistrationController extends AbstractController
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
-            // do anything else you need here, like send an email
 
             return $this->redirectToRoute('home_index');
         }
@@ -70,7 +70,7 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/verify/email', name: 'app_verify_email')]
+    #[Route('/verify', name: 'verify')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -85,13 +85,13 @@ class RegistrationController extends AbstractController
                 'VerifyEmailBundle'
             ));
 
-            return $this->redirectToRoute('app_register');
+            return $this->redirectToRoute('register_index');
         }
 
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('app_register');
+        return $this->redirectToRoute('register_index');
     }
 }

@@ -16,17 +16,10 @@
     use Symfony\Component\Security\Core\Security;
     use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
+    #[Route("/reservation", name: "reservation_")]
 class ReservationController extends AbstractController
 {
-    public function __construct(
-        private Security $security,
-        //        private AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->security = $security;
-//        $this->authorizationChecker = $authorizationChecker;
-    }
-
-    #[Route('/reservation/new/{id}', name: 'app_reservation_new', methods: ["GET", "POST"])]
+    #[Route('/new', name: 'new', methods: ["GET", "POST"])]
     public function new(
         Request $request,
         Restaurant $restaurant,
@@ -34,7 +27,7 @@ class ReservationController extends AbstractController
     ): Response {
         $reservation = new  Reservation();
         $form = $this->createForm(ReservationType::class, $reservation, [
-            'attr' => ['class' => 'my-form-class']
+            'attr' => ['class' => 'form']
         ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -57,13 +50,13 @@ class ReservationController extends AbstractController
         ]);
     }
 
-    #[Route('/reservation/confirmation', name: 'reservation_confirmation')]
+    #[Route('/confirmation', name: 'confirmation')]
     public function confirmReservation(): Response
     {
-        return $this->render('reservation/show.html.twig');
+        return $this->render('reservation/index.html.twig');
     }
 
-    #[Route('/reservation/list', name: 'app_reservation_list')]
+    #[Route('/list', name: 'list')]
     public function index(
         Request $request,
         ReservRepository $reservRepository
@@ -102,7 +95,7 @@ class ReservationController extends AbstractController
         ]);
     }
 
-    #[Route('/reservation/{id}/edit', name: 'reservation_edit', methods: ["GET", "POST"])]
+    #[Route('/edit/{id}', name: 'edit', methods: ["GET", "POST"])]
     public function editReservation(
         Request $request,
         Reservation $reservation,
@@ -116,7 +109,7 @@ class ReservationController extends AbstractController
 
             $this->addFlash('success', 'Votre réservation a bien été modifiée.');
 
-            return $this->redirectToRoute('app_reservation_list');
+            return $this->redirectToRoute('reservation_list');
         }
 
         return $this->render('reservation/edit.html.twig', [
@@ -125,7 +118,7 @@ class ReservationController extends AbstractController
         ]);
     }
 
-    #[Route('/reservation/{id}/delete', name: 'reservation_delete', methods: ["POST", "GET"])]
+    #[Route('/delete/{id}', name: 'delete', methods: ["POST", "GET"])]
     public function deleteReservation(
         Request $request,
         Reservation $reservation,
@@ -135,6 +128,6 @@ class ReservationController extends AbstractController
         $this->addFlash('success', 'Votre réservation a bien été supprimée.');
 
 
-        return $this->redirectToRoute('app_reservation_list');
+        return $this->redirectToRoute('reservation_list');
     }
 }

@@ -11,13 +11,13 @@
                 <tr>
                     <th>Id</th>
                     <th>Email</th>
-                    <th>Roles</th>
+                    <th>Rôle</th>
                     <th>Mot de Passe</th>
                     <th>Prénom</th>
                     <th>Nom</th>
                     <th>Téléphone</th>
-                    <th>IsVerified</th>
-                    <th>Actions</th>
+                    <th>Vérifié</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,20 +32,20 @@
                         <td>{{ user.phone }}</td>
                         <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
                         <td>
-                            <a class="text-decoration-none" href="{{ path('app_user_show', {'id': user.id}) }}">voir</a>
+                            <a class="text-decoration-none" href="{{ path('user_show', {'id': user.id}) }}">Voir</a>
                             <a class="text-decoration-none"
-                               href="{{ path('app_user_edit', {'id': user.id}) }}">modifier</a>
+                               href="{{ path('user_edit', {'id': user.id}) }}">Modifier</a>
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="9">no records found</td>
+                        <td colspan="9">Pas d'utilisateur trouvé.</td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
-            <a href="{{ path('app_user_new') }}">
-                <button class="btn btn-primary">Créer un nouvel utilisateur</button>
+            <a href="{{ path('user_new') }}">
+                <button class="btn btn-primary">Nouvel utilisateur</button>
             </a>
         </div>
     </div>

@@ -3,18 +3,16 @@
 {% block title %}Liste des éléments{% endblock %}
 
 {% block content %}
-
-    <div class="col-9">
-        <h1>Liste des éléments</h1>
+    <div class="shadow-sm p-5 bg-body-tertiary rounded">
+    <h1 class="text-center">Liste des éléments</h1>
         <div class="d-flex row">
             {% for item in items %}
                 {% include 'admin/item/_card.html.twig' %}
             {% else %}
-                <div>
-                    Il n'y a pas encore de menus.
+                <div class="text-center">
+                    Il n'y a pas encore d'élément.
                 </div>
             {% endfor %}
         </div>
     </div>
-
 {% endblock %}

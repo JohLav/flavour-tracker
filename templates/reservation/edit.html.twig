@@ -8,9 +8,9 @@
 
         {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button class="btn btn-primary" type="submit">Enregistrer les modifications</button>
+        <button class="btn btn-primary" type="submit">Enregistrer</button>
         {{ form_end(form) }}
 
-        <a href="{{ path('app_reservation_list') }}">Retour à la liste des réservations</a>
+        <a href="{{ path('reservation_list') }}">Retour à la liste des réservations</a>
     </div>
 {% endblock %}

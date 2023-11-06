@@ -8,9 +8,10 @@
     use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+    #[Route("/login", name: "login_")]
 class LoginController extends AbstractController
 {
-    #[Route('/login', name: 'app_login')]
+    #[Route('/', name: 'index')]
     public function index(AuthenticationUtils $authenticationUtils): Response
     {
         $error = [];
@@ -25,10 +26,12 @@ class LoginController extends AbstractController
         ]);
     }
 
-    #[Route('/logout', name: 'app_logout', methods: ['GET'])]
+    /**
+     * @throws Exception
+     */
+    #[Route('/logout', name: 'logout', methods: ['GET'])]
     public function logout()
     {
-        // controller can be blank: it will never be called!
-        throw new Exception('Don\'t forget to activate logout in security.yaml');
+        throw new Exception("Don't forget to activate logout in security.yaml");
     }
 }

@@ -12,11 +12,11 @@
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
 
-    #[Route('/time/slot')]
+    #[Route('/time_slot', name: 'timeslot_')]
     #[IsGranted('ROLE_OWNER')]
 class TimeSlotController extends AbstractController
 {
-    #[Route('/', name: 'app_time_slot_index', methods: ['GET'])]
+    #[Route('/', name: 'index', methods: ['GET'])]
     public function index(TimeSlotRepository $timeSlotRepository): Response
     {
         return $this->render('time_slot/index.html.twig', [
@@ -24,7 +24,7 @@ class TimeSlotController extends AbstractController
         ]);
     }
 
-    #[Route('/new/{id}', name: 'app_time_slot_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
     public function new(
         Request $request,
         Restaurant $restaurant,
@@ -38,7 +38,7 @@ class TimeSlotController extends AbstractController
             $timeSlot->setRestaurant($restaurant);
             $timeSlotRepository->save($timeSlot, true);
 
-            return $this->redirectToRoute('app_restaurant_show', ['id' => $restaurant->getId()]);
+            return $this->redirectToRoute('restaurant_show', ['id' => $restaurant->getId()]);
         }
 
         return $this->renderForm('time_slot/new.html.twig', [
@@ -47,7 +47,7 @@ class TimeSlotController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_time_slot_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'show', methods: ['GET'])]
     public function show(TimeSlot $timeSlot): Response
     {
         return $this->render('time_slot/show.html.twig', [
@@ -55,7 +55,7 @@ class TimeSlotController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_time_slot_edit', methods: ['GET', 'POST'])]
+    #[Route('/edit/{id}', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
         TimeSlot $timeSlot,
@@ -68,7 +68,7 @@ class TimeSlotController extends AbstractController
             $restaurant = $timeSlot->getRestaurant();
             $timeSlotRepository->save($timeSlot, true);
 
-            return $this->redirectToRoute('app_restaurant_show', ['id' => $restaurant->getId()]);
+            return $this->redirectToRoute('restaurant_show', ['id' => $restaurant->getId()]);
         }
 
         return $this->renderForm('time_slot/edit.html.twig', [
@@ -77,7 +77,7 @@ class TimeSlotController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_time_slot_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'delete', methods: ['POST'])]
     public function delete(
         Request $request,
         TimeSlot $timeSlot,
@@ -89,6 +89,6 @@ class TimeSlotController extends AbstractController
             $timeSlotRepository->remove($timeSlot, true);
         }
 
-        return $this->redirectToRoute('app_restaurant_show', ['id' => $restaurant->getId()], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('restaurant_show', ['id' => $restaurant->getId()], Response::HTTP_SEE_OTHER);
     }
 }

@@ -1,13 +1,13 @@
-{# {% include 'search_bar.html.twig' with {'form': form} %} #}
-
 {% extends 'base.html.twig' %}
 
+{% block title %}Résultats de recherche{% endblock %}
+
 {% block search %}
-    {% include 'home/_search_bar.html.twig' %}
+    {% include 'search/_search_bar.html.twig' %}
 {% endblock %}
 
 {% block body %}
-    {% include '/home/_search_results.html.twig' %}
+    {% include 'search/_search_results.html.twig' %}
 {% endblock %}
 
 {% block script %}

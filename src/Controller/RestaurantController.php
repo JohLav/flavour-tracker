@@ -16,7 +16,7 @@
     use App\Entity\Restaurant;
     use Symfony\Component\String\Slugger\SluggerInterface;
 
-    #[Route(path: '/restaurant', name: 'app_restaurant_')]
+    #[Route(path: '/restaurant', name: 'restaurant_')]
     #[IsGranted('ROLE_OWNER')]
 class RestaurantController extends AbstractController
 {
@@ -62,7 +62,7 @@ class RestaurantController extends AbstractController
             }
             $restaurantRepository->save($restaurant, true);
 
-            return $this->redirectToRoute('app_restaurant_show', ['id' => $restaurant->getId()]);
+            return $this->redirectToRoute('restaurant_show', ['id' => $restaurant->getId()]);
         }
 
         return $this->renderForm('restaurant/new.html.twig', [
@@ -107,7 +107,7 @@ class RestaurantController extends AbstractController
             }
             $restaurantRepository->save($restaurant, true);
 
-            return $this->redirectToRoute('app_restaurant_show', ['id' => $restaurant->getId()]);
+            return $this->redirectToRoute('restaurant_show', ['id' => $restaurant->getId()]);
         }
 
         return $this->renderForm('restaurant/edit.html.twig', [

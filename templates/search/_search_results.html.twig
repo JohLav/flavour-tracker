@@ -1,0 +1,16 @@
+{% if restaurants|length == 0 %}
+    <p>Aucun restaurant trouvé.</p>
+{% else %}
+    <div class="container">
+        <h3 class="text-center mb-4">Résultats</h3>
+        <div class="d-flex flex-row flex-wrap justify-content-center">
+
+            {% for restaurant in restaurants %}
+                {% include 'restaurant/_restaurant.html.twig' %}
+            {% endfor %}
+
+            {% include 'search/_map.html.twig' %}
+        </div>
+    </div>
+
+{% endif %}

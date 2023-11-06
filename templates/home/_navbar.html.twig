@@ -1,26 +1,21 @@
-<nav class="navbar navbar-expand-lg sticky-top bg-primary px-5">
-    <div class="container-fluid">
-        <a class="navbar-brand link-light d-flex align-items-center" href="/">
-            <img src="{{ asset('build/images/tds_logo.png') }}" width="70px" alt="" id="logo">
-            <h1 class="ps-4">Tracker de Saveurs</h1>
-        </a>
-        <div>
-            {% if app.user %}
-                <a href="{{ path('app_favorite') }}">
-                    <button type="button" class="btn btn-secondary me-2">Profil</button>
-                </a>
-            {% endif %}
-            {% if app.user is null %}
-                <a href="{{ path('app_login') }}">
-                    <button type="button" class="btn btn-light">Connexion</button>
-                </a>
-            {% endif %}
-
-            {% if app.user %}
-                <a href="{{ path('app_logout') }}">
-                    <button type="button" class="btn btn-danger">Déconnexion</button>
-                </a>
-            {% endif %}
-        </div>
+<nav class="navbar navbar-expand-lg sticky-top bg-primary px-5 justify-content-between">
+    <a class="navbar-brand link-light d-flex align-items-center mx-auto mx-md-0" href="/">
+        <img src="{{ asset('build/images/tds_logo.png') }}" width="70px" alt="" id="logo">
+        <h1 class="ps-4">Tracker de Saveurs</h1>
+    </a>
+    <div class="d-flex gap-2 mx-auto mx-md-0 mb-3 mb-md-0">
+        {% if app.user %}
+            <a href="{{ path('favorite_index') }}">
+                <button class="btn btn-light" style="min-width: 125px;" type="button">Profil</button>
+            </a>
+            <a href="{{ path('login_logout') }}">
+                <button class="btn btn-danger" style="min-width: 125px;"  type="button">Déconnexion</button>
+            </a>
+        {% endif %}
+        {% if app.user is null %}
+            <a href="{{ path('login_index') }}">
+                <button class="btn btn-light" style="min-width: 125px;"  type="button">Connexion</button>
+            </a>
+        {% endif %}
     </div>
 </nav>

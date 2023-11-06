@@ -1,26 +1,28 @@
-{# _footer.html.twig #}
-
-<nav class="navbar sticky-bottom bg-secondary py-4">
-    <div class="container-fluid">
-        <div>
-            <p class="ps-5">©2023 - Trackers de Saveurs</p>
-        </div>
-        <div class="d-flex align-content-center">
-            <a class="text-decoration-none" href="{{ path('home_index') }}"><p class="px-2">Accueil</p></a>
-            <a class="text-decoration-none" href="{{ path('home_index') }}"><p class="px-2">A propos</p></a>
-            <a class="text-decoration-none" href="{{ path('app_contact') }}"><p class="px-2">Contact</p></a>
-            <a class="text-decoration-none" href="#"><p class="px-2">FAQs</p></a>
-        </div>
-        <div class="d-flex pe-5 gap-3">
-            <a href="https://www.facebook.com/?lang=fr" target="_blank">
+<footer class="fixed-bottom d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top p-5">
+    <div class="col-md-4 d-flex align-items-center">
+        <span class="mb-md-0 text-body-secondary">©2023 - Trackers de Saveurs</span>
+        {#        <div class="d-flex align-content-center"> #}
+        {#            <a class="text-decoration-none" href="{{ path('home_index') }}"><p class="px-2">Accueil</p></a> #}
+        {#            <a class="text-decoration-none" href="{{ path('home_index') }}"><p class="px-2">A propos</p></a> #}
+        {#            <a class="text-decoration-none" href="{{ path('app_contact') }}"><p class="px-2">Contact</p></a> #}
+        {#            <a class="text-decoration-none" href="#"><p class="px-2">FAQs</p></a> #}
+        {#        </div> #}
+    </div>
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3">
+            <a class="text-body-secondary" href="https://www.facebook.com/?lang=fr" target="_blank">
                 <i class="bi bi-facebook"></i>
             </a>
-            <a href="https://twitter.com/?lang=fr" target="_blank">
+        </li>
+        <li class="ms-3">
+            <a class="text-body-secondary" href="https://twitter.com/?lang=fr" target="_blank">
                 <i class="bi bi-twitter"></i>
             </a>
-            <a href="https://instagram.com/?lang=fr" target="_blank">
+        </li>
+        <li class="ms-3">
+            <a class="text-body-secondary" href="https://instagram.com/?lang=fr" target="_blank">
                 <i class="bi bi-instagram"></i>
             </a>
-        </div>
-    </div>
-</nav>
+        </li>
+    </ul>
+</footer>

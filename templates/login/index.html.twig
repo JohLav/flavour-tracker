@@ -10,39 +10,39 @@
     {% endif %}
 
     <div class="container d-sm-block justify-content-center mt-3 py-5">
-        <h2 class="ms-5 my-5">Connectez-vous</h2>
         <div>
             <form class="shadow-lg p-5 m-5 bg-body-tertiary rounded"
-                  action="{{ path('app_login') }}"
+                  action="{{ path('login_index') }}"
                   method="post"
                   id="login_form">
+                <h2 class="text-center">Connexion</h2>
                 <div class="p-3">
-                    <label for="username">Email :</label>
+                    <label for="username">Email</label>
                     <input class="form-control"
                            type="text" id="username"
                            name="_username" value="{{ last_username }}">
                 </div>
                 <div class="p-3">
-                    <label for="password">Mot de passe :</label>
+                    <label for="password">Mot de passe</label>
                     <input class="form-control"
                            type="password" id="password" name="_password">
                 </div>
                 <div class="p-3">
-                    <button class="btn btn-primary" type="submit">Se Connecter</button>
+                    <button class="btn btn-primary" type="submit">Connexion</button>
                 </div>
             </form>
         </div>
         <div class="d-flex ms-5 mb-5 pb-5">
             <div>
                 <p class="fs-6">
-                    Vous n'avez de compte ?
-                    <a href="/register" class="text-decoration-none">Cliquez ici</a>
+                    Pas de compte ?
+                    <a href="/register" class="text-decoration-none">Cliquer ici</a>
                 </p>
             </div>
             <div class="ps-5">
                 <p class="fs-6">
-                    Vous êtes un restaurateur ?
-                    <a href="/register" class="text-decoration-none">Cliquez ici</a>
+                    Restaurateur ?
+                    <a href="/register" class="text-decoration-none">Cliquer ici</a>
                 </p>
             </div>
         </div>

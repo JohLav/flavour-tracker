@@ -10,37 +10,38 @@
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
 
+    #[Route("/favorite", name: "favorite_")]
 class FavoriteController extends AbstractController
 {
-    #[Route('/favorite', name: 'app_favorite')]
+    #[Route('/', name: 'index')]
     public function index(): Response
     {
-        return $this->render('favorite/favorite.html.twig', [
+        return $this->render('admin/favorite/favorite.html.twig', [
             'controller_name' => 'Favorite',
         ]);
     }
 
-    #[Route('/favorite/new/{id}', name: 'app_favorite_new')]
-    public function addFavorite(
+    #[Route('/new', name: 'new')]
+    public function new(
         Request $request,
         Restaurant $restaurant,
         UserRepository $userRepository
     ): Response {
         /** @var User $user */
         $user = $this->getUser();
-        $user->addFavorites($restaurant);
+        $user->new($restaurant);
 
         $userRepository->save($user, true);
 
         return $this->redirectToRoute('search_index');
     }
 
-    #[Route('/favorite/remove/{id}', name: 'app_favorite_remove')]
-    public function removeFavorite(Restaurant $restaurant, UserRepository $userRepository): Response
+    #[Route('/delete/{id}', name: 'delete')]
+    public function delete(Restaurant $restaurant, UserRepository $userRepository): Response
     {
         /** @var User $user */
         $user = $this->getUser();
-        $user->removeFavorites($restaurant);
+        $user->delete($restaurant);
 
         $userRepository->save($user, true);
 

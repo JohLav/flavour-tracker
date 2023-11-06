@@ -3,12 +3,8 @@
 {% block title %}Ajouter un élément{% endblock %}
 
 {% block content %}
-
-    <div class="container-fluid col-9 mt-5">
-        <h2 class="ps-5">Ajouter un élément</h2>
-        <div class="shadow-lg p-5 m-5 bg-body-tertiary rounded">
-            {% include 'admin/item/_form.html.twig' %}
-        </div>
+    <div class="shadow-sm p-5 bg-body-tertiary rounded">
+        <h1 class="text-center">Ajouter un élément</h1>
+        {% include 'admin/item/_form.html.twig' %}
     </div>
-
 {% endblock %}

@@ -7,38 +7,34 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
           integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
           crossorigin=""/>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
     <title>
         {% block title %}Tracker de Saveurs{% endblock %}
     </title>
     <script src="https://kit.fontawesome.com/2283b728c7.js" crossorigin="anonymous"></script>
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
-    {% endblock %}
-
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </head>
 
 <body>
-<header>
-    {% block navbar %}
-        {% include 'home/_navbar.html.twig' %}
-    {% endblock %}
-    {% block search %}{% endblock %}
-</header>
+
+{% block navbar %}
+    {% include 'home/_navbar.html.twig' %}
+{% endblock %}
+
+{% block search %}{% endblock %}
 
 {% block body %}{% endblock %}
-{% block reserv %}{% endblock %}
 
-<footer>
-    {% block footer %}
-        {% include 'home/_footer.html.twig' %}
-    {% endblock %}
-</footer>
+{% block footer %}
+    {% include 'home/_footer.html.twig' %}
+{% endblock %}
+
 {% block script %}
-
 {% endblock %}
 
 </body>

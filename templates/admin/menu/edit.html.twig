@@ -1,9 +1,8 @@
 {% extends 'admin/admin.base.html.twig' %}
 
 {% block content %}
-
-    <h2 class="mt-5">Modifier {{ item.name }}</h2>
-
-    {% include 'admin/menu/_form.html.twig' %}
-
+    <div class="shadow-sm p-5 bg-body-tertiary rounded">
+        <h1 class="text-center">Modifier {{ item.name }}</h1>
+        {% include 'admin/menu/_form.html.twig' %}
+    </div>
 {% endblock %}

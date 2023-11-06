@@ -12,12 +12,13 @@
     use Symfony\Component\Mime\Email;
     use Symfony\Component\Routing\Annotation\Route;
 
+    #[Route('/contact', name: 'contact_')]
 class ContactController extends AbstractController
 {
     /**
      * @throws TransportExceptionInterface
      */
-    #[Route('/contact', name: 'app_contact')]
+    #[Route('/', name: 'index')]
     public function index(Request $request, MailerInterface $mailer): Response
     {
         $form = $this->createForm(ContactType::class);
@@ -35,7 +36,7 @@ class ContactController extends AbstractController
 
             $mailer->send($email);
             $this->addFlash('success', message: 'Votre message a été envoyé');
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('home_index');
         }
         return $this->render('contact/index.html.twig', [
             'form' => $form->createView()
@@ -45,7 +46,7 @@ class ContactController extends AbstractController
     /**
      * @throws TransportExceptionInterface
      */
-    #[Route('/reply', name: 'app_reply')]
+    #[Route('/reply', name: 'reply')]
     #[IsGranted('ROLE_SUPER_ADMIN')]
     public function new(Request $request, MailerInterface $mailer): Response
     {
@@ -62,7 +63,7 @@ class ContactController extends AbstractController
                 ->text($content);
 
             $mailer->send($email);
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('home_index');
         }
         return $this->render('contact/reply.html.twig', [
             'form' => $form->createView()

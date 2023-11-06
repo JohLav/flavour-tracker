@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}Création de compte{% endblock %}
 {% block search %}{% endblock %}
 
 {% block body %}
@@ -10,40 +10,41 @@
 
     <div class="container d-sm-block justify-content-center" id="reg_form">
         <div class="shadow-lg p-5 m-5 bg-body-tertiary rounded">
-            <h2>Créer un compte</h2>
-            <div class="p-2">
+            <div class="p-1">
                 {{ form_start(registrationForm) }}
-                <div class="p-2">
-                    {{ form_row(registrationForm.email, {
-                        label: 'Email :'
-                    }) }}
-                </div>
-                <div class="p-2">
-                    {{ form_row(registrationForm.plainPassword, {
-                        label: 'Mot de passe :'
-                    }) }}
-                </div>
-                <div class="p-2">
+                <h2 class="text-center">Création de compte</h2>
+
+                <div class="p-1">
                     {{ form_row(registrationForm.firstname, {
-                        label: 'Prénom :'
+                        label: 'Prénom'
                     }) }}
                 </div>
-                <div class="p-2">
+                <div class="p-1">
                     {{ form_row(registrationForm.lastname, {
-                        label: 'Nom :'
+                        label: 'Nom'
                     }) }}
                 </div>
-                <div class="p-2">
+                <div class="p-1">
                     {{ form_row(registrationForm.phone, {
-                        label: 'Téléphone :'
+                        label: 'Téléphone'
                     }) }}
                 </div>
-                <div class="p-2">
-                    {{ form_row(registrationForm.agreeTerms, {label: 'Accepter les termes et les conditions'}) }}
+                <div class="p-1">
+                    {{ form_row(registrationForm.email, {
+                        label: 'Email'
+                    }) }}
                 </div>
-                <div class="p-2">
+                <div class="p-1">
+                    {{ form_row(registrationForm.plainPassword, {
+                        label: 'Mot de passe'
+                    }) }}
+                </div>
+                <div class="p-1">
+                    {{ form_row(registrationForm.agreeTerms, {label: "En cochant cette case, je déclare avoir pris connaissance des conditions générales d’utilisation du site internet et les accepter."}) }}
+                </div>
+                <div class="p-1">
                     {{ form_row(registrationForm.submit, {
-                        label: 'S\'inscrire'}) }}
+                        label: 'Inscription'}) }}
                 </div>
                 {{ form_end(registrationForm) }}
             </div>
