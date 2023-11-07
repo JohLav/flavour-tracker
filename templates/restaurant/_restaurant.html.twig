@@ -31,7 +31,7 @@
     <div class="card-body">
         <h5 class="card-title">
             {{ restaurant.name }}
-            {% if restaurant in user.favorites %}
+            {% if is_granted('ROLE_USER') and restaurant in app.user.favorites %}
                 <a href="{{ path('favorite_delete', {'id': restaurant.id}) }}" class="m-2"><i
                         class="bi bi-heart-fill"></i></a>
             {% else %}

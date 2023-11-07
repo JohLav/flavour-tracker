@@ -15,7 +15,7 @@
     #[IsGranted('ROLE_USER')]
 class UserController extends AbstractController
 {
-    #[Route('/', name: 'index', methods: ['GET'])]
+    #[Route('', name: 'index', methods: ['GET'])]
     #[IsGranted('ROLE_SUPER_ADMIN')]
     public function index(UserRepository $userRepository): Response
     {
