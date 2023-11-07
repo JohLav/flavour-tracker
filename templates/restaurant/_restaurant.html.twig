@@ -1,6 +1,4 @@
-{# <div class="col-sm-12 col-md-6 col-lg-4"> #}
 <div class="card px-0 mx-3 mb-3" style="min-width: 18rem; max-width: 18rem; max-height: 365px;">
-    {#                <img src="..." class="card-img-top" alt="...">  ajouter un carrousel à la place image #}
     <div id="carouselExampleAutoplaying{{ loop.index }}" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -33,7 +31,7 @@
     <div class="card-body">
         <h5 class="card-title">
             {{ restaurant.name }}
-            {% if restaurant in app.user.favorites %}
+            {% if restaurant in user.favorites %}
                 <a href="{{ path('favorite_delete', {'id': restaurant.id}) }}" class="m-2"><i
                         class="bi bi-heart-fill"></i></a>
             {% else %}

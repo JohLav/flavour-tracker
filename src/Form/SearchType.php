@@ -65,9 +65,9 @@ class SearchType extends AbstractType
             ->add('category', EntityType::class, [
                 'required' => false,
                 'label' => false,
-                'attr' => ['placeholder' => 'Catégorie'],
                 'class' => Category::class,
                 'choice_label' => 'name',
+                'placeholder' => 'Catégorie',
                 'row_attr' => [
                     'class' => 'm-1',
                 ]
