@@ -7,7 +7,7 @@
         <h1 class="text-center">Favoris</h1>
         {% if app.user.favorites is not empty %}
             {% for restaurant in app.user.favorites %}
-                {% include '../../restaurant/_restaurant.html.twig' %}
+                {% include 'restaurant/_restaurant.html.twig' %}
             {% endfor %}
         {% else %}
             <p class="text-center">Aucun favori</p>

@@ -1,5 +1,40 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css");
 
-$primary: #E29838;
-$light: #fff7eb;
-$secondary: #ff9200;
+//$primary: #E29838;
+$primary: #FC7F36;
+//$light: #fff7eb;
+$light: #FFF2EB;
+//$secondary: #ff9200;
+$secondary: #FDB986;
+
+/*
+    Color palette
+ */
+
+// Light orange
+$primary_light1: #FFF2EB;
+$primary_light2: #FEE5D7;
+$primary_light3: #FED8C3;
+$primary_light4: #FECCAF;
+$primary_light5: #FDBF9B;
+$primary_light6: #FDB986;
+$primary_light7: #FDA572;
+$primary_light8: #FD985E;
+$primary_light9: #FC8B4A;
+$primary_light10: #FC7F36;
+$primary_light11: #FC7222;
+$primary_light12: #FB650E;
+
+// Dark orange
+$primary_dark1: #F35B04;
+$primary_dark2: #DD5303;
+$primary_dark3: #C94C03;
+$primary_dark4: #B54403;
+$primary_dark5: #A13C02;
+$primary_dark6: #8D3502;
+$primary_dark7: #792D02;
+$primary_dark8: #642602;
+$primary_dark9: #501E01;
+$primary_dark10: #3C1701;
+$primary_dark11: #280F01;
+$primary_dark12: #140800;

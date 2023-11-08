@@ -14,7 +14,7 @@
                     intuitif. Fini les recherches fastidieuses, bonjour à une expérience culinaire personnalisée !
                 </p>
                 {{ form_start(form, {'attr': {'action': path('home_index')} }) }}
-                <div class="d-block rounded"  style="max-width: 300px;">
+                <div class="d-block rounded" style="max-width: 300px;">
                     {{ form_widget(form.items) }}
                     {{ form_widget(form.city) }}
                     <button class="btn btn-primary mt-4" type="submit">Rechercher</button>
