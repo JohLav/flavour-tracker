@@ -102,7 +102,6 @@ class SearchType extends AbstractType
                 ],
             ]);
 
-
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
             $form = $event->getForm();
 

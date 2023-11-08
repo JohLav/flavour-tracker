@@ -17,6 +17,11 @@ framework:
     php_errors:
         log: true
 
+# when@dev:
+#     _errors:
+#         resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
+#         prefix:   /_error
+
 when@test:
     framework:
         test: true

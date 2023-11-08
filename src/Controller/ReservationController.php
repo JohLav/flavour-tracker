@@ -11,20 +11,21 @@
     use App\Entity\Reservation;
     use App\Form\ReservationType;
     use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+    use Symfony\Component\Security\Core\Security;
 
     #[Route("/reservation", name: "reservation_")]
 class ReservationController extends AbstractController
 {
-//    public function __construct(
-//        private Security $security,
-//        private AuthorizationCheckerInterface $authorizationChecker)
-//    {
-//        $this->security = $security;
-//        $this->authorizationChecker = $authorizationChecker;
-//    }
+   public function __construct(
+       private Security $security,
+       private AuthorizationCheckerInterface $authorizationChecker)
+   {
+       $this->security = $security;
+       $this->authorizationChecker = $authorizationChecker;
+   }
 
-    #[Route('/reservation/new/{id}', name: 'app_reservation_new', methods: ["GET", "POST"])]
-    #[Route('/new', name: 'new', methods: ["GET", "POST"])]
+    #[Route('/new/{id}', name: 'new', methods: ["GET", "POST"])]
     public function new(
         Request $request,
         Restaurant $restaurant,
@@ -58,7 +59,7 @@ class ReservationController extends AbstractController
     #[Route('/confirmation', name: 'confirmation')]
     public function confirmReservation(): Response
     {
-        return $this->render('reservation/index.html.twig');
+        return $this->render('confirmation/index.html.twig');
     }
 
     #[Route('/list', name: 'list')]

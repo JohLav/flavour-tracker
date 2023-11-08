@@ -61,6 +61,7 @@ class RestaurantRepository extends ServiceEntityRepository
             ->leftJoin('r.menus', 'menus')
             ->leftJoin('r.timeSlots', 'timeSlots')
             ->leftJoin('r.category', 'category')
+            ->leftJoin('r.city', 'city')
             ->leftJoin('menus.diets', 'diets');
 
         if (!empty($filters['items'])) {
@@ -73,13 +74,12 @@ class RestaurantRepository extends ServiceEntityRepository
             }
         }
 
-//        if (!empty($filters['city'])) {
-//            $qb->andWhere($qb->expr()->orX(
-//                $qb->expr()->like('r.address', ':city'),
-//                $qb->expr()->like('r.zip_code', ':city')
-//            ))
-//                ->setParameter('city', '%' . $filters['city'] . '%');
-//        }
+        if (!empty($filters['city'])) {
+            $qb->andWhere($qb->expr()->orX(
+                $qb->expr()->eq('city.zipCode', ':zipCode')
+            ))
+                ->setParameter('zipCode', $filters['city']->getZipCode());
+        }
 
         if (!empty($filters['timeSlot'])) {
             $qb->andWhere($qb->expr()->andX(

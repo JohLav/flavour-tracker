@@ -21,7 +21,7 @@ class FavoriteController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'new')]
+    #[Route('/new/{id}', name: 'new')]
     public function new(
         Request $request,
         Restaurant $restaurant,
@@ -29,7 +29,7 @@ class FavoriteController extends AbstractController
     ): Response {
         /** @var User $user */
         $user = $this->getUser();
-        $user->new($restaurant);
+        $user->addFavorites($restaurant);
 
         $userRepository->save($user, true);
 
@@ -41,10 +41,10 @@ class FavoriteController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
-        $user->delete($restaurant);
+        $user->removeFavorites($restaurant);
 
         $userRepository->save($user, true);
 
-        return $this->redirectToRoute('app_favorite');
+        return $this->redirectToRoute('search_index');
     }
 }

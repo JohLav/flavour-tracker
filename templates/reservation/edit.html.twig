@@ -1,16 +1,17 @@
 {% extends 'admin/admin.base.html.twig' %}
 
-{% block title %}Modifier une réservation{% endblock %}
+{% block title %}Modifier une réservation
+{% endblock %}
 
 {% block content %}
-    <div class="row col-9 d-flex">
-        <h1>Modifier une réservation</h1>
+	<div class="row col-9 d-flex">
+		<h1>Modifier une réservation</h1>
 
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button class="btn btn-primary" type="submit">Enregistrer</button>
-        {{ form_end(form) }}
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		<button class="btn btn-primary" type="submit">Enregistrer</button>
+		{{ form_end(form) }}
 
-        <a href="{{ path('reservation_list') }}">Retour à la liste des réservations</a>
-    </div>
+		<a href="{{ path('reservation_list') }}">Retour à la liste des réservations</a>
+	</div>
 {% endblock %}
