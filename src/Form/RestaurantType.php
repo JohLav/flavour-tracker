@@ -32,8 +32,11 @@ class RestaurantType extends AbstractType
                 'choice_label' => 'realName',
                 'autocomplete' => true
             ])
-            ->add('capacity', IntegerType::class)
+            ->add('capacity', IntegerType::class, [
+                'label' => "Capacité d'accueil"
+            ])
             ->add('category', EntityType::class, [
+                'label' => "Type de cuisine",
                 'class' => Category::class,
                 'choice_label' => 'name',
                 'autocomplete' => true
@@ -43,7 +46,7 @@ class RestaurantType extends AbstractType
                 'multiple' => true,
                 'mapped' => false,
             ])
-            ->add('Sauvegarde', SubmitType::class);
+            ->add('Enregistrer', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
