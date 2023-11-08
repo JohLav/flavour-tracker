@@ -5,16 +5,12 @@
     use App\Entity\Restaurant;
     use App\Entity\User;
     use App\Repository\ReservRepository;
-    use App\Repository\RestaurantRepository;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
     use App\Entity\Reservation;
     use App\Form\ReservationType;
-    use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Component\HttpFoundation\Request;
-    use Symfony\Component\Security\Core\Security;
-    use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
     #[Route("/reservation", name: "reservation_")]
 class ReservationController extends AbstractController
@@ -77,15 +73,15 @@ class ReservationController extends AbstractController
                         // Redirigez vers la route 'reservation_edit' avec l'ID de la première réservation sélectionnée
                         return $this->redirectToRoute('reservation_edit', ['id' => $selectedReservations[0]]);
                     } else {
-                        $this->addFlash('error', 'Une erreur s\'est produite lors de la sélection des réservations.');
+                        $this->addFlash('error', "Une erreur s'est produite lors de la réservation.");
                     }
                 } elseif ($action === 'delete') {
                     foreach ($selectedReservations as $reservationId) {
                         $reservation = $reservRepository->find($reservationId);
                         $reservRepository->remove($reservation, true);
                     }
-                    $this->addFlash('success', 'Les réservations sélectionnées ont bien été supprimées.');
-                    return $this->redirectToRoute('app_reservation_list');
+                    $this->addFlash('success', "Les réservations sélectionnées ont bien été supprimées.");
+                    return $this->redirectToRoute('reservation_list');
                 }
             }
         }
