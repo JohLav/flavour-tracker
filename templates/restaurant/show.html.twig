@@ -1,14 +1,17 @@
 {% extends 'admin/admin.base.html.twig' %}
 
 {% block content %}
-    <div class="col-9">
-        <h2>{{ restaurant.name }} - {{ restaurant.city.name }} ({{ restaurant.city.zipCode }})</h2>
-        <p>{{ restaurant.category.name }}</p>
-        <p>{{ restaurant.phone }}</p>
+    <div class="shadow-sm p-5 bg-body-tertiary rounded">
+        <h1 class="mb-5 text-center">{{ restaurant.name }}</h1>
+        <p><strong>Ville :</strong> {{ restaurant.city.name }} ({{ restaurant.city.zipCode }})</p>
+        <p><strong>Téléphone :</strong> 0{{ restaurant.phone }}</p>
+        <p><strong>Capacité d'accueil :</strong> {{ restaurant.capacity }} personnes</p>
+        <p><strong>Type de cuisine :</strong> {{ restaurant.category.name }}</p>
+
         <a href="{{ path('restaurant_edit', {'id': restaurant.id}) }}" class="btn btn-primary">Modifier</a>
 
-        {% include 'restaurant/_timeslot.html.twig' %}
-        <a class="btn btn-primary" href="{{ path('timeslot_new', {'id': restaurant.id}) }}">Ajouter un créneau
-            horaire</a>
+        {#        {% include 'restaurant/_timeslot.html.twig' %} #}
+        {#        <a class="btn btn-primary" href="{{ path('timeslot_new', {'id': restaurant.id}) }}">Ajouter un créneau #}
+        {#            horaire</a> #}
     </div>
 {% endblock %}

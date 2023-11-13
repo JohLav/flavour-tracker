@@ -8,14 +8,13 @@
     use Symfony\Bridge\Doctrine\Form\Type\EntityType;
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+    use Symfony\Component\Form\Extension\Core\Type\NumberType;
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\OptionsResolver\OptionsResolver;
     use Symfony\Component\Form\Extension\Core\Type\TextType;
-    use Symfony\Component\Form\Extension\Core\Type\TextareaType;
     use Symfony\Component\Form\Extension\Core\Type\FileType;
     use Symfony\Component\Form\Extension\Core\Type\SubmitType;
     use Vich\UploaderBundle\Form\Type\VichFileType;
-    use Symfony\Component\Form\Extension\Core\Type\TimeType;
 
 class RestaurantType extends AbstractType
 {
@@ -32,6 +31,9 @@ class RestaurantType extends AbstractType
                 'choice_label' => 'realName',
                 'autocomplete' => true
             ])
+            ->add('phone', NumberType::class, [
+                'label' => 'Téléphone',
+            ])
             ->add('capacity', IntegerType::class, [
                 'label' => "Capacité d'accueil"
             ])
@@ -45,6 +47,7 @@ class RestaurantType extends AbstractType
                 'label' => 'Photos',
                 'multiple' => true,
                 'mapped' => false,
+                'required' => false
             ])
             ->add('Enregistrer', SubmitType::class);
     }

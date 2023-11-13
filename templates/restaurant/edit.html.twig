@@ -1,16 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin.base.html.twig' %}
 
-{% block title %}Modifications du restaurant{% endblock %}
-{% block search %}{% endblock %}
+{% block title %}Modifier le restaurant{% endblock %}
 
-{% block body %}
-    <div class="d-flex justify-content-center">
-        <div class="col-6">
-            <h1>Modifier son restaurant</h1>
+{% block content %}
+    <div class="shadow-sm p-5 bg-body-tertiary rounded">
+            <h1 class="text-center">Modifier le restaurant</h1>
             {{ form_start(form) }}
-            {{ form_row(form) }}
             {{ form_end(form) }}
-        </div>
     </div>
 
 {% endblock %}

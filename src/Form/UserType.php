@@ -66,16 +66,7 @@ class UserType extends AbstractType
                         'message' => 'Champ obligatoire'
                     ])
                 ],
-            ])/*->add('email')
-        ->add('roles')
-        ->add('password')
-        ->add('firstname')
-        ->add('lastname')
-        ->add('phone')
-        ->add('isVerified')
-        ->add('favorites')
-        ->add('restaurant')*/
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
