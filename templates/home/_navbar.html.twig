@@ -5,7 +5,7 @@
 	</a>
 	<div class="d-flex gap-2 mx-auto mx-md-0 mb-3 mb-md-0">
 		{% if app.user %}
-			<a href="{{ path('favorite_index') }}">
+			<a href="{{ path('user_show', {'id': app.user.id}) }}">
 				<button class="btn btn-light" style="min-width: 125px;" type="button">Profil</button>
 			</a>
 			<a href="{{ path('login_logout') }}">
