@@ -1,12 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin.base.html.twig' %}
 
 {% block title %}Mon Compte{% endblock %}
 
-{% block body %}
+{% block content %}
     <div class="container d-sm-block justify-content-center">
-        <div class="shadow-lg p-5 m-5 bg-body-tertiary rounded">
+        <div class="shadow-sm p-5 bg-body-tertiary rounded">
             <h1 class="mb-5 text-center">Mon Compte</h1>
-            <table class="table">
+            <table class="table bg-transparent">
                 <tbody>
                 <tr>
                     <th>Email</th>
@@ -22,14 +22,14 @@
                 </tr>
                 <tr>
                     <th>Téléphone</th>
-                    <td>{{ user.phone }}</td>
+                    <td>0{{ user.phone }}</td>
                 </tr>
             </table>
-{#            <div>#}
-{#                <a href="{{ path('user_edit', {'id': user.id}) }}">#}
-{#                    <button class="btn btn-primary">Modifier</button>#}
-{#                </a>#}
-{#            </div>#}
+            <div>
+                <a href="{{ path('user_edit', {'id': user.id}) }}">
+                    <button class="btn btn-primary">Modifier</button>
+                </a>
+            </div>
             {% if is_granted('ROLE_SUPER_ADMIN') %}
             <div class="mt-2">
                 <a class="text-decoration-none" href="{{ path('user_index') }}">
