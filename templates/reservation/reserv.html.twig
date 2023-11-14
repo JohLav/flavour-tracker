@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Nouvelle réservation{% endblock %}
-
+{# templates/reservation/reserv.html.twig #}
 {% block body %}
 
     {% for message in app.flashes('success') %}
@@ -39,7 +39,6 @@
     <div class="container">
         <div class="row m-5">
             <div class="col-lg-6 col-sm-12">
-
                 <div class="card mb-5">
                     <div class="card-body">
                         <h5 class="card-title">{{ restaurant.name }}</h5>
@@ -53,7 +52,6 @@
                         <li class="list-group-item">Capacité : {{ restaurant.capacity }}</li>
                     </ul>
                 </div>
-
                 <div class="card mb-5">
                     <div class="card-body" data-bs-toggle="collapse" href="#menus" role="button" aria-expanded="false"
                          aria-controls="collapseExample">
@@ -61,7 +59,6 @@
                         <p class="card-text"></p>
                     </div>
                     <ul class="list-group list-group-flush">
-
                         <li class="list-group-item">
                             <ul>
                                 {% if restaurant.menus|length > 0 %}
@@ -76,7 +73,6 @@
                         </li>
                     </ul>
                 </div>
-
                 <div class="card mb-5">
                     <div class="card-body">
                         <h5 class="card-title">À la carte</h5>
@@ -97,7 +93,6 @@
                         </li>
                     </ul>
                 </div>
-
             </div>
 
             <div class="col-lg-6 col-sm-12">
@@ -105,6 +100,7 @@
 
                 {{ form_start(form, {'attr': {'class': 'form'}}) }}
                 {{ form_widget(form) }}
+                {{ form_end(form) }}
 
                 <div class="card">
                     <div class="card-header bg-primary">
@@ -154,7 +150,7 @@
                     </div>
                 </div>
             </div>
-            {{ form_end(form) }}
+
         </div>
     </div>
 {% endblock %}

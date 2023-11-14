@@ -93,6 +93,7 @@ class ItemController extends AbstractController
 
         return $this->renderForm('admin/item/edit.html.twig', [
             'form' => $form,
+            'item' => $item
         ]);
     }
 

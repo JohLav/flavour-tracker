@@ -2,9 +2,11 @@
 
     namespace App\Controller;
 
+    use App\Entity\Item;
     use App\Entity\Menu;
     use App\Entity\User;
     use App\Form\MenuType;
+    use App\Repository\ItemRepository;
     use App\Repository\MenuRepository;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -100,6 +102,8 @@ class MenuController extends AbstractController
     #[Route('/edit/{id}', name: 'edit')]
     public function edit(
         Request $request,
+        Item $item,
+        ItemRepository $itemRepository,
         Menu $menu,
         MenuRepository $menuRepository
     ): Response {
@@ -115,6 +119,7 @@ class MenuController extends AbstractController
 
         return $this->renderForm('admin/menu/edit.html.twig', [
             'form' => $form,
+            'item' => $item
         ]);
     }
 
