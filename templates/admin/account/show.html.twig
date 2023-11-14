@@ -3,40 +3,41 @@
 {% block title %}Mon Compte{% endblock %}
 
 {% block content %}
-{#    <div class="container d-sm-block justify-content-center">#}
-        <div class="shadow-sm p-5 bg-body-tertiary rounded">
-            <h1 class="mb-5 text-center">Mon Compte</h1>
-            <table class="table bg-transparent">
-                <tbody>
-                <tr>
-                    <th>Email</th>
-                    <td>{{ user.email }}</td>
-                </tr>
-                <tr>
-                    <th>Prénom</th>
-                    <td>{{ user.firstname }}</td>
-                </tr>
-                <tr>
-                    <th>Nom</th>
-                    <td>{{ user.lastname }}</td>
-                </tr>
-                <tr>
-                    <th>Téléphone</th>
-                    <td>0{{ user.phone }}</td>
-                </tr>
-            </table>
-            <div>
-                <a href="{{ path('user_edit', {'id': user.id}) }}">
-                    <button class="btn btn-primary">Modifier</button>
-                </a>
-            </div>
-            {% if is_granted('ROLE_SUPER_ADMIN') %}
-            <div class="mt-2">
+    {#    <div class="container d-sm-block justify-content-center"> #}
+    <div class="shadow-sm p-5 bg-body-tertiary rounded justify-content-center">
+        <h1 class="mb-5 text-center">Mon Compte</h1>
+        <table class="table ">
+            <tbody>
+            <tr>
+                <th scope="row">Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Prénom</th>
+                <td>{{ user.firstname }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Nom</th>
+                <td>{{ user.lastname }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Téléphone</th>
+                <td>0{{ user.phone }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <a href="{{ path('user_edit', {'id': user.id}) }}">
+                <button class="btn btn-primary rounded mt-2">Modifier</button>
+            </a>
+        </div>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <div">
                 <a class="text-decoration-none" href="{{ path('user_index') }}">
                     Retour à la liste
                 </a>
             </div>
-            {% endif %}
-        </div>
-{#    </div>#}
+        {% endif %}
+    </div>
+    {#    </div> #}
 {% endblock %}

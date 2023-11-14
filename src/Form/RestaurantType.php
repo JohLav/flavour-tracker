@@ -5,10 +5,12 @@
     use App\Entity\Category;
     use App\Entity\City;
     use App\Entity\Restaurant;
+    use Doctrine\ORM\EntityRepository;
+    use Doctrine\ORM\QueryBuilder;
     use Symfony\Bridge\Doctrine\Form\Type\EntityType;
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-    use Symfony\Component\Form\Extension\Core\Type\NumberType;
+    use Symfony\Component\Form\Extension\Core\Type\TelType;
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\OptionsResolver\OptionsResolver;
     use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -29,9 +31,13 @@ class RestaurantType extends AbstractType
                 'label' => 'Ville',
                 'class' => City::class,
                 'choice_label' => 'realName',
-                'autocomplete' => true
+                'autocomplete' => true,
+                'query_builder' => function (EntityRepository $er): QueryBuilder {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.city', 'ASC');
+                },
             ])
-            ->add('phone', NumberType::class, [
+            ->add('phone', TelType::class, [
                 'label' => 'Téléphone',
             ])
             ->add('capacity', IntegerType::class, [

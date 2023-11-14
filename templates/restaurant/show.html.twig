@@ -8,7 +8,7 @@
         <p><strong>Capacité d'accueil :</strong> {{ restaurant.capacity }} personnes</p>
         <p><strong>Type de cuisine :</strong> {{ restaurant.category.name }}</p>
 
-        <a href="{{ path('restaurant_edit', {'id': restaurant.id}) }}" class="btn btn-primary">Modifier</a>
+        <a href="{{ path('restaurant_edit', {'id': restaurant.id}) }}" class="btn btn-primary mt-3">Modifier</a>
 
         {#        {% include 'restaurant/_timeslot.html.twig' %} #}
         {#        <a class="btn btn-primary" href="{{ path('timeslot_new', {'id': restaurant.id}) }}">Ajouter un créneau #}

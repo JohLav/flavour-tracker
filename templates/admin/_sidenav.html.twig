@@ -5,66 +5,64 @@
     <hr>
     <ul class="nav nav-pills flex-column">
         {% if is_granted('ROLE_OWNER') and app.user.restaurant is not empty %}
-            <li class="mt-1 ms-3">
-                <a class="nav-item link-dark text-decoration-none"
+            <li class="mt-1">
+                <a class="nav-link text-decoration-none {{ app.request.attributes.get('_route') == 'restaurant_show' ? 'active' : 'link-dark' }}"
                    href="{{ path('restaurant_show', {'id': app.user.restaurant.id}) }}">
                     <i class="bi bi-info-circle me-2" width="16" height="16"></i>Mon restaurant</a>
             </li>
-            <li class="nav-item mt-1">
-                <a class="nav-link active" href="{{ path('menus_list') }}" aria-current="page">
+            <li class="mt-1">
+                <a class="nav-link text-decoration-none {{ app.request.attributes.get('_route') == 'menus_list' ? 'active' : 'link-dark' }}"
+                   href="{{ path('menus_list') }}">
                     <i class="bi bi-card-list pe-none me-2" width="16" height="16"></i>Menus
                 </a>
             </li>
-            <li class="mt-1 ms-3">
-                <a class="nav-item link-dark text-decoration-none" href="{{ path('menus_new') }}">
+            <li class="mt-1">
+                <a class="nav-link text-decoration-none {{ app.request.attributes.get('_route') == 'menus_new' ? 'active' : 'link-dark' }}"
+                   href="{{ path('menus_new') }}">
                     <i class="bi bi-file-plus pe-none me-2" width="16" height="16"></i>Ajouter</a>
             </li>
-            <li class="mt-4 ms-3">
-                <a class="nav-item link-dark text-decoration-none" href="{{ path('items_list') }}">
+            <li class="mt-1">
+                <a class="nav-link text-decoration-none {{ app.request.attributes.get('_route') == 'items_list' ? 'active' : 'link-dark' }}"
+                   href="{{ path('items_list') }}">
                     <i class="bi bi-files pe-none me-2" width="16" height="16"></i>Éléments
                 </a>
             </li>
-            <li class="mt-1 ms-3">
-                <a class="nav-item link-dark text-decoration-none" href="{{ path('items_new') }}">
+            <li class="mt-1">
+                <a class="nav-link text-decoration-none {{ app.request.attributes.get('_route') == 'items_new' ? 'active' : 'link-dark' }}"
+                   href="{{ path('items_new') }}">
                     <i class="bi bi-file-plus pe-none me-2" width="16" height="16"></i>Ajouter</a>
             </li>
         {% elseif is_granted('ROLE_OWNER') and app.user.restaurant is empty %}
             <li class="mt-1 ms-3 align-items-center justify-content-center">
                 <a class="nav-item link-dark text-decoration-none" href="{{ path('restaurant_new') }}">
-                    <i class="bi bi-info-circle me-2" width="16" height="16"></i>
-                    Nouveau restaurant
+                    <i class="bi bi-info-circle me-2" width="16" height="16"></i>Nouveau restaurant
                 </a>
             </li>
         {% endif %}
-        <li class="mt-4 ms-3">
-            <a class="nav-item link-dark text-decoration-none" href="{{ path('user_show', {'id': app.user.id}) }}">
-                <i class="bi bi-person-circle me-2" width="16" height="16">
-                </i>
-                Compte
+        <li class="mt-1">
+            <a class="nav-link text-decoration-none {{ app.request.attributes.get('_route') == 'user_show' ? 'active' : 'link-dark' }}"
+               href="{{ path('user_show', {'id': app.user.id}) }}">
+                <i class="bi bi-person-circle me-2" width="16" height="16"></i>Compte
             </a>
         </li>
         {% if is_granted('ROLE_USER') and not is_granted('ROLE_OWNER') %}
-            <li class="mt-1 ms-3">
-                <a class="nav-item link-dark text-decoration-none" href="{{ path('favorite_index') }}">
-                    <i class="bi bi-heart me-2" width="16" height="16">
-                    </i>
-                    Favoris
+            <li class="mt-1">
+                <a class="nav-link text-decoration-none {{ app.request.attributes.get('_route') == 'favorite_index' ? 'active' : 'link-dark' }}"
+                   href="{{ path('favorite_index') }}">
+                    <i class="bi bi-heart me-2" width="16" height="16"></i>Favoris
                 </a>
             </li>
-            <li class="my-1 ms-3">
-                <a class="nav-item link-dark text-decoration-none"
+            <li class="my-1">
+                <a class="nav-link text-decoration-none {{ app.request.attributes.get('_route') == 'reservation_list' ? 'active' : 'link-dark' }}"
                    href="{{ path('reservation_list') }}">
-                    <i class="bi bi-calendar-event me-2" width="16" height="16">
-                    </i>
-                    Réservations
+                    <i class="bi bi-calendar-event me-2" width="16" height="16"></i>Réservations
                 </a>
             </li>
 
-            <li class="mt-1 ms-3">
-                <a class="nav-item link-dark text-decoration-none" href="#">
-                    <i class="bi bi-gear me-2" width="16" height="16">
-                    </i>
-                    Paramètres</a>
+            <li class="mt-1">
+                <a class="nav-link text-decoration-none {{ app.request.attributes.get('_route') == '#' ? 'active' : 'link-dark' }}"
+                   href="#">
+                    <i class="bi bi-gear me-2" width="16" height="16"></i>Paramètres</a>
             </li>
         {% endif %}
     </ul>

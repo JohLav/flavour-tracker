@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="shadow-sm p-5 bg-body-tertiary rounded">
-        <h1 class="text-center">Favoris</h1>
+        <h1 class="text-center mb-5">Favoris</h1>
         {% if app.user.favorites is not empty %}
             {% for restaurant in app.user.favorites %}
                 {% include 'restaurant/_restaurant.html.twig' %}
