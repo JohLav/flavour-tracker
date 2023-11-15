@@ -26,6 +26,32 @@ class RestaurantController extends AbstractController
         return $this->render('restaurant/index.html.twig');
     }
 
+    private function handleImageUpload(
+        array $files,
+        Restaurant $restaurant,
+        SluggerInterface $slugger,
+        ImageRepository $imageRepository
+    ): void {
+        foreach ($files as $file) {
+            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $safeFilename = $slugger->slug($originalFilename);
+            $newFilename = $safeFilename . '_' . uniqid() . '_' . $file->guessExtension();
+
+            try {
+                $file->move(
+                    $this->getParameter('restaurant_directory'),
+                    $newFilename
+                );
+            } catch (FileException $e) {
+            }
+
+            $image = new Image();
+            $image->setUrl('uploads/restaurant/' . $newFilename);
+            $imageRepository->save($image);
+            $restaurant->addImage($image);
+        }
+    }
+
     #[Route(path: '/new', name: 'new')]
     public function new(
         Request $request,
@@ -42,23 +68,7 @@ class RestaurantController extends AbstractController
             $restaurant->setUser($this->getUser());
 
             if ($files) {
-                foreach ($files as $file) {
-                    $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                    $safeFilename = $slugger->slug($originalFilename);
-                    $newFilename = $safeFilename . '_' . uniqid() . '_' . $file->guessExtension();
-
-                    try {
-                        $file->move(
-                            $this->getParameter('restaurant_directory'),
-                            $newFilename
-                        );
-                    } catch (FileException $e) {
-                    }
-                    $image = new Image();
-                    $image->setUrl('uploads/restaurant/' . $newFilename);
-                    $imageRepository->save($image);
-                    $restaurant->addImage($image);
-                }
+                $this->handleImageUpload($files, $restaurant, $slugger, $imageRepository);
             }
             $restaurantRepository->save($restaurant, true);
 
@@ -87,23 +97,7 @@ class RestaurantController extends AbstractController
             $restaurant->setUser($this->getUser());
 
             if ($files) {
-                foreach ($files as $file) {
-                    $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                    $safeFilename = $slugger->slug($originalFilename);
-                    $newFilename = $safeFilename . '_' . uniqid() . '_' . $file->guessExtension();
-
-                    try {
-                        $file->move(
-                            $this->getParameter('restaurant_directory'),
-                            $newFilename
-                        );
-                    } catch (FileException $e) {
-                    }
-                    $image = new Image();
-                    $image->setUrl('uploads/restaurant/' . $newFilename);
-                    $imageRepository->save($image);
-                    $restaurant->addImage($image);
-                }
+                $this->handleImageUpload($files, $restaurant, $slugger, $imageRepository);
             }
             $restaurantRepository->save($restaurant, true);
 
