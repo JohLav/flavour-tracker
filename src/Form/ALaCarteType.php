@@ -39,7 +39,7 @@ class ALaCarteType extends AbstractType
             ->add('price', NumberType::class, [
                 'label' => 'Prix',
                 'attr' => [
-                    'placeholder' => '12'
+                    'placeholder' => '12€'
                 ],
                 'required' => true,
                 'help' => "Saisir le prix de l'élément à la carte.",

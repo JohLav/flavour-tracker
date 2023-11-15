@@ -3,13 +3,9 @@
     namespace App\Controller;
 
     use App\Entity\Item;
-    use App\Entity\Menu;
     use App\Entity\User;
     use App\Form\ALaCarteType;
-    use App\Form\MenuType;
     use App\Repository\ItemRepository;
-    use App\Repository\MenuRepository;
-    use App\Repository\RestaurantRepository;
     use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Request;
@@ -86,7 +82,7 @@ class ItemController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $itemRepository->save($item, true);
-            $this->addFlash('success', "L'élément a bien été mis à jour.");
+            $this->addFlash('success', "L'élément a bien été modifié.");
 
             return $this->redirectToRoute('items_list');
         }
