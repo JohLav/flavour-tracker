@@ -31,7 +31,7 @@ class LoginController extends AbstractController
      * @throws Exception
      */
     #[Route('/logout', name: 'logout', methods: ['GET'])]
-    public function logout()
+    public function logout(): Response
     {
         throw new Exception("Don't forget to activate logout in security.yaml");
     }

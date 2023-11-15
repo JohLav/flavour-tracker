@@ -6,10 +6,10 @@
 
 class LoginControllerTest extends WebTestCase
 {
-    public function testShowLogin()
+    public function testShowLogin(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/login/');
+        $client->request('GET', '/login/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
