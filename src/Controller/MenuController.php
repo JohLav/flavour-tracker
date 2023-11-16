@@ -112,7 +112,7 @@ class MenuController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $menuRepository->save($menu, true);
-            $this->addFlash('success', 'Le menu a bien été ajouté.');
+            $this->addFlash('success', 'Le menu a bien été modifié.');
 
             return $this->redirectToRoute('menus_list');
         }

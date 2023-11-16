@@ -28,10 +28,8 @@ class HomeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            $restaurants = $repository->findFiltered($data);
-
             return $this->render('search/search.html.twig', [
-                'restaurants' => $restaurants ?? $repository->findAll(),
+                'restaurants' => $repository->findFiltered($data),
                 'form' => $searchForm->createView(),
             ]);
         }
@@ -40,4 +38,3 @@ class HomeController extends AbstractController
         ]);
     }
 }
-

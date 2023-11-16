@@ -11,6 +11,7 @@
 class UserFixtures extends Fixture
 {
     private UserPasswordHasherInterface $passwordHasher;
+    private \Faker\Generator $faker;
 
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {

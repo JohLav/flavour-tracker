@@ -17,13 +17,11 @@
     #[Route("/reservation", name: "reservation_")]
 class ReservationController extends AbstractController
 {
-   public function __construct(
-       private Security $security,
-       private AuthorizationCheckerInterface $authorizationChecker)
-   {
-       $this->security = $security;
-       $this->authorizationChecker = $authorizationChecker;
-   }
+    public function __construct(
+        private Security $security,
+    ) {
+        $this->security = $security;
+    }
 
     #[Route('/new/{id}', name: 'new', methods: ["GET", "POST"])]
     public function new(
@@ -79,12 +77,8 @@ class ReservationController extends AbstractController
                 $action = $request->request->get('action');
 
                 if ($action === 'edit') {
-                    if (is_scalar($selectedReservations[0])) {
-                        // Redirigez vers la route 'reservation_edit' avec l'ID de la première réservation sélectionnée
-                        return $this->redirectToRoute('reservation_edit', ['id' => $selectedReservations[0]]);
-                    } else {
-                        $this->addFlash('error', "Une erreur s'est produite lors de la réservation.");
-                    }
+                    // Redirigez vers la route 'reservation_edit' avec l'ID de la première réservation sélectionnée
+                    return $this->redirectToRoute('reservation_edit', ['id' => $selectedReservations[0]]);
                 } elseif ($action === 'delete') {
                     foreach ($selectedReservations as $reservationId) {
                         $reservation = $reservRepository->find($reservationId);
@@ -92,16 +86,20 @@ class ReservationController extends AbstractController
                     }
                     $this->addFlash('success', "Les réservations sélectionnées ont bien été supprimées.");
                     return $this->redirectToRoute('reservation_list');
+                } else {
+                    $this->addFlash('error', "Aucune réservation sélectionnée.");
                 }
             }
         }
+
 
         return $this->render('reserv/index.html.twig', [
             'reservations' => $reservations,
         ]);
     }
 
-    #[Route('/edit/{id}', name: 'edit', methods: ["GET", "POST"])]
+    #[
+        Route('/edit/{id}', name: 'edit', methods: ["GET", "POST"])]
     public function editReservation(
         Request $request,
         Reservation $reservation,

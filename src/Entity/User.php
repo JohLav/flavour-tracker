@@ -47,7 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     #[Assert\NotBlank]
-    private ?int $phone = null;
+    private ?string $phone = null;
 
     #[ORM\ManyToMany(targetEntity: Restaurant::class, inversedBy: 'users')]
     private Collection $favorites;
@@ -161,12 +161,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPhone(): ?int
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    public function setPhone(int $phone): self
+    public function setPhone(string $phone): self
     {
         $this->phone = $phone;
 
