@@ -17,13 +17,13 @@
     #[Route("/reservation", name: "reservation_")]
 class ReservationController extends AbstractController
 {
-   public function __construct(
-       private Security $security,
-       private AuthorizationCheckerInterface $authorizationChecker)
-   {
-       $this->security = $security;
-       $this->authorizationChecker = $authorizationChecker;
-   }
+    public function __construct(
+        private Security $security,
+        private AuthorizationCheckerInterface $authorizationChecker
+    ) {
+        $this->security = $security;
+        $this->authorizationChecker = $authorizationChecker;
+    }
 
     #[Route('/new/{id}', name: 'new', methods: ["GET", "POST"])]
     public function new(
