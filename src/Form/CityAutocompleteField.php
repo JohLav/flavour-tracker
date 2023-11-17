@@ -4,10 +4,13 @@
 
     use App\Entity\City;
     use App\Repository\CityRepository;
+    use Doctrine\ORM\EntityRepository;
+    use Doctrine\ORM\QueryBuilder;
     use Symfony\Component\Form\AbstractType;
+    use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\OptionsResolver\OptionsResolver;
     use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
-    use Symfony\UX\Autocomplete\Form\ParentEntityAutocompleteType;
+    use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 
     #[AsEntityAutocompleteField]
 class CityAutocompleteField extends AbstractType
@@ -24,8 +27,13 @@ class CityAutocompleteField extends AbstractType
 //                'name',
 //                'zipCode'
 //            ],
-            'query_builder' => function (CityRepository $cityRepository) {
-                return $cityRepository->createQueryBuilder('city');
+            'query_builder' =>
+                function (CityRepository $cityRepository) {
+                    return $cityRepository->createQueryBuilder('city');
+                },
+            function (EntityRepository $er): QueryBuilder {
+                return $er->createQueryBuilder('u')
+                    ->orderBy('u.city', 'ASC');
             },
             //'security' => 'ROLE_SOMETHING',
         ]);
@@ -33,6 +41,6 @@ class CityAutocompleteField extends AbstractType
 
     public function getParent(): string
     {
-        return ParentEntityAutocompleteType::class;
+        return BaseEntityAutocompleteType::class;
     }
 }

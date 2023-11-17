@@ -27,3 +27,14 @@
         </div>
     </div>
 {% endblock %}
+
+{% block script %}
+    document.addEventListener('DOMContentLoaded', function() {
+        new TomSelect('.tom-select', {
+            valueField: 'value',
+            labelField: 'name',
+            searchField: 'name',
+            create: true,
+        });
+    });
+{% endblock %}
