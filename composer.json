@@ -94,7 +94,10 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "scripts": {
+            "phpstan": "vendor/bin/phpstan -c phpstan.neon"
+        }
     },
     "conflict": {
         "symfony/symfony": "*"
