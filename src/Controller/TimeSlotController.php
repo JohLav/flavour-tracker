@@ -6,7 +6,7 @@
     use App\Entity\TimeSlot;
     use App\Form\TimeSlotType;
     use App\Repository\TimeSlotRepository;
-    use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+    use Symfony\Component\Security\Http\Attribute\IsGranted;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;

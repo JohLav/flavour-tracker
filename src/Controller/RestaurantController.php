@@ -5,7 +5,7 @@
     use App\Entity\Image;
     use App\Form\RestaurantType;
     use App\Repository\ImageRepository;
-    use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+    use Symfony\Component\Security\Http\Attribute\IsGranted;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\File\Exception\FileException;
     use Symfony\Component\HttpFoundation\Request;
