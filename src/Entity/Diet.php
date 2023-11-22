@@ -18,7 +18,7 @@ class Diet
     #[ORM\Column(length: 100)]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: Menu::class, inversedBy: 'diets')]
+    #[ORM\ManyToMany(targetEntity: Menu::class, mappedBy: 'diets')]
     private Collection $menus;
 
     public function __construct()
@@ -51,18 +51,21 @@ class Diet
         return $this->menus;
     }
 
-    public function addMenu(Menu $menu): self
+    public function addMenu(Menu $menu): static
     {
         if (!$this->menus->contains($menu)) {
             $this->menus->add($menu);
+            $menu->addDiet($this);
         }
 
         return $this;
     }
 
-    public function removeMenu(Menu $menu): self
+    public function removeMenu(Menu $menu): static
     {
-        $this->menus->removeElement($menu);
+        if ($this->menus->removeElement($menu)) {
+            $menu->removeDiet($this);
+        }
 
         return $this;
     }

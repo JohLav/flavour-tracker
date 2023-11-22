@@ -16,13 +16,9 @@ class HomeController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(Request $request, RestaurantRepository $restaurantRepository): Response
     {
-        $form = $this->createForm(HomeSearchType::class, [
-            'items' => $request->request->all('home_search')['items'] ?? []
-        ]);
+        $form = $this->createForm(HomeSearchType::class);
 
-        $searchForm = $this->createForm(SearchType::class, [
-            'items' => $request->request->all('search')['items'] ?? []
-        ]);
+        $searchForm = $this->createForm(SearchType::class);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

@@ -45,6 +45,7 @@ security:
          - { path: ^/register, roles: PUBLIC_ACCESS }
          - { path: ^/search, roles: PUBLIC_ACCESS }
          - { path: ^/$, roles: PUBLIC_ACCESS }
+         - { path: ^/autocomplete/*, roles: PUBLIC_ACCESS }
          - { path: ^/*, roles: ROLE_USER }
 
 when@test:

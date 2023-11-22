@@ -18,14 +18,14 @@ class SearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('item', ItemAutocompleteField::class, [
-                'attr' => [
-                    'placeholder' => 'PLATS'
-                ],
-                'row_attr' => [
-                    'class' => 'm-1',
-                ]
-            ])
+//            ->add('item', ItemAutocompleteField::class, [
+//                'attr' => [
+//                    'placeholder' => 'PLATS'
+//                ],
+//                'row_attr' => [
+//                    'class' => 'm-1',
+//                ]
+//            ])
             ->add('city', CityAutocompleteField::class, [
                 'required' => false,
                 'label' => false,

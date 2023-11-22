@@ -66,22 +66,20 @@ class ALaCarteType extends AbstractType
                 'required' => true,
                 'help' => "Préciser si l'élément est également accessible 'à la carte' en plus du menu.",
             ])
-
-//            ->add('menus', EntityType::class, [
-//                'label' => 'Menus',
-//                'class' => Menu::class,
-//                'choice_label' => 'name',
-//                'multiple' => true,
-//                'attr' => [
-//                    'placeholder' => 'Menu du midi'
-//                ],
-//                'row_attr' => [
-//                    'class' => "form-floating",
-//                ],
-//                'required' => true,
-//                'help' => 'Sélectionner le menu relié à cet élément.',
-//            ])
-
+            ->add('menus', EntityType::class, [
+                'label' => 'Menus',
+                'class' => Menu::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'attr' => [
+                    'placeholder' => 'Menu du midi'
+                ],
+                'row_attr' => [
+                    'class' => "form-floating",
+                ],
+                'required' => true,
+                'help' => 'Sélectionner le menu relié à cet élément.',
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Ajouter',
             ]);

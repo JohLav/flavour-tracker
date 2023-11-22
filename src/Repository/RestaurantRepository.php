@@ -2,6 +2,7 @@
 
     namespace App\Repository;
 
+    use App\Entity\Item;
     use App\Entity\Restaurant;
     use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
     use Doctrine\Persistence\ManagerRegistry;
@@ -65,12 +66,13 @@ class RestaurantRepository extends ServiceEntityRepository
             ->leftJoin('menus.diets', 'diets');
 
         if (!empty($filters['items'])) {
-            foreach ($filters['items'] as $i => $name) {
+            /** @var Item $item */
+            foreach ($filters['items'] as $i => $item) {
                 $qb
                     ->orWhere("items.name LIKE :item{$i}")
-                    ->setParameter("item{$i}", "%{$name}%")
+                    ->setParameter("item{$i}", "%{$item->getName()}%")
                     ->orWhere("menus.name LIKE :menu{$i}")
-                    ->setParameter("menu{$i}", "%{$name}%");
+                    ->setParameter("menu{$i}", "%{$item->getName()}%");
             }
         }
 
