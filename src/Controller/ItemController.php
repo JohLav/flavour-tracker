@@ -25,8 +25,8 @@ class ItemController extends AbstractController
      * Items list
      */
     #[Route('/list', name: 'list')]
-    public function itemsList(
-    ): Response {
+    public function itemsList(): Response
+    {
         /** @var User $connectedUser */
         $connectedUser = $this->getUser();
         $restaurant = $connectedUser->getRestaurant();
