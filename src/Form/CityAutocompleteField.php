@@ -21,8 +21,7 @@ class CityAutocompleteField extends AbstractType
             'placeholder' => 'Ville',
             'label' => false,
             'choice_label' => function (City $city) {
-                return $city->getRealName();
-//                return $city->getRealName() . ' (' . $city->getZipCode() . ')';
+                return $city->getRealName() . ' (' . $city->getZipCode() . ')';
             },
             'query_builder' =>
                 function (CityRepository $cityRepository) {

@@ -102,7 +102,6 @@ class MenuController extends AbstractController
     #[Route('/edit/{id}', name: 'edit')]
     public function edit(
         Request $request,
-        Item $item,
         ItemRepository $itemRepository,
         Menu $menu,
         MenuRepository $menuRepository
@@ -119,7 +118,7 @@ class MenuController extends AbstractController
 
         return $this->renderForm('admin/menu/edit.html.twig', [
             'form' => $form,
-            'item' => $item
+            'menu' => $menu
         ]);
     }
 

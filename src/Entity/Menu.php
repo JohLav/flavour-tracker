@@ -25,19 +25,19 @@ class Menu
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
     private ?string $reduction = null;
 
-    #[ORM\ManyToMany(targetEntity: Diet::class, mappedBy: 'menus')]
-    private Collection $diets;
-
-    #[ORM\ManyToMany(targetEntity: Item::class, mappedBy: 'menus')]
-    private Collection $items;
-
     #[ORM\ManyToOne(inversedBy: 'menus')]
     private ?Restaurant $restaurant = null;
 
+    #[ORM\ManyToMany(targetEntity: Item::class, inversedBy: 'menus', cascade: ['persist'])]
+    private Collection $items;
+
+    #[ORM\ManyToMany(targetEntity: Diet::class, inversedBy: 'menus')]
+    private Collection $diets;
+
     public function __construct()
     {
-        $this->diets = new ArrayCollection();
         $this->items = new ArrayCollection();
+        $this->diets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -94,33 +94,6 @@ class Menu
     }
 
     /**
-     * @return Collection<int, Diet>
-     */
-    public function getDiets(): Collection
-    {
-        return $this->diets;
-    }
-
-    public function addDiet(Diet $diet): self
-    {
-        if (!$this->diets->contains($diet)) {
-            $this->diets->add($diet);
-            $diet->addMenu($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDiet(Diet $diet): self
-    {
-        if ($this->diets->removeElement($diet)) {
-            $diet->removeMenu($this);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Item>
      */
     public function getItems(): Collection
@@ -128,21 +101,42 @@ class Menu
         return $this->items;
     }
 
-    public function addItem(Item $item): self
+    public function addItem(Item $item): static
     {
         if (!$this->items->contains($item)) {
             $this->items->add($item);
-            $item->addMenu($this);
         }
 
         return $this;
     }
 
-    public function removeItem(Item $item): self
+    public function removeItem(Item $item): static
     {
-        if ($this->items->removeElement($item)) {
-            $item->removeMenu($this);
+        $this->items->removeElement($item);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Diet>
+     */
+    public function getDiets(): Collection
+    {
+        return $this->diets;
+    }
+
+    public function addDiet(Diet $diet): static
+    {
+        if (!$this->diets->contains($diet)) {
+            $this->diets->add($diet);
         }
+
+        return $this;
+    }
+
+    public function removeDiet(Diet $diet): static
+    {
+        $this->diets->removeElement($diet);
 
         return $this;
     }

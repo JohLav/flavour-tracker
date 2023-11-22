@@ -20,12 +20,13 @@ class ItemAutocompleteField extends AbstractType
             'searchable_fields' => ['name'],
             'multiple' => true,
             'label' => false,
-            'choice_label' => function (Item $item) {
-                return $item->getName();
-            },
-            'query_builder' => function (ItemRepository $itemRepository) {
-                return $itemRepository->createQueryBuilder('name');
-            }
+            'choice_label' => 'name'
+//            'choice_label' => function (Item $item) {
+//                return $item->getName();
+//            },
+//            'query_builder' => function (ItemRepository $itemRepository) {
+//                return $itemRepository->createQueryBuilder('name');
+//            }
         ]);
     }
 

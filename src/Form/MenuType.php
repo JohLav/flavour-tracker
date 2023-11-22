@@ -64,7 +64,7 @@ class MenuType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
                 'autocomplete' => true,
-                'required' => true,
+                'required' => false,
                 'help' => 'Sélectionner les plats qui composent votre menu.',
             ])
             ->add('submit', SubmitType::class, [
