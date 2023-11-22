@@ -41,7 +41,7 @@ class TimeSlotController extends AbstractController
             return $this->redirectToRoute('restaurant_show', ['id' => $restaurant->getId()]);
         }
 
-        return $this->renderForm('time_slot/new.html.twig', [
+        return $this->render('time_slot/new.html.twig', [
             'time_slot' => $timeSlot,
             'form' => $form,
         ]);
@@ -71,7 +71,7 @@ class TimeSlotController extends AbstractController
             return $this->redirectToRoute('restaurant_show', ['id' => $restaurant->getId()]);
         }
 
-        return $this->renderForm('time_slot/edit.html.twig', [
+        return $this->render('time_slot/edit.html.twig', [
             'time_slot' => $timeSlot,
             'form' => $form,
         ]);

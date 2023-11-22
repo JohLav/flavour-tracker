@@ -22,9 +22,10 @@ class SearchController extends AbstractController
     ): Response {
         // TODO : Ajouter autres tables concernées par le tri (ex. diet, category, etc.)
 //        $timeSlot = null;
-        $form = $this->createForm(SearchType::class, [
-            'items' => $request->request->all('search')['items'] ?? []
-        ]);
+        $form = $this->createForm(SearchType::class);
+//        $form = $this->createForm(SearchType::class, [
+//            'items' => $request->request->all('search')['items'] ?? []
+//        ]);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

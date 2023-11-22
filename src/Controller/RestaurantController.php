@@ -74,7 +74,7 @@ class RestaurantController extends AbstractController
             return $this->redirectToRoute('restaurant_show', ['id' => $restaurant->getId()]);
         }
 
-        return $this->renderForm('restaurant/new.html.twig', [
+        return $this->render('restaurant/new.html.twig', [
             'restaurant' => $restaurant,
             'form' => $form,
         ]);
@@ -103,7 +103,7 @@ class RestaurantController extends AbstractController
             return $this->redirectToRoute('restaurant_show', ['id' => $restaurant->getId()]);
         }
 
-        return $this->renderForm('restaurant/edit.html.twig', [
+        return $this->render('restaurant/edit.html.twig', [
             'restaurant' => $restaurant,
             'form' => $form,
         ]);

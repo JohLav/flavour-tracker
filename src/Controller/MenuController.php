@@ -91,7 +91,7 @@ class MenuController extends AbstractController
             return $this->redirectToRoute('menus_list');
         }
 
-        return $this->renderForm('admin/menu/new.html.twig', [
+        return $this->render('admin/menu/new.html.twig', [
             'form' => $form,
         ]);
     }
@@ -116,7 +116,7 @@ class MenuController extends AbstractController
             return $this->redirectToRoute('menus_list');
         }
 
-        return $this->renderForm('admin/menu/edit.html.twig', [
+        return $this->render('admin/menu/edit.html.twig', [
             'form' => $form,
             'menu' => $menu
         ]);
