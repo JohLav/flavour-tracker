@@ -6,6 +6,7 @@
     use App\Entity\User;
     use App\Form\ALaCarteType;
     use App\Repository\ItemRepository;
+    use App\Repository\MenuRepository;
     use Symfony\Component\Security\Http\Attribute\IsGranted;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Request;
@@ -55,6 +56,10 @@ class ItemController extends AbstractController
         $restaurant = $connectedUser->getRestaurant();
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $menus = $item->getMenus();
+            foreach ($menus as $menu) {
+                $menu->addItem($item);
+            }
             $item->setRestaurant($restaurant);
             $itemRepository->save($item, true);
             $this->addFlash('success', "L'élément a bien été ajouté.");

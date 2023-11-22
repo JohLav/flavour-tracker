@@ -31,12 +31,12 @@ class Item
     #[ORM\Column]
     private ?bool $visible = null;
 
-    #[ORM\ManyToMany(targetEntity: Menu::class, inversedBy: 'items')]
-    private Collection $menus;
-
     #[ORM\ManyToOne(inversedBy: 'items')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Restaurant $restaurant = null;
+
+    #[ORM\ManyToMany(targetEntity: Menu::class, mappedBy: 'items', cascade: ['persist'])]
+    private Collection $menus;
 
     public function __construct()
     {
@@ -110,30 +110,6 @@ class Item
         return $this;
     }
 
-    /**
-     * @return Collection<int, Menu>
-     */
-    public function getMenus(): Collection
-    {
-        return $this->menus;
-    }
-
-    public function addMenu(Menu $menu): self
-    {
-        if (!$this->menus->contains($menu)) {
-            $this->menus->add($menu);
-        }
-
-        return $this;
-    }
-
-    public function removeMenu(Menu $menu): self
-    {
-        $this->menus->removeElement($menu);
-
-        return $this;
-    }
-
     public function getRestaurant(): ?Restaurant
     {
         return $this->restaurant;
@@ -142,6 +118,33 @@ class Item
     public function setRestaurant(?Restaurant $restaurant): self
     {
         $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Menu>
+     */
+    public function getMenus(): Collection
+    {
+        return $this->menus;
+    }
+
+    public function addMenu(Menu $menu): static
+    {
+        if (!$this->menus->contains($menu)) {
+            $this->menus->add($menu);
+            $menu->addItem($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMenu(Menu $menu): static
+    {
+        if ($this->menus->removeElement($menu)) {
+            $menu->removeItem($this);
+        }
 
         return $this;
     }

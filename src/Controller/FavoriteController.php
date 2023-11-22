@@ -9,6 +9,7 @@
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
+    use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
     #[Route("/favorite", name: "favorite_")]
 class FavoriteController extends AbstractController
@@ -37,14 +38,19 @@ class FavoriteController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'delete')]
-    public function delete(Restaurant $restaurant, UserRepository $userRepository): Response
+    public function delete(Request $request, Restaurant $restaurant, UserRepository $userRepository): Response
     {
         /** @var User $user */
         $user = $this->getUser();
         $user->removeFavorites($restaurant);
 
         $userRepository->save($user, true);
+        $route = $request->headers->get('referer') === $this->generateUrl(
+            'favorite_index',
+            [],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        ) ? 'favorite_index' : 'search_index';
 
-        return $this->redirectToRoute('search_index');
+        return $this->redirectToRoute($route);
     }
 }
