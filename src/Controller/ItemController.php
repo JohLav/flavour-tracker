@@ -25,9 +25,8 @@ class ItemController extends AbstractController
      * Items list
      */
     #[Route('/list', name: 'list')]
-    public function itemsList(
-        ItemRepository $itemRepository,
-    ): Response {
+    public function itemsList(): Response
+    {
         /** @var User $connectedUser */
         $connectedUser = $this->getUser();
         $restaurant = $connectedUser->getRestaurant();
@@ -63,7 +62,7 @@ class ItemController extends AbstractController
             return $this->redirectToRoute('items_list');
         }
 
-        return $this->renderForm('admin/item/new.html.twig', [
+        return $this->render('admin/item/new.html.twig', [
             'form' => $form,
         ]);
     }
@@ -87,7 +86,7 @@ class ItemController extends AbstractController
             return $this->redirectToRoute('items_list');
         }
 
-        return $this->renderForm('admin/item/edit.html.twig', [
+        return $this->render('admin/item/edit.html.twig', [
             'form' => $form,
             'item' => $item
         ]);

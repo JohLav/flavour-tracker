@@ -2,32 +2,30 @@
 
     namespace App\Form;
 
-    use App\Entity\City;
-    use App\Repository\CityRepository;
+    use App\Entity\Item;
+    use App\Repository\ItemRepository;
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\OptionsResolver\OptionsResolver;
     use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
     use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 
     #[AsEntityAutocompleteField]
-class CityAutocompleteField extends AbstractType
+class ItemAutocompleteField extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'class' => City::class,
+            'class' => Item::class,
             'required' => false,
             'searchable_fields' => ['name'],
-            'placeholder' => 'Ville',
+            'multiple' => true,
             'label' => false,
-            'choice_label' => function (City $city) {
-                return $city->getRealName();
-//                return $city->getRealName() . ' (' . $city->getZipCode() . ')';
+            'choice_label' => function (Item $item) {
+                return $item->getName();
             },
-            'query_builder' =>
-                function (CityRepository $cityRepository) {
-                    return $cityRepository->createQueryBuilder('city');
-                },
+            'query_builder' => function (ItemRepository $itemRepository) {
+                return $itemRepository->createQueryBuilder('name');
+            }
         ]);
     }
 

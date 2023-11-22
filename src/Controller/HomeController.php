@@ -14,7 +14,7 @@
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(Request $request, RestaurantRepository $repository): Response
+    public function index(Request $request, RestaurantRepository $restaurantRepository): Response
     {
         $form = $this->createForm(HomeSearchType::class, [
             'items' => $request->request->all('home_search')['items'] ?? []
@@ -29,7 +29,7 @@ class HomeController extends AbstractController
             $data = $form->getData();
 
             return $this->render('search/search.html.twig', [
-                'restaurants' => $repository->findFiltered($data),
+                'restaurants' => $restaurantRepository->findFiltered($data),
                 'form' => $searchForm->createView(),
             ]);
         }

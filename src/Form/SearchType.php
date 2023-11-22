@@ -18,6 +18,14 @@ class SearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('item', ItemAutocompleteField::class, [
+                'attr' => [
+                    'placeholder' => 'PLATS'
+                ],
+                'row_attr' => [
+                    'class' => 'm-1',
+                ]
+            ])
             ->add('city', CityAutocompleteField::class, [
                 'required' => false,
                 'label' => false,
@@ -36,20 +44,6 @@ class SearchType extends AbstractType
                 'row_attr' => [
                     'class' => 'm-1',
                 ]
-            ])
-            ->add('items', ChoiceType::class, [
-                'required' => false,
-                'label' => false,
-                'multiple' => true,
-                'autocomplete' => true,
-                'attr' => ['placeholder' => 'Ingrédient ou plat'],
-                'tom_select_options' => [
-                    'create' => true
-                ],
-                'row_attr' => [
-                    'class' => 'm-1',
-                ],
-                'choices' => []
             ])
             ->add('category', EntityType::class, [
                 'required' => false,
@@ -97,7 +91,7 @@ class SearchType extends AbstractType
             $form->add('items', ChoiceType::class, [
                 'required' => false,
                 'label' => false,
-                'attr' => ['placeholder' => 'Ingrédient, plat'],
+                'attr' => ['placeholder' => 'Plats, boissons'],
                 'multiple' => true,
                 'autocomplete' => true,
                 'tom_select_options' => [
