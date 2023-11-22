@@ -13,13 +13,13 @@
                     Trouvez le restaurant idéal en quelques clics sur notre site grâce à notre outil de filtrage
                     intuitif. Fini les recherches fastidieuses, bonjour à une expérience culinaire personnalisée !
                 </p>
-                {{ form_start(form, {'attr': {'action': path('home_index')} }) }}
                 <div class="d-block rounded" style="max-width: 300px;">
-                    {{ form_widget(form.items) }}
-                    {{ form_widget(form.city) }}
-                    <button class="btn btn-primary mt-4" type="submit">Rechercher</button>
-                </div>
+                {{ form_start(form) }}
+                    {{ form_row(form.items) }}
+                    {{ form_row(form.city) }}
+                    <button type="submit" class="btn btn-primary mt-4">Enregistrer</button>
                 {{ form_end(form) }}
+                </div>
             </div>
             <div class="col-md-8 col-sm-12 align-self-center">
                 <img src="{{ asset('build/images/fruits.jpg') }}" class="img-fluid" alt="fruits">
