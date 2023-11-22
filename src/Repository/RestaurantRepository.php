@@ -76,9 +76,9 @@ class RestaurantRepository extends ServiceEntityRepository
 
         if (!empty($filters['city'])) {
             $qb->andWhere($qb->expr()->orX(
-                $qb->expr()->eq('city.zipCode', ':zipCode')
+                $qb->expr()->eq('city.realName', ':realName')
             ))
-                ->setParameter('zipCode', $filters['city']->getZipCode());
+                ->setParameter('realName', $filters['city']->getRealName());
         }
 
         if (!empty($filters['timeSlot'])) {
