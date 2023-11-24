@@ -97,7 +97,10 @@ class SearchType extends AbstractType
                 'tom_select_options' => [
                     'create' => true
                 ],
-                'choices' => array_combine($options['data']['items'], $options['data']['items']),
+                'choices' => array_combine(
+                    $options['data']['items'] ?? [],
+                    $options['data']['items'] ?? []
+                ),
                 'row_attr' => [
                     'class' => 'm-1',
                 ],
