@@ -63,8 +63,7 @@
                             <ul>
                                 {% if restaurant.menus|length > 0 %}
                                     {% for menu in restaurant.menus %}
-                                        <li class="list-unstyled">{{ menu.name }} - {{ menu.reduction }} €</li>
-                                        <span>{{ menu.description }}</span>
+                                        <li class="list-unstyled">{{ menu.name }}</li>
                                     {% endfor %}
                                 {% else %}
                                     <li class="list-unstyled">Aucun menu</li>
