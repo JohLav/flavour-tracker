@@ -6,7 +6,6 @@ use App\Repository\RestaurantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: RestaurantRepository::class)]
 class Restaurant
