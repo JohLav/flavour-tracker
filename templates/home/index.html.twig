@@ -2,27 +2,29 @@
 
 {% block title %}Accueil{% endblock %}
 
-{% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-sm-12 py-5 ps-5 justify-content-end align-content-center">
-                <h1>
-                    Bienvenue!
+{% block content %}
+    <div
+        class="position-absolute container-fluid bg-image vh-100 d-flex vh-100 align-items-center justify-content-center"
+        style="
+            background: radial-gradient(circle, rgba(241,241,241,0) 0%, rgba(0,0,0,0.7909319899244333) 76%), url('{{ asset('build/images/boeufbourgignon.3f8eabdd.jpg') }}');
+            background-size: cover;
+            "
+    >
+        <div class="row w-100 p-5">
+            <div class="col-lg-6 col-md-6 col-sm-12 text-light">
+                <h1 class="display-5">
+                    Trouvez le restaurant parfait en un clic !
                 </h1>
                 <p>
-                    Trouvez le restaurant idéal en quelques clics sur notre site grâce à notre outil de filtrage
-                    intuitif. Fini les recherches fastidieuses, bonjour à une expérience culinaire personnalisée !
+                    Grâce à notre outil de filtrage intuitif, dites adieu aux recherches compliquées et profitez d'une expérience culinaire sur mesure.
                 </p>
-                <div class="d-block rounded" style="max-width: 300px;">
+                <div class="d-block rounded w-75 col-lg-4">
                 {{ form_start(form) }}
                     {{ form_row(form.items) }}
                     {{ form_row(form.city) }}
                     <button type="submit" class="btn btn-primary mt-4">Enregistrer</button>
                 {{ form_end(form) }}
                 </div>
-            </div>
-            <div class="col-md-8 col-sm-12 align-self-center">
-                <img src="{{ asset('build/images/fruits.jpg') }}" class="img-fluid" alt="fruits">
             </div>
         </div>
     </div>

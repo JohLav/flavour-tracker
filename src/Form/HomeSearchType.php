@@ -1,10 +1,10 @@
 <?php
 
-    namespace App\Form;
+namespace App\Form;
 
-    use Symfony\Component\Form\AbstractType;
-    use Symfony\Component\Form\FormBuilderInterface;
-    use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class HomeSearchType extends AbstractType
 {
@@ -13,15 +13,11 @@ class HomeSearchType extends AbstractType
         $builder
             ->add('items', ItemAutocompleteField::class, [
                 'placeholder' => 'Quoi ?',
-                'attr' => [
-                    'class' => 'mt-4'
-                ],
+                'attr' => ['class' => 'mt-4'],
             ])
             ->add('city', CityAutocompleteField::class, [
                 'placeholder' => 'Où ?',
-                'attr' => [
-                    'class' => 'mt-4'
-                ],
+                'attr' => ['class' => 'mt-4'],
             ]);
     }
 

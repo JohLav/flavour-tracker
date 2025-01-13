@@ -1,4 +1,4 @@
-@import "_base.scss";
+@import "./base";
 @import "~bootstrap/scss/bootstrap";
 @import "~bootstrap-icons/font/bootstrap-icons.scss";
 
@@ -9,31 +9,32 @@
 }
 
 body {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-    width: 100%;
-}
-
-html {
-    height: -webkit-fill-available;
+    margin: 0;
 }
 
 main {
-    height: 100vh;
-    height: -webkit-fill-available;
-    max-height: 100vh;
     overflow-x: auto;
     overflow-y: hidden;
 }
 
 .form input[type="text"],
 .form select {
-    width: 100%;
+    width: 100vw;
     max-width: 400px;
 }
 
 .image-reservation {
     object-fit: cover;
-    width: 100%;
+    width: 100vw;
     height: 400px;
+}
+
+/* CSS for adjusting the background container */
+.bg-image {
+    height: calc(100vh - var(--navbar-height) - var(--footer-height));
+}
+
+:root {
+    --navbar-height: 96px;
+    --footer-height: 56px;
 }

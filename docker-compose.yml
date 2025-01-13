@@ -1,4 +1,7 @@
-version: '3'
+### https://medium.com/@philipp.schmiedel/local-docker-mysql-macos-fa7ac14348c4
+### Missing the download of MySQL Docker image?
+
+version: '3.3'
 
 services:
     php:
@@ -11,14 +14,16 @@ services:
             - "8000:80"
 ###> doctrine/doctrine-bundle ###
     database:
-        image: mysql
+        image: mysql/mysql-server:9.0
         restart: always
+        environment:
+            MYSQL_DATABASE: 'flavour_tracker'
+            MYSQL_ROOT_PASSWORD: 'test'
+            MYSQL_ROOT_HOST: '%'
         volumes:
             - ./db-data:/var/lib/mysql
-        environment:
-            MYSQL_ROOT_PASSWORD: password
         ports:
-            - "5432:3306"
+            - '3306:3306'
         # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
         # - ./docker/db/data:/var/lib/postgresql/data:rw
 ###< doctrine/doctrine-bundle ###
@@ -26,7 +31,7 @@ services:
 ###> symfony/mailer ###
     mailer:
         image: schickling/mailcatcher
-        ports: [1025, 1080]
+        ports: ["1025", "1080"]
 ###< symfony/mailer ###
 
 volumes:

@@ -1,63 +1,110 @@
-# Project 3 - Starter Kit - Symfony
+# Flavour-tracker
 
 ## Presentation
 
-This starter kit is here to easily start a repository for Wild Code School students.
+Flavour Tracker is a web application designed to revolutionize the way users discover restaurants, bars, and cafés by allowing them to search for specific dishes or beverages rather than just locations or types of cuisine. The project focuses on solving a common user frustration: the inability to find establishments based on specific dishes or beverages.
 
-It's symfony website-skeleton project with some additional library (webpack, fixtures) and tools to validate code standards.
+Initially focused on the Auvergne-Rhône-Alpes region, known for its culinary diversity, Flavour Tracker aims to serve as an indispensable tool for gastronomic exploration.
 
-* GrumPHP, as pre-commit hook, will run 2 tools when `git commit` is run :
+### Key Features
 
-    * PHP_CodeSniffer to check PSR12
-    * PHPStan focuses on finding errors in your code (without actually running it)
-    * PHPmd will check if you follow PHP best practices
+- **Search Bar Functionality**: Advanced text-based search allowing users to locate restaurants by specific dishes, beverages, or keywords.
+- **Dish Type Filtering**: Dynamic filters enable users to narrow results based on cuisine types, dietary preferences, or meal categories (e.g., starters, main courses, desserts).
+- **Menu and Dish Browsing**: Fetch and display complete menus, including dish details, descriptions, and prices, with optimized rendering for fast loading.
+- **Reservation Systemv: Integrated booking feature with credit card payment handling for securing reservations. Includes form validation and secure storage via industry-standard encryption.
+- **User Profiles**:
+  - *Restaurant Owners*: Manage menus, upload dishes with images, set availability, and respond to reservations.
+  - *Clients*: Save favorite restaurants, track reservations, and leave reviews or ratings.
 
-  If tests fail, the commit is canceled and a warning message is displayed to developer.
+### Getting Started
 
-* GitHub Action as Continuous Integration will be run when a branch with active pull request is updated on gitHub. It will run :
+This project used a starter kit designed for the Wild Code School's students to quickly set up a Symfony-based project. It includes a symfony/website-skeleton setup with additional tools for code validation and asset management.
 
-    * Tasks to check if vendor, .idea, env.local are not versioned,
-    * PHP_CodeSniffer, PHPStan and PHPmd with same configuration as GrumPHP.
+Ensure the following are installed on your system:
+- Composer
+- Yarn & Node.js
 
-## Getting Started for Students
+### Installation
 
-### Prerequisites
+1. Clone this repository:
+```bash
+git clone https://github.com/JohLav/flavour-tracker.git
+```
 
-1. Check composer is installed
-2. Check yarn & node are installed
+2. Install PHP & Javascript dependencies:
+```bash
+composer install
+yarn install
+```
 
-### Install
+3. Build assets
+```bash
+yarn encore dev
+```
 
-1. Clone this project
-2. Run `composer install`
-3. Run `yarn install`
-4. Run `yarn encore dev` to build assets
- 
-### Working
+### Development workflow
+1. Start the symfony server:
+```bash
+symfony server:start
+```
 
-1. Run `symfony server:start` to launch your local php web server
-2. Run `yarn run dev --watch` to launch your local server for assets (or `yarn dev-server` do the same with Hot Module Reload activated)
+2. Start the asset watcher or use Hot Module Reload:
+```bash
+yarn run dev --watch
+yarn dev-server
+```
 
-### Testing
+### Code Quality and Testing
 
-1. Run `php ./vendor/bin/phpcs` to launch PHP code sniffer
-2. Run `php ./vendor/bin/phpstan analyse src --level max` to launch PHPStan
-3. Run `php ./vendor/bin/phpmd src text phpmd.xml` to launch PHP Mess Detector
-4. Run `./node_modules/.bin/eslint assets/js` to launch ESLint JS linter
+GrumPHP, as pre-commit hook, will run 2 tools when `git commit` is run :
 
-### Windows Users
+- PHP_CodeSniffer to check PSR12
+- PHPStan focuses on finding errors in your code (without actually running it)
+- PHPmd will check if you follow PHP best practices
 
-If you develop on Windows, you should edit your git configuration to change your end of line rules with this command:
+If tests fail, the commit is canceled and a warning message is displayed to developer.
 
-`git config --global core.autocrlf true`
+GitHub Action as Continuous Integration will be run when a branch with active pull request is updated on gitHub. It will run :
 
-The `.editorconfig` file in root directory do this for you. You probably need `EditorConfig` extension if your IDE is VSCode.
+- Tasks to check if vendor, .idea, env.local are not versioned,
+- PHP_CodeSniffer, PHPStan and PHPmd with same configuration as GrumPHP.
 
-### Run locally with Docker
+#### Run the following commands to ensure code quality:
 
-1. Fill DATABASE_URL variable in .env.local file with
-`DATABASE_URL="mysql://root:password@database:3306/<choose_a_db_name>"`
-2. Install Docker Desktop an run the command:
+- PHP CodeSniffer:
+```bash
+php ./vendor/bin/phpcs
+```
+- PHPStan (maximum level):
+```bash
+php ./vendor/bin/phpstan analyse src --level max
+```
+- PHP Mess Detector:
+```bash
+php ./vendor/bin/phpmd src text phpmd.xml
+```
+- ESLint for JavaScript:
+```bash
+./node_modules/.bin/eslint assets/js
+```
+
+### Windows-Specific Configuration
+
+For Windows users, set Git's end-of-line rules:
+```bash
+git config --global core.autocrlf true
+```
+
+The `.editorconfig` file in the root directory enforces consistent formatting. Install the `EditorConfig` extension if you're using VSCode.
+
+### Running Locally with Docker
+
+1. Configure the database URL in `.env.local`:
+```bash
+DATABASE_URL="mysql://user:password@localhost:3306/<choose_a_db_name>"
+```
+
+2. Install Docker Desktop and run the command:
 ```bash
 docker-compose up -d
 ```
@@ -66,7 +113,7 @@ docker-compose up -d
 
 ## Deployment
 
-Some files are used to manage automatic deployments (using tools as Caprover, Docker and GitHub Action). Please do not modify them.
+The following files handle deployment automation (e.g., Caprover, Docker, GitHub Actions).
 
 * [captain-definition](/captain-definition) Caprover entry point
 * [Dockerfile](/Dockerfile) Web app configuration for Docker container
@@ -84,43 +131,3 @@ Some files are used to manage automatic deployments (using tools as Caprover, Do
 * [PHPMD](http://phpmd.org)
 * [ESLint](https://eslint.org/)
 * [Sass-Lint](https://github.com/sasstools/sass-lint)
-
-
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-
-## Authors
-
-Wild Code School trainers team
-
-## License
-
-MIT License
-
-Copyright (c) 2019 aurelien@wildcodeschool.fr
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-## Acknowledgments
-
