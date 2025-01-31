@@ -18,9 +18,9 @@ use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 class EmailVerifier
 {
     public function __construct(
-        private VerifyEmailHelperInterface $verifyEmailHelper,
-        private MailerInterface $mailer,
-        private EntityManagerInterface $entityManager
+        private readonly VerifyEmailHelperInterface $verifyEmailHelper,
+        private readonly MailerInterface $mailer,
+        private readonly EntityManagerInterface $entityManager
     ) {
     }
 
@@ -28,9 +28,7 @@ class EmailVerifier
      * @param string $verifyEmailRouteName
      * @param UserInterface $user
      * @param TemplatedEmail $email
-     *
      * @return void
-     * @throws TransportExceptionInterface
      */
     public function sendEmailConfirmation(
         string $verifyEmailRouteName,
@@ -82,11 +80,11 @@ class EmailVerifier
 
             $this->entityManager->flush();
         } catch (VerifyEmailExceptionInterface $e) {
-            if ($e->getReason() === VerifyEmailExceptionInterface::SIGNATURE_EXPIRED) {
-                // Provide a message to the user and an option to resend the email
-                throw new RuntimeException('Verification link expired.');
+            if (str_contains($e->getReason(), 'expired')) {
+                throw new RuntimeException('The link to verify your email has expired. Please request a new link.');
             }
-            throw new RuntimeException('Email verification failed.' . $e->getReason());
+            // Provide a message to the user and an option to resend the email
+            throw new RuntimeException($e->getReason(), 0, $e);
         } catch (Exception $e) {
             // Handle generic database or other errors
             throw new RuntimeException('An unexpected error occurred.', 0, $e);

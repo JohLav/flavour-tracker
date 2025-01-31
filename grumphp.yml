@@ -10,10 +10,10 @@ grumphp:
         phpcpd:
             directory: [ 'src' ]
         phpcs:
-            standard: ~
+            standard: PSR12
         phpstan:
             configuration: ./phpstan.neon
-            level: 6
+            memory_limit: '512M'
         phpmd:
             whitelist_patterns:
                 - 'src'

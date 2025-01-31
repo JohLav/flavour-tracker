@@ -7,12 +7,10 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossorigin=""/>
+    <title>{% block title %}Tracker de Saveurs{% endblock %}</title>
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
-    <title>
-        {% block title %}Tracker de Saveurs{% endblock %}
-    </title>
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
@@ -26,8 +24,6 @@
 
 {% block search %}{% endblock %}
 
-{% block content %}{% endblock %}
-
 {% for category, messages in app.flashes %}
     {% for message in messages %}
         <div class="alert alert-{{ category }}">
@@ -36,13 +32,12 @@
     {% endfor %}
 {% endfor %}
 
+{% block body %}{% endblock %}
+
+
 {% block footer %}
     {% include 'home/_footer.html.twig' %}
 {% endblock %}
 
-<script>
-    {% block script %}
-    {% endblock %}
-</script>
 </body>
 </html>

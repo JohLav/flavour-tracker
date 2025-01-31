@@ -11,14 +11,8 @@ class HomeSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('items', ItemAutocompleteField::class, [
-                'placeholder' => 'Quoi ?',
-                'attr' => ['class' => 'mt-4'],
-            ])
-            ->add('city', CityAutocompleteField::class, [
-                'placeholder' => 'Où ?',
-                'attr' => ['class' => 'mt-4'],
-            ]);
+            ->add('items', ItemAutocompleteField::class)
+            ->add('city', CityAutocompleteField::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

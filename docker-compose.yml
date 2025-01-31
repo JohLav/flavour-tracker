@@ -12,9 +12,10 @@ services:
             - ./:/var/www
         ports:
             - "8000:80"
+
 ###> doctrine/doctrine-bundle ###
     database:
-        image: mysql/mysql-server:9.0
+        image: mysql:8.0
         restart: always
         environment:
             MYSQL_DATABASE: 'flavour_tracker'

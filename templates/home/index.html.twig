@@ -2,9 +2,9 @@
 
 {% block title %}Accueil{% endblock %}
 
-{% block content %}
+{% block body %}
     <div
-        class="position-absolute container-fluid bg-image vh-100 d-flex vh-100 align-items-center justify-content-center"
+        class="position-absolute container-fluid bg-image vh-100 d-flex align-items-center justify-content-center"
         style="
             background: radial-gradient(circle, rgba(241,241,241,0) 0%, rgba(0,0,0,0.7909319899244333) 76%), url('{{ asset('build/images/boeufbourgignon.3f8eabdd.jpg') }}');
             background-size: cover;
@@ -16,14 +16,15 @@
                     Trouvez le restaurant parfait en un clic !
                 </h1>
                 <p>
-                    Grâce à notre outil de filtrage intuitif, dites adieu aux recherches compliquées et profitez d'une expérience culinaire sur mesure.
+                    Grâce à notre outil de filtrage intuitif, dites adieu aux recherches compliquées et profitez d'une
+                    expérience culinaire sur mesure.
                 </p>
                 <div class="d-block rounded w-75 col-lg-4">
-                {{ form_start(form) }}
+                    {{ form_start(form) }}
                     {{ form_row(form.items) }}
                     {{ form_row(form.city) }}
                     <button type="submit" class="btn btn-primary mt-4">Enregistrer</button>
-                {{ form_end(form) }}
+                    {{ form_end(form) }}
                 </div>
             </div>
         </div>

@@ -11,7 +11,7 @@ Initially focused on the Auvergne-Rhône-Alpes region, known for its culinary di
 - **Search Bar Functionality**: Advanced text-based search allowing users to locate restaurants by specific dishes, beverages, or keywords.
 - **Dish Type Filtering**: Dynamic filters enable users to narrow results based on cuisine types, dietary preferences, or meal categories (e.g., starters, main courses, desserts).
 - **Menu and Dish Browsing**: Fetch and display complete menus, including dish details, descriptions, and prices, with optimized rendering for fast loading.
-- **Reservation Systemv: Integrated booking feature with credit card payment handling for securing reservations. Includes form validation and secure storage via industry-standard encryption.
+- **Reservation System: Integrated booking feature with credit card payment handling for securing reservations. Includes form validation and secure storage via industry-standard encryption.
 - **User Profiles**:
   - *Restaurant Owners*: Manage menus, upload dishes with images, set availability, and respond to reservations.
   - *Clients*: Save favorite restaurants, track reservations, and leave reviews or ratings.
@@ -77,7 +77,7 @@ php ./vendor/bin/phpcs
 ```
 - PHPStan (maximum level):
 ```bash
-php ./vendor/bin/phpstan analyse src --level max
+composer exec phpstan analyse phpstan.neon
 ```
 - PHP Mess Detector:
 ```bash
@@ -118,7 +118,7 @@ The following files handle deployment automation (e.g., Caprover, Docker, GitHub
 * [captain-definition](/captain-definition) Caprover entry point
 * [Dockerfile](/Dockerfile) Web app configuration for Docker container
 * [docker-entry.sh](/docker-entry.sh) shell instruction to execute when docker image is built
-* [nginx.conf](/ginx.conf) Nginx server configuration
+* [nginx.conf](/nginx.conf) Nginx server configuration
 * [php.ini](/php.ini) Php configuration
 
 

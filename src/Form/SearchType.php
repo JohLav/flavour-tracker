@@ -1,17 +1,17 @@
 <?php
 
-    namespace App\Form;
+namespace App\Form;
 
-    use App\Entity\Category;
-    use App\Entity\Diet;
-    use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-    use Symfony\Component\Form\AbstractType;
-    use Symfony\Component\Form\Extension\Core\Type\RangeType;
-    use Symfony\Component\Form\FormBuilderInterface;
-    use Symfony\Component\Form\FormEvent;
-    use Symfony\Component\Form\FormEvents;
-    use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-    use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use App\Entity\Category;
+use App\Entity\Diet;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class SearchType extends AbstractType
 {

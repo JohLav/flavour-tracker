@@ -3,7 +3,7 @@
     "description": "",
     "type": "project",
     "license": "proprietary",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
         "php": ">=8.1",
@@ -17,7 +17,7 @@
         "guzzlehttp/guzzle": "^7.8",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.24",
-        "sensio/framework-extra-bundle": "^6.2",
+        "sebastian/phpcpd": "^6.0",
         "symfony/asset": "^6.3",
         "symfony/console": "^6.3",
         "symfony/doctrine-messenger": "^6.3",
@@ -45,10 +45,9 @@
         "symfony/ux-autocomplete": "^2.12",
         "symfony/validator": "^6.3",
         "symfony/web-link": "^6.3",
-        "symfony/webapp-meta": "^1.0",
         "symfony/webpack-encore-bundle": "^1.17",
         "symfony/yaml": "^6.3",
-        "symfonycasts/verify-email-bundle": "*",
+        "symfonycasts/verify-email-bundle": "^1.0",
         "twig/extra-bundle": "^3.7",
         "twig/twig": "^3.7"
     },
@@ -103,7 +102,7 @@
             "@auto-scripts"
         ],
         "scripts": {
-            "phpstan": "vendor/bin/phpstan -c phpstan.neon"
+            "phpstan": "composer exec phpstan analyse phpstan.neon"
         }
     },
     "conflict": {
@@ -124,7 +123,6 @@
         "phpstan/phpstan-doctrine": "^1.3",
         "phpstan/phpstan-symfony": "^1.3",
         "phpunit/phpunit": "^9.6",
-        "sebastian/phpcpd": "^6.0",
         "squizlabs/php_codesniffer": "^3.6",
         "symfony/browser-kit": "^6.3",
         "symfony/css-selector": "^6.3",

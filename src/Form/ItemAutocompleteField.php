@@ -1,15 +1,14 @@
 <?php
 
-    namespace App\Form;
+namespace App\Form;
 
-    use App\Entity\Item;
-    use App\Repository\ItemRepository;
-    use Symfony\Component\Form\AbstractType;
-    use Symfony\Component\OptionsResolver\OptionsResolver;
-    use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
-    use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
+use App\Entity\Item;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
+use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 
-    #[AsEntityAutocompleteField]
+#[AsEntityAutocompleteField]
 class ItemAutocompleteField extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver): void
@@ -20,13 +19,11 @@ class ItemAutocompleteField extends AbstractType
             'searchable_fields' => ['name'],
             'multiple' => true,
             'label' => false,
-            'choice_label' => 'name'
-//            'choice_label' => function (Item $item) {
-//                return $item->getName();
-//            },
-//            'query_builder' => function (ItemRepository $itemRepository) {
-//                return $itemRepository->createQueryBuilder('name');
-//            }
+            'choice_label' => 'name',
+            'tom_select_options' => [
+                'placeholder' => 'Quoi ?',
+                'allowEmptyOption' => true,
+            ]
         ]);
     }
 

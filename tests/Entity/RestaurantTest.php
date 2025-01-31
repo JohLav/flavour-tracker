@@ -9,7 +9,7 @@ class RestaurantTest extends TestCase
 {
     public function testDefault(): void
     {
-        $restaurant = new Restaurant('Comme à la maison', '');
-        $this->assertSame(null, $restaurant->getName());
+        $restaurant = new Restaurant();
+        $this->assertSame('Bouchon Lyonnais', $restaurant->getName());
     }
 }

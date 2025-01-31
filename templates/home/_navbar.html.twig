@@ -8,11 +8,11 @@
 			<a href="{{ path('user_show', {'id': app.user.id}) }}">
 				<button class="btn btn-light" style="min-width: 125px;" type="button">Profil</button>
 			</a>
-			<a href="{{ path('login_logout') }}">
+			<a href="{{ path('logout') }}">
 				<button class="btn btn-danger" style="min-width: 125px;" type="button">Déconnexion</button>
 			</a>
 		{% elseif app.user is null %}
-			<a href="{{ path('login_index') }}">
+			<a href="{{ path('login') }}">
 				<button class="btn btn-light" style="min-width: 125px;" type="button">Connexion</button>
 			</a>
 		{% endif %}

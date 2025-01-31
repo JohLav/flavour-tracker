@@ -3,14 +3,17 @@ includes:
     - vendor/phpstan/phpstan-doctrine/rules.neon
     - vendor/phpstan/phpstan-symfony/extension.neon
 parameters:
+    level: 6
+    paths:
+        - src
     excludePaths:
     - src/Security
     ignoreErrors:
         - "#^Parameter.*(User).*(UserInterface).*#"
         - "#^Call to an undefined .*(UserInterface).*#"
     reportUnmatchedIgnoredErrors: false
-    checkGenericClassInNonGenericObjectType: false
-    checkMissingIterableValueType: false
     doctrine:
     	ormRepositoryClass: MyApp\Doctrine\BetterEntityRepository
     	odmRepositoryClass: MyApp\Doctrine\BetterDocumentRepository
+    parallel:
+        maximumNumberOfProcesses: 1

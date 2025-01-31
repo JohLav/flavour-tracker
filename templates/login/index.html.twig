@@ -5,13 +5,6 @@
 {% block search %}{% endblock %}
 
 {% block body %}
-
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
-
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -19,7 +12,7 @@
     <div class="container d-sm-block justify-content-center mt-3 py-5">
         <div>
             <form class="shadow-lg p-5 m-5 bg-body-tertiary rounded"
-                  action="{{ path('login_index') }}"
+                  action="{{ path('login') }}"
                   method="post"
                   id="login_form">
                 <h2 class="text-center">Connexion</h2>
@@ -43,13 +36,13 @@
             <div>
                 <p class="fs-6">
                     Pas de compte ?
-                    <a href="/register" class="text-decoration-none">Cliquer ici</a>
+                    <a href="{{ path('register_index') }}" class="text-decoration-none">Cliquer ici</a>
                 </p>
             </div>
             <div class="ps-5">
                 <p class="fs-6">
                     Restaurateur ?
-                    <a href="/register" class="text-decoration-none">Cliquer ici</a>
+                    <a href="{{ path('register_index') }}" class="text-decoration-none">Cliquer ici</a>
                 </p>
             </div>
         </div>

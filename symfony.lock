@@ -277,9 +277,6 @@
     "sebastian/object-reflector": {
         "version": "2.0.4"
     },
-    "sebastian/phpcpd": {
-        "version": "6.0.3"
-    },
     "sebastian/recursion-context": {
         "version": "4.0.4"
     },
@@ -294,18 +291,6 @@
     },
     "seld/jsonlint": {
         "version": "1.9.0"
-    },
-    "sensio/framework-extra-bundle": {
-        "version": "6.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "5.2",
-            "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
-        },
-        "files": [
-            "config/packages/sensio_framework_extra.yaml"
-        ]
     },
     "squizlabs/php_codesniffer": {
         "version": "3.6",
@@ -682,18 +667,6 @@
         "files": [
             "config/packages/web_profiler.yaml",
             "config/routes/web_profiler.yaml"
-        ]
-    },
-    "symfony/webapp-meta": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "67cae591d131c133d63b893c5324796b88c59b34"
-        },
-        "files": [
-            "config/packages/messenger.yaml"
         ]
     },
     "symfony/webpack-encore-bundle": {

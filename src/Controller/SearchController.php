@@ -1,17 +1,16 @@
 <?php
 
-// src/Controller/SearchController.php
-    namespace App\Controller;
+namespace App\Controller;
 
-    use App\Repository\ItemRepository;
-    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-    use Symfony\Component\HttpFoundation\Request;
-    use Symfony\Component\HttpFoundation\Response;
-    use Symfony\Component\Routing\Annotation\Route;
-    use App\Form\SearchType;
-    use App\Repository\RestaurantRepository;
+use App\Form\SearchType;
+use App\Repository\ItemRepository;
+use App\Repository\RestaurantRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-    #[Route("/search", name: "search_")]
+#[Route("/search", name: "search_")]
 class SearchController extends AbstractController
 {
     #[Route("/", name: "index")]

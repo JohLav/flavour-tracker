@@ -1,24 +1,24 @@
 <?php
 
-    namespace App\Controller;
+namespace App\Controller;
 
-    use Exception;
-    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-    use Symfony\Component\HttpFoundation\Response;
-    use Symfony\Component\Routing\Annotation\Route;
-    use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Exception;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-    #[Route("/login", name: "login_")]
 class LoginController extends AbstractController
 {
-    #[Route('/', name: 'index')]
+    #[Route('/login', name: 'login')]
     public function index(AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
         if ($this->getUser()) {
-            $this->addFlash('success', message: 'Vous êtes connecté');
+            $this->addFlash('success', 'Connexion réussie');
+            return $this->redirectToRoute('home_index');
         }
 
         return $this->render('login/index.html.twig', [

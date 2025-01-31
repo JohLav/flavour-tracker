@@ -1,30 +1,34 @@
 <?php
 
-    namespace App\Repository;
+namespace App\Repository;
 
-    use App\Entity\Item;
-    use App\Entity\Restaurant;
-    use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-    use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Category;
+use App\Entity\City;
+use App\Entity\Diet;
+use App\Entity\Item;
+use App\Entity\Restaurant;
+use DateTimeInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
-    /**
-     * @extends ServiceEntityRepository<Restaurant>
-     *
-     * @method Restaurant|null find($id, $lockMode = null, $lockVersion = null)
-     * @method Restaurant|null findOneBy(array $criteria, array $orderBy = null)
-     * @method Restaurant[]    findAll()
-     * @method Restaurant[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
-     */
+/**
+ * @extends ServiceEntityRepository<Restaurant>
+ *
+ * @method Restaurant|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Restaurant|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Restaurant[]    findAll()
+ * @method Restaurant[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
 class RestaurantRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Restaurant::class);
     }
+
     /**
      * @param Restaurant $entity
      * @param bool $flush
-     *
      * @return void
      */
     public function save(Restaurant $entity, bool $flush = false): void
@@ -35,10 +39,10 @@ class RestaurantRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
     /**
      * @param Restaurant $entity
      * @param bool $flush
-     *
      * @return void
      */
     public function remove(Restaurant $entity, bool $flush = false): void
@@ -51,13 +55,13 @@ class RestaurantRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param array $filters
-     *
-     * @return array
+     * @param array<mixed> $filters
+     * @return Restaurant
      */
-    public function findFiltered(array $filters): array
+    public function findFiltered(array $filters): Restaurant
     {
         $qb = $this->createQueryBuilder('r')
+            ->select('DISTINCT r')
             ->leftJoin('r.items', 'items')
             ->leftJoin('r.menus', 'menus')
             ->leftJoin('r.timeSlots', 'timeSlots')
@@ -66,21 +70,20 @@ class RestaurantRepository extends ServiceEntityRepository
             ->leftJoin('menus.diets', 'diets');
 
         if (!empty($filters['items'])) {
-            /** @var Item $item */
             foreach ($filters['items'] as $i => $item) {
                 $qb
-                    ->orWhere("items.name LIKE :item{$i}")
-                    ->setParameter("item{$i}", "%{$item->getName()}%")
-                    ->orWhere("menus.name LIKE :menu{$i}")
-                    ->setParameter("menu{$i}", "%{$item->getName()}%");
+                    ->orWhere("items.name LIKE :item$i")
+                    ->setParameter("item$i", "%{$item->getName()}%")
+                    ->orWhere("menus.name LIKE :menu$i")
+                    ->setParameter("menu$i", "%{$item->getName()}%");
             }
         }
 
         if (!empty($filters['city'])) {
-            $qb->andWhere($qb->expr()->orX(
-                $qb->expr()->eq('city.realName', ':realName')
-            ))
-                ->setParameter('realName', $filters['city']->getRealName());
+            foreach ($filters['city'] as $i => $city) {
+                $qb->orWhere("city.realName LIKE :city$i")
+                    ->setParameter("city$i", "%{$city->getRealName()}%");
+            }
         }
 
         if (!empty($filters['timeSlot'])) {
