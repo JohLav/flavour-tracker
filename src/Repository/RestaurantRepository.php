@@ -56,9 +56,9 @@ class RestaurantRepository extends ServiceEntityRepository
 
     /**
      * @param array<mixed> $filters
-     * @return Restaurant
+     * @return array<Restaurant>
      */
-    public function findFiltered(array $filters): Restaurant
+    public function findFiltered(array $filters): array
     {
         $qb = $this->createQueryBuilder('r')
             ->select('DISTINCT r')
@@ -67,6 +67,7 @@ class RestaurantRepository extends ServiceEntityRepository
             ->leftJoin('r.timeSlots', 'timeSlots')
             ->leftJoin('r.category', 'category')
             ->leftJoin('r.city', 'city')
+            ->leftJoin('r.images', 'images')
             ->leftJoin('menus.diets', 'diets');
 
         if (!empty($filters['items'])) {

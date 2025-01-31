@@ -14,8 +14,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(Request $request, RestaurantRepository $restaurantRepository): Response
-    {
+    public function index(
+        Request $request,
+        RestaurantRepository $restaurantRepository
+    ): Response {
         $form = $this->createForm(HomeSearchType::class);
         $form->handleRequest($request);
 

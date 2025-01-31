@@ -1,22 +1,29 @@
 <div class="card px-0 mx-3 mb-3" style="width: 18rem;">
     <div id="carouselAutoplaying{{ loop.index }}" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-{#            <div class="carousel-item active">#}
-            <div class="carousel-item object-fit-cover active">
-{#                <img src="https://th.bing.com/th/id/OIP.6_UzrWzOBF_KDtJ6vwaV_wHaEw?pid=ImgDet&rs=1"#}
-{#                     class="card-img-top" height="200px" alt="...">#}
-                <img src="https://th.bing.com/th/id/OIP.6_UzrWzOBF_KDtJ6vwaV_wHaEw?pid=ImgDet&rs=1"
-                     class="card-img-top d-block w-100" height="200px" alt="...">
-            </div>
-            <div class="carousel-item object-fit-cover">
-                <img src="https://www.restaurant-anglet.com/wp-content/uploads/2020/10/2-scaled.jpg"
-                     class="card-img-top d-block w-100" height="200px" alt="...">
-            </div>
-            <div class="carousel-item object-fit-cover">
-                <img
-                    src="https://th.bing.com/th/id/R.efa8f447cba810a15ea303ae6767ff0c?rik=%2fgk%2fCOIEkQwYaw&pid=ImgRaw&r=0"
-                    class="card-img-top d-block w-100" height="200px" alt="...">
-            </div>
+            {% if restaurant.images|length > 0 %}
+                {% for image in restaurant.images %}
+                    <div class="carousel-item object-fit-cover {% if loop.first %}active{% endif %}">
+                        <img src="{{ asset(image.url) }}"
+                             class="card-img-top d-block w-100" height="200px" alt="...">
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="carousel-item object-fit-cover">
+                    <img src="{{ asset('build/images/bouchon-lyonnais.7709293f.jpgbo') }}"
+                         class="card-img-top d-block w-100" height="200px" alt="...">
+                </div>
+            {% endif %}
+
+            {#            <div class="carousel-item object-fit-cover"> #}
+            {#                <img src="https://www.restaurant-anglet.com/wp-content/uploads/2020/10/2-scaled.jpg" #}
+            {#                     class="card-img-top d-block w-100" height="200px" alt="..."> #}
+            {#            </div> #}
+            {#            <div class="carousel-item object-fit-cover"> #}
+            {#                <img #}
+            {#                    src="https://th.bing.com/th/id/R.efa8f447cba810a15ea303ae6767ff0c?rik=%2fgk%2fCOIEkQwYaw&pid=ImgRaw&r=0" #}
+            {#                    class="card-img-top d-block w-100" height="200px" alt="..."> #}
+            {#            </div> #}
         </div>
         <button class="carousel-control-prev" type="button"
                 data-bs-target="#carouselAutoplaying{{ loop.index }}"
@@ -54,7 +61,7 @@
             </a>
         </h5>
         <p class="card-text">{{ restaurant.city.realName }} {{ restaurant.city.zipCode }}
-            </p>
+        </p>
         {% if timeSlot is defined and timeSlot is not empty %}
             {% set isFull = time_slot_service.checkAvailable(restaurant, timeSlot) %}
             {% if not isFull %}
