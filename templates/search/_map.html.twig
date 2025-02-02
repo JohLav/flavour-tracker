@@ -1,25 +1,55 @@
 <div id="map" style="width: 600px; height: 400px;"></div>
 
+{# Leaflet JS (CDN) #}
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin=""></script>
 
 <script type="text/javascript">
-    var lat = 45.7647885;
-    var lng = 4.8259724;
+    // var lat = 45.7647885;
+    // var lng = 4.8259724;
 
-    var map = L.map('map').setView([lat, lng], 14);
+    // 1) Initialize the map (pick a default center & zoom)
+    let map = L.map('map').setView([45.7647885, 4.8259724], 10);
+
+    // 2) Add tile layer
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         minZoom: 1,
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
-    var marker = L.marker([lat, lng]).addTo(map);
 
-    function onMapClick(e) {
-        alert("You clicked the map at " + e.latlng);
+    // 3) Convert your restaurants array into a JS variable
+    //    Use JSON encode + |raw to avoid escaping
+    let restaurants = {{ restaurants|json_encode|raw }};
+
+    // 4) For each restaurant, add a marker if lat/lng exist
+    restaurants.forEach(function(restaurant) {
+        if (restaurant.latitude && restaurant.longitude) {
+            let marker = L.marker([restaurant.latitude, restaurant.longitude]).addTo(map);
+            marker.bindPopup(restaurant.name); // or any info you want in the popup
+        }
+    });
+
+    // 5) Optionally, fit the map to all markers:
+    //    Collect all LatLng into a LatLngBounds
+    /*
+    var markersLatLngs = restaurants
+        .filter(r => r.latitude && r.longitude)
+        .map(r => L.latLng(r.latitude, r.longitude));
+
+    if (markersLatLngs.length > 0) {
+        var bounds = L.latLngBounds(markersLatLngs);
+        map.fitBounds(bounds);
     }
+    */
 
-    map.on('click', onMapClick);
+    // var marker = L.marker([lat, lng]).addTo(map);
+
+    // function onMapClick(e) {
+    //     alert("You clicked the map at " + e.latlng);
+    // }
+    //
+    // map.on('click', onMapClick);
 
 </script>

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\SearchType;
+use App\Repository\CityRepository;
 use App\Repository\ItemRepository;
 use App\Repository\RestaurantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,6 +18,7 @@ class SearchController extends AbstractController
     public function index(
         Request $request,
         ItemRepository $itemRepository,
+        CityRepository $cityRepository,
         RestaurantRepository $restaurantRepository
     ): Response {
         // TODO : Ajouter autres tables concernées par le tri (ex. diet, category, etc.)

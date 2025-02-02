@@ -27,13 +27,16 @@ class HomeController extends AbstractController
             /** @var array<mixed> $data */
             $data = $form->getData();
 
+            $restaurants = $restaurantRepository->findFiltered($data);
+
             return $this->render('search/search.html.twig', [
-                'restaurants' => $restaurantRepository->findFiltered($data),
+                'restaurants' => $restaurants,
                 'form' => $searchForm->createView(),
             ]);
         }
 
         return $this->render('home/index.html.twig', [
+            'restaurants' => [],
             'form' => $form->createView()
         ]);
     }

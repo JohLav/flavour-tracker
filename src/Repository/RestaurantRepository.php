@@ -2,12 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Category;
-use App\Entity\City;
-use App\Entity\Diet;
-use App\Entity\Item;
 use App\Entity\Restaurant;
-use DateTimeInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -83,7 +78,11 @@ class RestaurantRepository extends ServiceEntityRepository
         if (!empty($filters['city'])) {
             foreach ($filters['city'] as $i => $city) {
                 $qb->orWhere("city.realName LIKE :city$i")
-                    ->setParameter("city$i", "%{$city->getRealName()}%");
+                    ->setParameter("city$i", "%{$city->getRealName()}%")
+                    ->andWhere("city.latitudeDeg = :lat")
+                    ->setParameter("lat", $city->getLatitudeDeg())
+                    ->andWhere("city.longitudeDeg = :lng")
+                    ->setParameter("lng", $city->getLongitudeDeg());
             }
         }
 
