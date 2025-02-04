@@ -34,8 +34,4 @@
 
     <extensions>
     </extensions>
-
-<!--    <logging>-->
-<!--        <log type="coverage-text" target="php://stdout"/>-->
-<!--    </logging>-->
 </phpunit>

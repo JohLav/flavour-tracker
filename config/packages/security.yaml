@@ -28,6 +28,9 @@ security:
 
             logout:
                 path: logout
+        secured_area:
+            form_login:
+                enable_csrf: true
 
 
             # activate different ways to authenticate

@@ -98,11 +98,9 @@
         "post-install-cmd": [
             "@auto-scripts"
         ],
-        "post-update-cmd": [
-            "@auto-scripts"
-        ],
-        "scripts": {
-            "phpstan": "composer exec phpstan analyse phpstan.neon"
+        "phpstan": "composer exec phpstan analyse phpstan.neon",
+        "tests": {
+            "phpunit": "vendor/bin/phpunit"
         }
     },
     "conflict": {
