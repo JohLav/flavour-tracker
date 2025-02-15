@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SearchType extends AbstractType
 {
@@ -64,21 +65,27 @@ class SearchType extends AbstractType
                 'row_attr' => ['class' => 'm-1'],
             ]);
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $form = $event->getForm();
+            $data = $event->getData();
 
-            $form->add('items', ChoiceType::class, [
-                'required' => false,
-                'label' => false,
-                'attr' => ['placeholder' => 'Plats, boissons'],
-                'multiple' => true,
-                'autocomplete' => true,
-                'tom_select_options' => ['create' => true],
-                'choices' => array_combine(
-                    $options['data']['items'] ?? [],
-                    $options['data']['items'] ?? []
-                ),
-                'row_attr' => ['class' => 'm-1'],
+            if (!isset($data['items'])) {
+                $data['items'] = [];
+            }
+
+            $form->add('items', ItemAutocompleteField::class, [
+                'data' => $data['items'] ?? null,
+//                'required' => false,
+//                'label' => false,
+//                'attr' => ['placeholder' => 'Plats, boissons'],
+//                'multiple' => true,
+//                'autocomplete' => true,
+//                'tom_select_options' => ['create' => true],
+//                'choices' => array_combine(
+//                    $options['data']['items'] ?? [],
+//                    $options['data']['items'] ?? []
+//                ),
+//                'row_attr' => ['class' => 'm-1'],
             ]);
         });
     }
